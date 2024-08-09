@@ -1,19 +1,12 @@
 "use client"
 
-import useTranslate from '@/hooks/use-translate'
-import { useTranslation } from '@/i18n/client'
-import { translation } from '@/i18n/server'
-import { useParams } from 'next/navigation'
+import Hero from '@/app/[lng]/(root)/(home)/_components/hero'
 
 const Home =  () => {
-	const t = useTranslate()
-	
 	return (
-		<div>
-			<h1 className={'font-spaceGrotesk pt-24'}>
-				{t('home')}
-			</h1>
-		</div>
+		<>
+			<Hero />
+		</>
 	)
 }
 export default Home
