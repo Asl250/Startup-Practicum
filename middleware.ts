@@ -3,12 +3,12 @@ import createMiddleware from 'next-intl/middleware';
 
 export const intlMiddleware = createMiddleware({
 	locales: ['en', 'ru', 'tr', 'uz'],
-	defaultLocale: 'en'
+	defaultLocale: 'uz'
 })
 
 export default authMiddleware({
 	beforeAuth: req => intlMiddleware(req),
-	publicRoutes: ['/:lng']
+	publicRoutes: ['/:lng', '/:lng/courses', '/:lng/contacts', '/:lng/courses/:slug']
 })
 
 

@@ -12,10 +12,11 @@ import { cn } from '@/lib/utils'
 import { Languages } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
+import { useParams, usePathname } from 'next/navigation'
 
 function LanguageDropdown () {
 	const { lng } = useParams()
+	const pathname = usePathname()
 	
 	return (
 		<DropdownMenu>
@@ -27,7 +28,7 @@ function LanguageDropdown () {
 			<DropdownMenuContent>
 				<DropdownMenuGroup>
 					{lngs.map((item) => (
-						<Link href={`/${item.route}`} key={item.route}>
+						<Link href={`/${item.route}/${pathname.slice(4)}`} key={item.route}>
 							<DropdownMenuItem
 								key={item.route}
 								className={cn('cursor-pointer', lng === item.route && 'bg-secondary')}>

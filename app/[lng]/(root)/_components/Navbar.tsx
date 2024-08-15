@@ -18,6 +18,7 @@ function Navbar() {
 	const t = useTranslate()
 	const pathname = usePathname()
 	const { lng } = useParams()
+	const pathName = usePathname()
 	
 	return (
 		<div className='fixed inset-0 z-40 h-20 bg-background/70 backdrop-blur-xl'>
@@ -31,6 +32,7 @@ function Navbar() {
 								key={nav.route}
 								className={cn(
 									'font-medium transition-all hover:text-blue-500 hover:underline',
+									pathName === `/${lng}/${nav.route}` && 'text-blue-500',
 								)}
 							>
 								{t(nav.name)}
