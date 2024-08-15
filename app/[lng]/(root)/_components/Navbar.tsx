@@ -2,6 +2,7 @@
 
 import Logo from '@/components/shared/logo'
 import ModeToggle from '@/components/shared/mode-toggle'
+import UserBox from '@/components/shared/user-box'
 import { Button } from '@/components/ui/button'
 import { navLinks } from '@/constants'
 import { LogIn, ShoppingCart } from 'lucide-react'
@@ -62,7 +63,7 @@ function Navbar() {
 						<ModeToggle />
 					</div>
 					<SignedIn>
-						<UserButton/>
+						<UserBox/>
 					</SignedIn>
 					<SignedOut>
 						<SignInButton mode='modal'>
