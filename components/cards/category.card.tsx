@@ -1,6 +1,6 @@
 'use client'
 
-import type { ICategory } from '@/types'
+import  type { ICategory } from '@/types'
 import Image from 'next/image'
 
 const CategoryCard = (category : ICategory) => {
