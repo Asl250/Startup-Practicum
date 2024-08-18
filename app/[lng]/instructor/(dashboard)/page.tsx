@@ -1,10 +1,10 @@
 'use client'
 
 import Header from '@/app/[lng]/instructor/_components/header'
-import InstructorCourseCard from '@/components/cards/instructor-course.card'
+// import InstructorCourseCard from '@/components/cards/instructor-course.card'
 import ReviewCard from '@/components/cards/review.card'
 import StatisticsCard from '@/components/cards/statistics.card'
-import { courses } from '@/constants'
+// import { courses } from '@/constants'
 import { MonitorPlay } from 'lucide-react'
 import { GrMoney } from 'react-icons/gr'
 import { PiStudent } from 'react-icons/pi'
