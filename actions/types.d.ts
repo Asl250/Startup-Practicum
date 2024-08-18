@@ -21,8 +21,11 @@ export interface ICreateUser {
 }
 export interface IUpdateUser {
 	clerkId: string
-	path?: string
-	updatedData: Partial<IUser>
+	updatedData: {
+		fullName: string
+		email: string
+		picture: string
+	}
 }
 
 export interface IUpdateSection {
