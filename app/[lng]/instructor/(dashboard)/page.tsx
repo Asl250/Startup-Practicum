@@ -9,6 +9,7 @@ import { MonitorPlay } from 'lucide-react'
 import { GrMoney } from 'react-icons/gr'
 import { PiStudent } from 'react-icons/pi'
 
+
 const Page = () => {
 	return (
 		<div>
