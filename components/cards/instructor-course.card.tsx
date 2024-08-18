@@ -1,5 +1,6 @@
 import type { ICourse } from '@/app.types'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Badge } from '../ui/badge'
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
 
 function InstructorCourseCard({ course }: Props ) {
 	return (
+		<Link href={` /instructor/my-courses/${course._id}`}>
 			<div className='flex flex-col space-y-2 rounded-md bg-background p-2'>
 				<div className='relative h-52 w-full'>
 					<Image
@@ -26,6 +28,8 @@ function InstructorCourseCard({ course }: Props ) {
 					</Badge>
 				</div>
 			</div>
+		</Link>
+	
 	)
 }
 

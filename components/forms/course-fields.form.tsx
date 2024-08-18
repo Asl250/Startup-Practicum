@@ -9,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { courseCategory, courseLanguage, courseLevels } from '@/constants'
 import { courseStorageRefs } from '@/lib/firebase'
 import { courseSchema } from '@/lib/validation'
+import { useUser } from '@clerk/nextjs'
 import { getDownloadURL, uploadString } from '@firebase/storage'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ImageDown } from 'lucide-react'
@@ -26,6 +27,7 @@ const CourseFieldsForm = () => {
 	const [open, setOpen] = useState(false)
 	
 	const router = useRouter()
+	const {user} = useUser()
 	
 	const form = useForm<z.infer<typeof courseSchema>>({
 		resolver: zodResolver(courseSchema),
@@ -62,7 +64,7 @@ const CourseFieldsForm = () => {
 				oldPrice: +oldPrice,
 				currentPrice: +currentPrice,
 				previewImage,
-			}
+			}, user?.id as string
 		).then(() => {
 			form.reset()
 			router.push('/en/instructor/my-courses')
@@ -75,7 +77,7 @@ const CourseFieldsForm = () => {
 	}
 	return (
 		<>
-			<Toaster position={'top-center'} richColors/>
+			<Toaster position={'top-center'} theme={'dark'}/>
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className={'space-y-3'}>
 					<FormField
@@ -317,7 +319,6 @@ const CourseFieldsForm = () => {
 						<Button
 							disabled={isLoading}
 							type={'button'}
-							size={'lg'}
 							variant={'destructive'}
 							onClick={() => form.reset()}
 						>
@@ -326,12 +327,11 @@ const CourseFieldsForm = () => {
 						<Button
 							disabled={isLoading}
 							type={'submit'}
-							size={'lg'}
 						>
 							Submit
 						</Button>
 						{previewImage && (
-							<Button type={'button'} size={'lg'} variant={'outline'} onClick={() => setOpen(true)}>
+							<Button type={'button'} variant={'outline'} onClick={() => setOpen(true)}>
 								<span>Image</span>
 								<ImageDown className={'ml-2 size-2'}/>
 							</Button>
