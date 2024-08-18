@@ -9,6 +9,7 @@ async function Page({params} : {params: {courseId: string}}) {
 	const courseJSON = await getCourseByid(params.courseId)
 	const course = JSON.parse(JSON.stringify(courseJSON))
 	
+	
 	return (
 		<>
 			<div className='flex items-center justify-between'>
