@@ -2,11 +2,9 @@
 
 import ReactStars from 'react-stars'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
-import { useParams } from 'next/navigation'
 import useTranslate from '@/hooks/use-translate'
 
 function ReviewCard() {
-	const { lng } = useParams()
 	const t = useTranslate()
 
 	return (

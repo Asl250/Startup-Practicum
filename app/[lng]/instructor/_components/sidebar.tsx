@@ -2,8 +2,6 @@
 
 import { Button } from '@/components/ui/button'
 import { instructorNavLinks } from '@/constants'
-import { UserProfile } from '@clerk/nextjs'
-import { Settings2 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 

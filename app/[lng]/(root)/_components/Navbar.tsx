@@ -9,7 +9,7 @@ import { LogIn, ShoppingCart } from 'lucide-react'
 import Link from 'next/link'
 import GlobalSearch from './global-search'
 import LanguageDropdown from '@/components/shared/language-dropdown'
-import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { SignInButton, SignedIn, SignedOut } from '@clerk/nextjs'
 import useTranslate from '@/hooks/use-translate'
 import Mobile from './mobile'
 import { useParams, usePathname } from 'next/navigation'
@@ -17,7 +17,6 @@ import { cn } from '@/lib/utils'
 
 function Navbar() {
 	const t = useTranslate()
-	const pathname = usePathname()
 	const { lng } = useParams()
 	const pathName = usePathname()
 	
