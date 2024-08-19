@@ -9,7 +9,7 @@ import Price from '@/app/[lng]/instructor/my-courses/[courseId]/_components/pric
 import Sections from '@/app/[lng]/instructor/my-courses/[courseId]/_components/section'
 import SelectFields from '@/app/[lng]/instructor/my-courses/[courseId]/_components/select-fields'
 import { Separator } from '@/components/ui/separator'
-import { Gem, Images, LayoutPanelLeft, Settings } from 'lucide-react'
+import { Images, LayoutPanelLeft, Settings } from 'lucide-react'
 
 async function Page({params} : {params: {courseId: string}}) {
 	const courseJSON = await getCourseByid(params.courseId)
