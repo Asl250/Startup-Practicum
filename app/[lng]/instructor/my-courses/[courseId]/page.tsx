@@ -1,4 +1,5 @@
 import { getCourseByid } from '@/actions/course.action'
+import { getSections } from '@/actions/section.action'
 import Header from '@/app/[lng]/instructor/_components/header'
 import Actions from '@/app/[lng]/instructor/my-courses/[courseId]/_components/actions'
 import CourseFields from '@/app/[lng]/instructor/my-courses/[courseId]/_components/course-fields'
@@ -14,6 +15,9 @@ import { Images, LayoutPanelLeft, Settings } from 'lucide-react'
 async function Page({params} : {params: {courseId: string}}) {
 	const courseJSON = await getCourseByid(params.courseId)
 	const course = JSON.parse(JSON.stringify(courseJSON))
+	
+	const sectionsJSON = await getSections(params.courseId)
+	const section = JSON.parse(JSON.stringify(sectionsJSON))
 	
 	
 	return (
@@ -48,7 +52,7 @@ async function Page({params} : {params: {courseId: string}}) {
 						</span>{' '}
 						<LayoutPanelLeft />
 					</div>
-					<Sections />
+					<Sections course={course} sections={section}/>
 					
 					{/* Price */}
 					<div className='flex items-center gap-2'>
