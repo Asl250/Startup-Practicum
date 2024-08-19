@@ -13,8 +13,8 @@ export interface ICourse {
 	currentPrice: number
 	previewImage: string
 	published: boolean
-	// slug: string
-	// tags: string
+	slug: string
+	tags: string
 	// instructor: IUser
 	// updatedAt: string
 	// totalLessons: number

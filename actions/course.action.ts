@@ -40,11 +40,11 @@ export const getCourseByid = async (id: string) => {
 	}
 }
 
-export const updateStatusCourse = async (id: string, status: boolean, path: string) => {
+export const updateCourse = async (id: string, updateData: Partial<ICourse>, path: string) => {
 
 	try {
 		await connectToDatabase()
-		await Course.findByIdAndUpdate(id, {published:status})
+		await Course.findByIdAndUpdate(id, updateData)
 		revalidatePath(path)
 	}catch (err) {
 		throw new Error("Something went wrong when updating course status")
