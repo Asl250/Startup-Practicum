@@ -19,7 +19,7 @@ function Hero() {
 		<>
 			<div className='container mx-auto grid min-h-[80vh] max-w-6xl grid-cols-2 gap-8 max-md:grid-cols-1 max-md:pt-32'>
 				<div className='flex flex-col space-y-4 self-center'>
-					<h1 className='font-space-grotesk text-5xl font-bold'>
+					<h1 className='font-spaceGrotesk text-5xl font-bold'>
 						{t('heroTitle')}{' '}
 						<span className='text-blue-500'>{t('heroTitleSpan')}</span>
 					</h1>
@@ -43,7 +43,8 @@ function Hero() {
 					alt='hero'
 					width={520}
 					height={520}
-					className='self-end object-cover'
+					sizes='(max-width: 520px) 100vw, (max-width: 520px) 50vw, 33vw'
+					className='h-auto w-full self-end object-cover'
 				/>
 			</div>
 

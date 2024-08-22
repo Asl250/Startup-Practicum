@@ -43,7 +43,7 @@ function Information(course: ICourse) {
 				) : (
 					<div className='flex flex-col space-y-2'>
 						<div className='grid grid-cols-3 gap-2'>
-							<div className='col-span-1 font-space-grotesk font-bold text-muted-foreground'>
+							<div className='col-span-1 font-spaceGrotesk font-bold text-muted-foreground'>
 								Requirements:
 							</div>
 							<div className='col-span-2 line-clamp-3'>
@@ -51,13 +51,13 @@ function Information(course: ICourse) {
 							</div>
 						</div>
 						<div className='grid grid-cols-3 gap-2'>
-							<div className='col-span-1 font-space-grotesk font-bold text-muted-foreground'>
+							<div className='col-span-1 font-spaceGrotesk font-bold text-muted-foreground'>
 								Learning:
 							</div>
 							<div className='col-span-2 line-clamp-3'>{course.learning}</div>
 						</div>
 						<div className='grid grid-cols-3 gap-2'>
-							<div className='col-span-1 font-space-grotesk font-bold text-muted-foreground'>
+							<div className='col-span-1 font-spaceGrotesk font-bold text-muted-foreground'>
 								Tags:
 							</div>
 							<div className='col-span-2 line-clamp-3'>{course.tags}</div>

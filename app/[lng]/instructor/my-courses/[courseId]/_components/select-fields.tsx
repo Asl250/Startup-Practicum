@@ -51,19 +51,19 @@ function SelectFields(course: ICourse) {
 				) : (
 					<div className='flex flex-col space-y-2'>
 						<div className='flex items-center gap-2'>
-							<span className='font-space-grotesk font-bold text-muted-foreground'>
+							<span className='font-spaceGrotesk font-bold text-muted-foreground'>
 								Language:
 							</span>
 							<span className='font-medium'>{course.language}</span>
 						</div>
 						<div className='flex items-center gap-2'>
-							<span className='font-space-grotesk font-bold text-muted-foreground'>
+							<span className='font-spaceGrotesk font-bold text-muted-foreground'>
 								Category:
 							</span>
 							<span className='font-medium'>{course.category}</span>
 						</div>
 						<div className='flex items-center gap-2'>
-							<span className='font-space-grotesk font-bold text-muted-foreground'>
+							<span className='font-spaceGrotesk font-bold text-muted-foreground'>
 								Level:
 							</span>
 							<span className='font-medium'>{course.level}</span>

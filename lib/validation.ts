@@ -1,9 +1,10 @@
-import { z } from 'zod'
+import {z} from 'zod'
 
-export const contactSchema = z.object({
-	message: z.string().min(10),
-	email: z.string().email(),
-	name: z.string().min(3),
+export const contactSchema = z
+	.object({
+		email: z.string().email(),
+		message: z.string().min(20).max(1000),
+		name: z.string().min(3).max(50),
 })
 
 export const courseSchema = z.object({
@@ -50,9 +51,10 @@ export const sectionSchema = z.object({
 
 export const lessonSchema = z.object({
 	title: z.string().min(3),
-	videoUrl: z.string().url(),
-	content: z.string(),
+	videoUrl: z.string(),
+	content: z.string().optional(),
 	hours: z.string(),
 	minutes: z.string(),
 	seconds: z.string(),
+	free: z.boolean().default(false).optional(),
 })

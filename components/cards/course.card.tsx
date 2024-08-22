@@ -1,51 +1,49 @@
-import { ICourse } from '@/types'
-import Link from 'next/link'
-import { Card, CardContent } from '../ui/card'
+import { Card, CardContent } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
+import type { ICourse } from '@/types'
 import Image from 'next/image'
-import { Separator } from '../ui/separator'
+import Link from 'next/link'
 
-function CourseCard(course: ICourse) {
+const CourseCard = (course : ICourse) => {
 	return (
 		<Link href={'/courses/reactjs'}>
-			<Card className='group w-full'>
-				<CardContent className='relative h-56 w-full'>
+			<Card className={'group w-full'}>
+				<CardContent className={'relative w-full h-56'}>
 					<Image
+						className={'object-cover'}
 						fill
 						src={course.previewImage}
-						alt={course.title}
-						className='object-cover'
-					/>
+						alt={course.title}/>
 				</CardContent>
-				<div className='my-4 flex flex-col space-y-2 px-2'>
-					<h2 className='line-clamp-1 font-space-grotesk text-2xl font-bold'>
+				<div className={'my-4 flex flex-col space-y-2 px-2'}>
+					<h2 className={'line-clamp-1 font-spaceGrotesk text-2xl font-bold'}>
 						{course.title}
 					</h2>
-					<Separator />
-					<div className='flex items-center justify-between'>
-						<div className='flex items-center gap-2'>
+					<Separator/>
+					<div className={'flex items-center justify-between'}>
+						<div className={'flex items-center gap-2'}>
 							<Image
 								src={course.author.image}
-								alt={course.author.name}
+								alt={course.title}
 								width={40}
 								height={40}
-								className='rounded-full object-cover'
+								className={'rounded-full object-cover'}
 							/>
-							<p className='text-sm text-muted-foreground'>
+							<p className={'text-sm text-muted-foreground'}>
 								{course.author.name}
 							</p>
 						</div>
-
-						<div className='flex gap-2'>
-							<div className='self-start font-space-grotesk text-xs text-muted-foreground line-through'>
+						<div className={'flex gap-2'}>
+							<div className={'font-spaceGrotesk self-start text-sm text-muted-foreground line-through'}>
 								{course.oldPrice.toLocaleString('en-US', {
 									style: 'currency',
 									currency: 'USD',
 								})}
 							</div>
-							<div className='font-space-grotesk text-sm font-bold'>
+							<div className={'font-spaceGrotesk self-start text-md'}>
 								{course.currentPrice.toLocaleString('en-US', {
-									currency: 'USD',
 									style: 'currency',
+									currency: 'USD',
 								})}
 							</div>
 						</div>
@@ -55,5 +53,4 @@ function CourseCard(course: ICourse) {
 		</Link>
 	)
 }
-
 export default CourseCard

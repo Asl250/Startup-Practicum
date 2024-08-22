@@ -27,7 +27,7 @@ import { z } from 'zod'
 
 function Price(course: ICourse) {
 	const { state, onToggle } = useToggleEdit()
-
+	
 	return (
 		<Card>
 			<CardContent className='relative p-6'>
@@ -38,7 +38,7 @@ function Price(course: ICourse) {
 					</Button>
 				</div>
 				<Separator className='my-3' />
-
+				
 				{state ? (
 					<Forms onToggle={onToggle} course={course} />
 				) : (
@@ -81,7 +81,7 @@ interface FormsProps {
 function Forms({ course, onToggle }: FormsProps) {
 	const [isLoading, setIsLoading] = useState(false)
 	const pathname = usePathname()
-
+	
 	const form = useForm<z.infer<typeof priceSchema>>({
 		resolver: zodResolver(priceSchema),
 		defaultValues: {
@@ -89,7 +89,7 @@ function Forms({ course, onToggle }: FormsProps) {
 			currentPrice: `${course.currentPrice}`,
 		},
 	})
-
+	
 	function onSubmit(values: z.infer<typeof priceSchema>) {
 		setIsLoading(true)
 		const { currentPrice, oldPrice } = values
@@ -100,7 +100,7 @@ function Forms({ course, onToggle }: FormsProps) {
 		)
 			.then(() => onToggle())
 			.finally(() => setIsLoading(false))
-
+		
 		toast.promise(promise, {
 			loading: 'Loading...',
 			success: 'Successfully updated!',

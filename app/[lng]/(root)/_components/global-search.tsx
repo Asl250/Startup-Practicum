@@ -1,12 +1,11 @@
 import { Button } from '@/components/ui/button'
 import { Search } from 'lucide-react'
 
-function GlobalSearch() {
+const GlobalSearch = () => {
 	return (
 		<Button size={'icon'} variant={'ghost'}>
-			<Search />
+			<Search/>
 		</Button>
 	)
 }
-
 export default GlobalSearch

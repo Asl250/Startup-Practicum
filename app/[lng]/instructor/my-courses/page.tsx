@@ -1,16 +1,16 @@
-import Header from '../_components/header'
-import InstructorCourseCard from '@/components/cards/instructor-course.card'
 import { getCourses } from '@/actions/course.action'
-import { auth } from '@clerk/nextjs'
+import Header from '@/app/[lng]/instructor/_components/header'
+import InstructorCourseCard from '@/components/cards/instructor-course.card'
+import { auth } from '@clerk/nextjs/server'
 
-async function Page() {
-	const { userId } = auth()
+async function Page () {
+	const {userId} = auth()
 	const courses = await getCourses(userId as string)
-
+	
 	return (
-		<>
+		<div>
 			<Header title='My courses' description='Here are your latest courses' />
-			<div className='mt-4 grid grid-cols-3 gap-4'>
+			<div className={'grid grid-cols-3 gap-4 mt-4'}>
 				{courses.map(item => (
 					<InstructorCourseCard
 						key={item._id}
@@ -18,8 +18,8 @@ async function Page() {
 					/>
 				))}
 			</div>
-		</>
+			
+		</div>
 	)
 }
-
 export default Page

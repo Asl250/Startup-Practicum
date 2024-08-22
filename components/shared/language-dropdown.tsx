@@ -1,65 +1,39 @@
-'use client'
+"use client"
 
-import { Languages } from 'lucide-react'
-import { Button } from '../ui/button'
+import { Button } from '@/components/ui/button'
 import {
 	DropdownMenu,
 	DropdownMenuContent,
-	DropdownMenuGroup,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from '../ui/dropdown-menu'
-import Image from 'next/image'
+	DropdownMenuGroup, DropdownMenuItem,
+	DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
 import { lngs } from '@/constants'
+import { cn } from '@/lib/utils'
+import { Languages } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
-import { cn, getCurrentLng } from '@/lib/utils'
 import { useParams, usePathname } from 'next/navigation'
 
-interface Props {
-	isMobile?: boolean
-}
-
-function LanguageDropdown({ isMobile = false }: Props) {
+function LanguageDropdown () {
 	const { lng } = useParams()
-	const pathanme = usePathname()
-
+	const pathname = usePathname()
+	
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button
-					variant='ghost'
-					size={'icon'}
-					className={cn(
-						isMobile && 'w-full bg-primary hover:bg-primary/80 h-12'
-					)}
-				>
-					<Languages />
-					{isMobile && (
-						<span className='ml-2 font-space-grotesk font-medium'>
-							{getCurrentLng(lng as string)}
-						</span>
-					)}
+				<Button variant={'ghost'} size={'icon'}>
+					<Languages/>
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className='w-56'>
+			<DropdownMenuContent>
 				<DropdownMenuGroup>
-					{lngs.map(item => (
-						<Link key={item.route} href={`/${item.route}/${pathanme.slice(4)}`}>
+					{lngs.map((item) => (
+						<Link href={`/${item.route}/${pathname.slice(4)}`} key={item.route}>
 							<DropdownMenuItem
-								className={cn(
-									'cursor-pointer',
-									lng === item.route && 'bg-secondary'
-								)}
-							>
-								<Image
-									src={`/assets/locales/${item.route}.png`}
-									alt={item.label}
-									width={30}
-									height={30}
-								/>
-								<span className='ml-2 font-space-grotesk font-medium'>
-									{item.label}
-								</span>
+								key={item.route}
+								className={cn('cursor-pointer', lng === item.route && 'bg-secondary')}>
+								<Image src={`/assets/locales/${item.route}.png`} alt={item.route} width={30} height={30}/>
+								<span className={'ml-2 font-spaceGrotesk font-medium'}>{item.label}</span>
 							</DropdownMenuItem>
 						</Link>
 					))}
@@ -68,5 +42,4 @@ function LanguageDropdown({ isMobile = false }: Props) {
 		</DropdownMenu>
 	)
 }
-
 export default LanguageDropdown

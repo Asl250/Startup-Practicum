@@ -1,4 +1,4 @@
-import { Schema, model, models } from 'mongoose'
+import { model, models, Schema } from 'mongoose'
 
 const CourseSchema = new Schema(
 	{
@@ -12,12 +12,12 @@ const CourseSchema = new Schema(
 		oldPrice: Number,
 		currentPrice: Number,
 		previewImage: String,
-		published: { type: Boolean, default: false },
-		instructor: { type: Schema.Types.ObjectId, ref: 'User' },
+		published: {type: Boolean, default: false},
+		instructor: {type: Schema.Types.ObjectId, ref: 'User'},
 		slug: String,
 		tags: String,
 	},
-	{ timestamps: true }
+{timestamps: true}
 )
 
 const Course = models.Course || model('Course', CourseSchema)

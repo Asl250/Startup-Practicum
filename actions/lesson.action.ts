@@ -15,10 +15,10 @@ export const createLesson = async (params: ICreateLesson) => {
 			minutes: Number(lesson.minutes),
 			seconds: Number(lesson.seconds),
 		}
-
+		
 		const existSection = await Section.findById(section)
 		const position = existSection.lessons.length
-
+		
 		const newLesson = await Lesson.create({
 			...lesson,
 			position,

@@ -16,7 +16,7 @@ import useTranslate from '@/hooks/use-translate'
 function ContactForm() {
 	const [isLoading, setIsLoading] = useState(false)
 	const t = useTranslate()
-
+	
 	const form = useForm<z.infer<typeof contactSchema>>({
 		resolver: zodResolver(contactSchema),
 		defaultValues: {
@@ -25,12 +25,12 @@ function ContactForm() {
 			name: '',
 		},
 	})
-
+	
 	function onSubmit(values: z.infer<typeof contactSchema>) {
 		setIsLoading(true)
 		const telegramBotId = process.env.NEXT_PUBLIC_TETELGRAM_BOT_API!
 		const telegramChatId = process.env.NEXT_PUBLIC_TETELGRAM_CHAT_ID!
-
+		
 		const promise = fetch(
 			`https://api.telegram.org/bot${telegramBotId}/sendMessage`,
 			{
@@ -41,22 +41,20 @@ function ContactForm() {
 				},
 				body: JSON.stringify({
 					chat_id: telegramChatId,
-					text: `Name: ${values.name}:
-Email: ${values.email}:
-Message: ${values.message}`,
+					text: `Name: ${values.name}:Email: ${values.email}:Message: ${values.message}`,
 				}),
 			}
 		)
 			.then(() => form.reset())
 			.finally(() => setIsLoading(false))
-
+		
 		toast.promise(promise, {
 			loading: t('loading'),
 			success: t('successfully'),
 			error: t('error'),
 		})
 	}
-
+	
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-3'>

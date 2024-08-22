@@ -1,3 +1,5 @@
+import { IUser } from '@/app.types'
+
 export interface ICreateCourse {
 	title: string
 	description: string
@@ -38,10 +40,40 @@ export interface ILessonFields {
 	hours: string
 	minutes: string
 	seconds: string
+	free: boolean
 }
 
 export interface ICreateLesson {
 	lesson: ILessonFields
 	section: string
 	path: string
+}
+
+export interface IUpdatePosition {
+	lists: { _id: string; position: number }[]
+	path: string
+}
+
+export interface GetCoursesParams {
+	clerkId: string
+	page?: number
+	pageSize?: number
+}
+
+export interface GetAllCoursesParams {
+	page?: number
+	pageSize?: number
+	searchQuery?: string
+	filter?: string
+}
+
+export interface GetReviewParams {
+	clerkId: string
+	page?: number
+	pageSize?: number
+}
+
+export interface GetPaginationParams {
+	page?: number
+	pageSize?: number
 }

@@ -1,15 +1,15 @@
+import type { ICourse } from '@/app.types'
 import Image from 'next/image'
-import { Badge } from '../ui/badge'
-import { ICourse } from '@/app.types'
 import Link from 'next/link'
+import { Badge } from '../ui/badge'
 
 interface Props {
 	course: ICourse
 }
 
-function InstructorCourseCard({ course }: Props) {
+function InstructorCourseCard({ course }: Props ) {
 	return (
-		<Link href={`/en/instructor/my-courses/${course._id}`}>
+		<Link href={` /instructor/my-courses/${course._id}`}>
 			<div className='flex flex-col space-y-2 rounded-md bg-background p-2'>
 				<div className='relative h-52 w-full'>
 					<Image
@@ -24,11 +24,12 @@ function InstructorCourseCard({ course }: Props) {
 						{course.title}
 					</h1>
 					<Badge variant={course.published ? 'default' : 'destructive'}>
-						{course.published ? 'Published' : 'Draft'}
+						{course.published ? "Published" : "Draft"}
 					</Badge>
 				</div>
 			</div>
 		</Link>
+	
 	)
 }
 

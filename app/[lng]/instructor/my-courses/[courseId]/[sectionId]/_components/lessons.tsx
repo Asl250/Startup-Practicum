@@ -23,7 +23,7 @@ import { BadgePlus, X } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
+import { toast, Toaster } from 'sonner'
 import { z } from 'zod'
 
 interface Props {
@@ -92,10 +92,10 @@ function Forms({ handler, lesson }: FormProps) {
 			content,
 		},
 	})
-
+	
 	const onSubmit = (values: z.infer<typeof lessonSchema>) => {
-		const promise = handler(values).finally(() => form.reset())
-
+		const promise = handler(values as ILessonFields).finally(() => form.reset())
+		
 		toast.promise(promise, {
 			loading: 'Loading...',
 			success: 'Successfully!',
@@ -104,67 +104,19 @@ function Forms({ handler, lesson }: FormProps) {
 	}
 
 	return (
-		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-3'>
-				<FormField
-					control={form.control}
-					name='title'
-					render={({ field }) => (
-						<FormItem>
-							<FormControl>
-								<Input
-									placeholder='Title'
-									className='bg-secondary'
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={form.control}
-					name='videoUrl'
-					render={({ field }) => (
-						<FormItem>
-							<FormControl>
-								<Textarea
-									placeholder='Video URL'
-									className='bg-secondary'
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={form.control}
-					name='content'
-					render={({ field }) => (
-						<FormItem>
-							<FormControl>
-								<Textarea
-									placeholder='Content'
-									className='bg-secondary'
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<div className='grid grid-cols-3 gap-2'>
+		<>
+			<Toaster position={'top-center'} theme={'dark'}/>
+			<Form {...form}>
+				<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-3'>
 					<FormField
 						control={form.control}
-						name='hours'
+						name='title'
 						render={({ field }) => (
 							<FormItem>
 								<FormControl>
 									<Input
-										placeholder='Hours'
+										placeholder='Title'
 										className='bg-secondary'
-										type='number'
 										{...field}
 									/>
 								</FormControl>
@@ -174,14 +126,13 @@ function Forms({ handler, lesson }: FormProps) {
 					/>
 					<FormField
 						control={form.control}
-						name='minutes'
+						name='videoUrl'
 						render={({ field }) => (
 							<FormItem>
 								<FormControl>
-									<Input
-										placeholder='Minutes'
+									<Textarea
+										placeholder='Video URL'
 										className='bg-secondary'
-										type='number'
 										{...field}
 									/>
 								</FormControl>
@@ -191,14 +142,13 @@ function Forms({ handler, lesson }: FormProps) {
 					/>
 					<FormField
 						control={form.control}
-						name='seconds'
+						name='content'
 						render={({ field }) => (
 							<FormItem>
 								<FormControl>
-									<Input
-										placeholder='Seconds'
+									<Textarea
+										placeholder='Content'
 										className='bg-secondary'
-										type='number'
 										{...field}
 									/>
 								</FormControl>
@@ -206,11 +156,65 @@ function Forms({ handler, lesson }: FormProps) {
 							</FormItem>
 						)}
 					/>
-				</div>
-				<div className='flex items-center gap-2'>
-					<Button type='submit'>Add</Button>
-				</div>
-			</form>
-		</Form>
+					<div className='grid grid-cols-3 gap-2'>
+						<FormField
+							control={form.control}
+							name='hours'
+							render={({ field }) => (
+								<FormItem>
+									<FormControl>
+										<Input
+											placeholder='Hours'
+											className='bg-secondary'
+											type='number'
+											{...field}
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name='minutes'
+							render={({ field }) => (
+								<FormItem>
+									<FormControl>
+										<Input
+											placeholder='Minutes'
+											className='bg-secondary'
+											type='number'
+											{...field}
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name='seconds'
+							render={({ field }) => (
+								<FormItem>
+									<FormControl>
+										<Input
+											placeholder='Seconds'
+											className='bg-secondary'
+											type='number'
+											{...field}
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+					</div>
+					<div className='flex items-center gap-2'>
+						<Button type='submit'>Add</Button>
+					</div>
+				</form>
+			</Form>
+		</>
+		
 	)
 }

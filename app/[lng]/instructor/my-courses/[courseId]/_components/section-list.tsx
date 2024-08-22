@@ -12,7 +12,7 @@ interface Props {
 }
 
 function SectionList({ index, section }: Props) {
-	const pathname = usePathname()
+	const pathname= usePathname()
 
 	return (
 		<Draggable draggableId={section._id} index={index}>
@@ -30,7 +30,7 @@ function SectionList({ index, section }: Props) {
 					</div>
 					<span>{section.title}</span>
 					<div className='ml-auto flex items-center gap-x-2 pr-2'>
-						<Link href={`${pathname}/${section._id}`}>
+						<Link href={`${pathname}/${section._id}/`}>
 							<Pencil className='size-4 cursor-pointer transition hover:opacity-75' />
 						</Link>
 					</div>
