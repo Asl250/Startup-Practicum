@@ -1,5 +1,5 @@
 import Footer from '@/app/[lng]/(root)/_components/footer'
-import Navbar from '@/app/[lng]/(root)/_components/Navbar'
+import Navbar from '@/app/[lng]/(root)/_components/navbar'
 import type { ChildProps } from '@/types'
 
 function Layout ({children} : ChildProps) {
