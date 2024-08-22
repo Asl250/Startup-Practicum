@@ -1,8 +1,8 @@
 'use client'
 
-import Description from '@/app/[lng]/(root)/courses/[slug]/_components/Description'
-import Hero from '@/app/[lng]/(root)/courses/[slug]/_components/Hero'
-import Overview from '@/app/[lng]/(root)/courses/[slug]/_components/Overview'
+import Hero from '@/app/[lng]/(root)/(home)/_components/hero'
+import Description from '@/app/[lng]/(root)/courses/[slug]/_components/description'
+import Overview from '@/app/[lng]/(root)/courses/[slug]/_components/overview'
 import CourseCard from '@/components/cards/course.card'
 import TopBar from '@/components/shared/top-bar'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
