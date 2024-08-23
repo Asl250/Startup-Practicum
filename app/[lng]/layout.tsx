@@ -1,60 +1,63 @@
-import { ThemeProvider } from '@/components/providers/theme-provider'
+import type { Metadata } from 'next'
+import { Roboto, Space_Grotesk as SpaceGrotesk } from 'next/font/google'
+import './globals.css'
+import { ChildProps } from '@/types'
+import { ThemeProvider } from '@/components/providers/theme.provider'
 import { languages } from '@/i18n/settings'
-import { localization } from '@/lib/utils'
-import type { ChildProps } from '@/types'
-import { ClerkProvider } from '@clerk/nextjs'
 import { dir } from 'i18next'
-import type { Metadata } from "next";
-import { Roboto, Space_Grotesk } from "next/font/google";
-import "./globals.css";
+import { ClerkProvider } from '@clerk/nextjs'
+import { localization } from '@/lib/utils'
+import { Toaster } from '@/components/ui/sonner'
 
-const roboto  = Roboto({
-  subsets: ["latin", "cyrillic"],
-  weight: ["100", "300", "400", "500", "700",  "900"],
-  variable: "--font-roboto",
+const roboto = Roboto({
+	subsets: ['latin', 'cyrillic'],
+	weight: ['100', '300', '400', '500', '700', '900'],
+	variable: '--font-roboto',
 })
 
-const spaceGrotesk  = Space_Grotesk({
-  subsets: ["latin"],
-  weight: [ "300", "400", "500", "600", "700"],
-  variable: "--font-space-grotesk",
+const spaceGrotesk = SpaceGrotesk({
+	weight: ['300', '400', '500', '600', '700'],
+	subsets: ['latin'],
+	variable: '--font-space-grotesk',
 })
 
 export async function generateStaticParams() {
-  return languages.map((lng) => ({ lng }))
+	return languages.map(lng => ({ lng }))
 }
-
 
 export const metadata: Metadata = {
-  title: "Startup Practicum - Next.js",
-  description: "Startup Practicum - Next.js",
-  icons: { icon : '/logo.svg'}
-};
-
-interface Props extends ChildProps {
-  params: { lng: string}
+	title: 'Startup Praktikum - Next.js',
+	description: "Startup Praktikum's Next.js project",
+	icons: { icon: '/logo.svg' },
 }
 
-function RootLayout( {children, params : { lng }} : Props){
-  const local = localization(lng)
-  
-  return (
-    <ClerkProvider localization={local}>
-      <html lang={lng} dir={dir(lng)} suppressHydrationWarning>
-        <body className={`${roboto.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange>
-            {children}
-          
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
-  
-  );
+interface Props extends ChildProps {
+	params: { lng: string }
+}
+
+function RootLayout({ children, params: { lng } }: Props) {
+	const local = localization(lng)
+
+	return (
+		<ClerkProvider localization={local}>
+			<html lang={lng} dir={dir(lng)} suppressHydrationWarning>
+				<body
+					className={`${roboto.variable} ${spaceGrotesk.variable} overflow-x-hidden`}
+					suppressHydrationWarning
+				>
+					<ThemeProvider
+						attribute='class'
+						defaultTheme='system'
+						enableSystem
+						disableTransitionOnChange
+					>
+						<Toaster position='top-center' />
+						{children}
+					</ThemeProvider>
+				</body>
+			</html>
+		</ClerkProvider>
+	)
 }
 
 export default RootLayout

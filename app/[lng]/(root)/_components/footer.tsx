@@ -9,7 +9,7 @@ import Link from 'next/link'
 
 function Footer() {
 	const t = useTranslate()
-	
+
 	return (
 		<div className='mt-12 bg-secondary pt-12 max-md:px-4'>
 			<div className='container mx-auto max-w-7xl pb-12'>
@@ -18,7 +18,7 @@ function Footer() {
 						<Logo />
 						<p>{t('heroDescription')}</p>
 					</div>
-					
+
 					<div className='flex flex-col space-y-3'>
 						<h1 className='font-space-grotesk text-3xl'>{t('pages')}</h1>
 						<div className='flex flex-col space-y-3 pt-6'>
@@ -33,7 +33,7 @@ function Footer() {
 							))}
 						</div>
 					</div>
-					
+
 					<div className='flex flex-col space-y-3'>
 						<h1 className='font-space-grotesk text-3xl'>{t('contacts')}</h1>
 						<div className='flex flex-col space-y-3 pt-6'>
@@ -55,7 +55,7 @@ function Footer() {
 									</a>
 								</div>
 							</div>
-							
+
 							<div className='flex items-center space-x-3'>
 								<Mail size={20} />
 								<a
@@ -65,7 +65,7 @@ function Footer() {
 									info@sammi.ac
 								</a>
 							</div>
-							
+
 							<div className='flex items-center space-x-3'>
 								<MapPin size={20} />
 								<span className='text-sm'>
@@ -75,7 +75,7 @@ function Footer() {
 						</div>
 					</div>
 				</div>
-				
+
 				<div className='pt-12'>
 					<Separator className='mb-3 dark:bg-gray-500' />
 					<p>

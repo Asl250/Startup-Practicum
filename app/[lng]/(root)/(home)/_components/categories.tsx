@@ -4,9 +4,9 @@ import CategoryCard from '@/components/cards/category.card'
 import { categories } from '@/constants'
 import useTranslate from '@/hooks/use-translate'
 
-const Categories = () => {
+function Categories() {
 	const t = useTranslate()
-	
+
 	return (
 		<div className='container mx-auto max-w-6xl py-12'>
 			<div className='flex flex-col space-y-1'>
@@ -17,7 +17,7 @@ const Categories = () => {
 					{t('topCategoriesDescription')}
 				</p>
 			</div>
-			
+
 			<div className='mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
 				{categories.map(category => (
 					<CategoryCard key={category.label} {...category} />
@@ -26,4 +26,5 @@ const Categories = () => {
 		</div>
 	)
 }
+
 export default Categories

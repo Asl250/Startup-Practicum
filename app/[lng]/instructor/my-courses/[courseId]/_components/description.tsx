@@ -26,7 +26,7 @@ import { z } from 'zod'
 
 function Description(course: ICourse) {
 	const { state, onToggle } = useToggleEdit()
-	
+
 	return (
 		<Card>
 			<CardContent className='relative p-6'>
@@ -37,12 +37,12 @@ function Description(course: ICourse) {
 					</Button>
 				</div>
 				<Separator className='my-3' />
-				
+
 				{state ? (
 					<Forms course={course} onToggle={onToggle} />
 				) : (
 					<div className='flex items-center gap-2'>
-						<span className='self-start font-spaceGrotesk font-bold text-muted-foreground'>
+						<span className='self-start font-space-grotesk font-bold text-muted-foreground'>
 							Description:
 						</span>
 						<span className='line-clamp-3 font-medium'>
@@ -63,29 +63,29 @@ interface FormsProps {
 }
 function Forms({ course, onToggle }: FormsProps) {
 	const [isLoading, setIsLoading] = useState(false)
-	
+
 	const pathname = usePathname()
-	
+
 	const form = useForm<z.infer<typeof descriptionSchema>>({
 		resolver: zodResolver(descriptionSchema),
 		defaultValues: {
 			description: course.description,
 		},
 	})
-	
+
 	const onSubmit = (values: z.infer<typeof descriptionSchema>) => {
 		setIsLoading(true)
 		const promise = updateCourse(course._id, values, pathname)
 			.then(() => onToggle())
 			.finally(() => setIsLoading(false))
-		
+
 		toast.promise(promise, {
 			loading: 'Loading...',
 			success: 'Successfully updated!',
 			error: 'Something went wrong!',
 		})
 	}
-	
+
 	return (
 		<>
 			{isLoading && <FillLoading />}

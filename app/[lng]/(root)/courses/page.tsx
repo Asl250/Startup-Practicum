@@ -1,14 +1,13 @@
-'use client'
-
-import AllCourses from '@/app/[lng]/(root)/courses/_components/all-courses'
 import TopBar from '@/components/shared/top-bar'
+import AllCourses from './_components/all-courses'
 
-const Page = () => {
+function Page() {
 	return (
 		<>
-			<TopBar label={'allCourses'} description={'allCourseDescription'} extra={'ReactJs'} />
-			<AllCourses/>
+			<TopBar label='allCourses' description='allCourseDescription' />
+			<AllCourses />
 		</>
 	)
 }
+
 export default Page

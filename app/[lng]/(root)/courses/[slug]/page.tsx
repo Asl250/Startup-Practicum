@@ -1,41 +1,47 @@
-'use client'
-
-import Description from '@/app/[lng]/(root)/courses/[slug]/_components/Description'
-import Hero from '@/app/[lng]/(root)/courses/[slug]/_components/Hero'
-import Overview from '@/app/[lng]/(root)/courses/[slug]/_components/Overview'
-import CourseCard from '@/components/cards/course.card'
 import TopBar from '@/components/shared/top-bar'
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
+import Hero from './_components/hero'
+import Overview from './_components/overview'
+import Description from './_components/description'
 import { Separator } from '@/components/ui/separator'
+import {
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+	CarouselNext,
+	CarouselPrevious,
+} from '@/components/ui/carousel'
 import { courses } from '@/constants'
-import useTranslate from '@/hooks/use-translate'
-import type { ICourse } from '@/types'
+import CourseCard from '@/components/cards/course.card'
+import { translation } from '@/i18n/server'
+import { LngParams } from '@/types'
 
-const Page = () => {
-	const t = useTranslate()
-	
+async function Page({ params: { lng } }: LngParams) {
+	const { t } = await translation(lng)
+
 	return (
 		<>
-			<TopBar label={'allCourses'} extra={'Full Courses ReactJs'}/>
-			
-			<div className={'container mx-auto max-w-6xl'}>
-				<div className={'grid grid-cols-3 gap-4 pt-12'}>
-					<div className={'col-span-2 max-lg:col-span-3'}>
+			<TopBar label='allCourses' extra='Full Courses ReactJS' />
+
+			<div className='container mx-auto max-w-6xl'>
+				<div className='grid grid-cols-3 gap-4 pt-12'>
+					<div className='col-span-2 max-lg:col-span-3'>
 						<Hero />
-						<Overview/>
+						<Overview />
 					</div>
-					<div className={'col-span-1 max-lg:col-span-3'}>
-						<Description/>
+					<div className='col-span-1 max-lg:col-span-3'>
+						<Description />
 					</div>
 				</div>
-				
-				<Separator className={'my-12'}/>
+
+				<Separator className='my-12' />
+
 				<h1 className='font-space-grotesk text-4xl font-bold'>
 					{t('youMayLike')}
 				</h1>
+
 				<Carousel opts={{ align: 'start' }} className='mt-6 w-full'>
 					<CarouselContent className='w-full'>
-						{courses.map((course: ICourse) => (
+						{courses.map(course => (
 							<CarouselItem
 								key={course.title}
 								className='md:basis-1/2 lg:basis-1/3'
@@ -44,12 +50,12 @@ const Page = () => {
 							</CarouselItem>
 						))}
 					</CarouselContent>
-					<CarouselPrevious className={'flex max-lg:hidden'}/>
-					<CarouselNext className={'flex max-lg:hidden'}/>
+					<CarouselPrevious />
+					<CarouselNext />
 				</Carousel>
-				
 			</div>
 		</>
 	)
 }
+
 export default Page

@@ -1,16 +1,15 @@
-import Footer from '@/app/[lng]/(root)/_components/footer'
-import Navbar from '@/app/[lng]/(root)/_components/Navbar'
-import type { ChildProps } from '@/types'
+import { ChildProps } from '@/types'
+import Navbar from './_components/navbar'
+import Footer from './_components/footer'
 
-function Layout ({children} : ChildProps) {
-		return (
-			<div>
-				<main>
-					<Navbar/>
-					{children}
-					<Footer/>
-				</main>
-			</div>
-		)
+function Layout({ children }: ChildProps) {
+	return (
+		<div>
+			<Navbar />
+			<main>{children}</main>
+			<Footer />
+		</div>
+	)
 }
+
 export default Layout

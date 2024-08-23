@@ -9,7 +9,7 @@ import Link from 'next/link'
 
 function Instructor() {
 	const t = useTranslate()
-	
+
 	return (
 		<div className='container mx-auto max-w-6xl py-12'>
 			<div className='flex items-center justify-between'>
@@ -21,23 +21,21 @@ function Instructor() {
 						{t('learnInstructorsDescription')}
 					</p>
 				</div>
-				
+
 				<div className='flex items-center gap-1 self-end'>
-					<Button variant={'secondary'} asChild>
-						<Link href={'/instructors'}>
-							<span>{t('viewAll')}</span>
-							<MoveUpRight className='ml-2 size-5 font-bold' />
-						</Link>
+					<Button variant={'secondary'}>
+						<span>{t('viewAll')}</span>
+						<MoveUpRight className='ml-2 size-5 font-bold' />
 					</Button>
 				</div>
 			</div>
-			
+
 			<div className='mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
-				{instructors.map(instructor => (
-					<InstructorCard key={instructor.name} {...instructor}/>
+				{instructors.map(item => (
+					<InstructorCard key={item.name} {...item} />
 				))}
 			</div>
-			
+
 			<div className='mt-6 text-center text-sm'>
 				{t('becomeInstructor1')}{' '}
 				<Link

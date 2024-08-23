@@ -10,6 +10,7 @@ export default authMiddleware({
 	beforeAuth: req => intlMiddleware(req),
 	publicRoutes: ['/:lng', '/:lng/courses', '/:lng/contacts', '/:lng/courses/:slug'],
 	ignoredRoutes: ['/en/api/webhook'],
+	debug: true,
 })
 
 
