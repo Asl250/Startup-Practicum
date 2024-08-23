@@ -7,10 +7,11 @@ import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { courseCategory, courseLanguage, courseLevels } from '@/constants'
-import { courseStorageRefs } from '@/lib/firebase'
+import { storage } from '@/lib/firebase'
 import { courseSchema } from '@/lib/validation'
 import { useUser } from '@clerk/nextjs'
-import { getDownloadURL, uploadString } from '@firebase/storage'
+import { getDownloadURL, ref, uploadString } from '@firebase/storage'
+import { uuidv4 } from '@firebase/util'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ImageDown } from 'lucide-react'
 import Image from 'next/image'
@@ -43,9 +44,10 @@ const CourseFieldsForm = () => {
 		const reader = new FileReader()
 		reader.readAsDataURL(file)
 		reader.onload = (e) => {
+			const refs = ref(storage, `/praktikum/course/${uuidv4()}`)
 			const result = e.target?.result as string
-			const promise = uploadString(courseStorageRefs, result, 'data_url')
-				.then(() => getDownloadURL(courseStorageRefs)).then(url => setPreviewImage(url))
+			const promise = uploadString(refs, result, 'data_url')
+				.then(() => getDownloadURL(refs)).then(url => setPreviewImage(url))
 			toast.promise(promise, {
 				loading: 'Loading...',
 				success: 'Successfully uploaded!',

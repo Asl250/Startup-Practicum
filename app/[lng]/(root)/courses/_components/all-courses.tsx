@@ -1,8 +1,6 @@
-'use client'
 
-import CourseCard from '@/components/cards/course.card'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { courses, filterCourses, filterLevels } from '@/constants'
+import { filterCourses, filterLevels } from '@/constants'
 import useTranslate from '@/hooks/use-translate'
 
 const AllCourses = () => {
@@ -48,11 +46,11 @@ const AllCourses = () => {
 				</div>
 			</div>
 			
-			<div className={'mt-2 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'}>
-				{courses.map((courses, idx) => (
-					<CourseCard key={idx} {...courses} />
-				))}
-			</div>
+			{/* <div className={'mt-2 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'}> */}
+			{/* 	{courses.map((courses, idx) => ( */}
+			{/* 		<CourseCard key={idx} {...courses} /> */}
+			{/* 	))} */}
+			{/* </div> */}
 		</div>
 	)
 }

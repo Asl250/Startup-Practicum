@@ -1,14 +1,19 @@
 "use client"
 
+import { ICourse } from '@/app.types'
 import CourseCard from '@/components/cards/course.card'
 import { Button } from '@/components/ui/button'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
-import { courses, filterCourses } from '@/constants'
+import { filterCourses } from '@/constants'
 import useTranslate from '@/hooks/use-translate'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
 
-const FeaturedCourses = () => {
+interface Props {
+	courses: ICourse[]
+}
+
+const FeaturedCourses = ({courses}: Props) => {
 	const [filter, setFilter] = useState('all')
 	const t = useTranslate()
 	
@@ -47,7 +52,7 @@ const FeaturedCourses = () => {
 				<CarouselContent className={'flex w-full'}>
 					{courses.map(course => (
 						<CarouselItem
-							className={'md:basis-1/2 lg:basis-1/3'}
+							className={'md:basis-1/2 lg:basis-1/3 md:min-w-[300px]'}
 							key={course.title}>
 							<CourseCard {...course}/>
 						</CarouselItem>

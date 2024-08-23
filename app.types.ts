@@ -16,10 +16,10 @@ export interface ICourse {
 	slug: string
 	tags: string
 	instructor: IUser
-	// updatedAt: string
-	// totalLessons: number
-	// totalSections: number
-	// totalDuration: string
+	updatedAt: string
+	totalLessons: number
+	totalSections: number
+	totalDuration: string
 	// rating: number
 	// reviewCount: number
 	// purchasedStudents: number

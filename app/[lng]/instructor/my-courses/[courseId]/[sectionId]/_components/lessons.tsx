@@ -241,7 +241,7 @@ function Forms({ handler, lesson, isEdit = false, onCancel }: FormProps) {
 							<FormItem>
 								<FormControl>
 									<Editor
-										apiKey={process.env.NEXT_PUBLIC_TINY_API_KEY}
+										apiKey={'x0zrvoh53wqk0lgf31twb52uabvyyhdiirkm3pvi9tohmiuc'}
 										init={editorConfig}
 										onBlur={field.onBlur}
 										initialValue={content}

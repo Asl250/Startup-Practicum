@@ -1,7 +1,8 @@
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import type { ILesson } from '@/app.types'
 import { enUS, ruRU, trTR } from '@clerk/localizations'
+import { type ClassValue, clsx } from 'clsx'
 import qs from 'query-string'
+import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -31,4 +32,23 @@ export const formQuery = ({ key, params, value } : UrlQueryParams) => {
     },
     { skipNull: true }
   )
+}
+
+export const calculateTotalDuration = (lessons: ILesson[]) => {
+  let totalMinutes = 0
+  
+  lessons.forEach(lesson => {
+    totalMinutes +=
+      lesson.duration.hours * 60 +
+      lesson.duration.minutes +
+      Math.round(lesson.duration.seconds / 60)
+  })
+  
+  const totalHours = Math.floor(totalMinutes / 60)
+  const totalMinutesLeft = totalMinutes % 60
+
+  return `${totalHours}.${totalMinutesLeft
+    .toString()
+    .padStart(2, '0')
+  }`
 }

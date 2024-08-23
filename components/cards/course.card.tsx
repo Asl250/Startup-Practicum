@@ -1,12 +1,12 @@
+import { ICourse } from '@/app.types'
 import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
-import type { ICourse } from '@/types'
 import Image from 'next/image'
 import Link from 'next/link'
 
 const CourseCard = (course : ICourse) => {
 	return (
-		<Link href={'/courses/reactjs'}>
+		<Link href={`/courses/${course._id}`}>
 			<Card className={'group w-full'}>
 				<CardContent className={'relative w-full h-56'}>
 					<Image
@@ -23,14 +23,14 @@ const CourseCard = (course : ICourse) => {
 					<div className={'flex items-center justify-between'}>
 						<div className={'flex items-center gap-2'}>
 							<Image
-								src={course.author.image}
+								src={course.instructor.picture}
 								alt={course.title}
 								width={40}
 								height={40}
 								className={'rounded-full object-cover'}
 							/>
 							<p className={'text-sm text-muted-foreground'}>
-								{course.author.name}
+								{course.instructor.fullName}
 							</p>
 						</div>
 						<div className={'flex gap-2'}>
