@@ -39,13 +39,13 @@ export interface ILesson {
 	position: number
 	videoUrl: string
 	content: string
-	free: boolean
 	duration: {
 		hours: number
 		minutes: number
 		seconds: number
 	}
-	userProgress: IUserProgress[]
+	free: boolean
+	// userProgress: IUserProgress[]
 }
 
 export interface IUserProgress {

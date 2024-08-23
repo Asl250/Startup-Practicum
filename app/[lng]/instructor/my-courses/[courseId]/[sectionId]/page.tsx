@@ -1,3 +1,4 @@
+import { getLessons } from '@/actions/lesson.action'
 import { Separator } from '@/components/ui/separator'
 import Header from '../../../_components/header'
 import { getSectionById } from '@/actions/section.action'
@@ -13,9 +14,12 @@ interface Params {
 }
 async function Page({ params }: Params) {
 	const sectionJSON = await getSectionById(params.sectionId)
+	const lessonsJSON = await getLessons(params.sectionId)
 
 	const section = JSON.parse(JSON.stringify(sectionJSON))
-
+	const lessons = JSON.parse(JSON.stringify(lessonsJSON))
+	
+	
 	return (
 		<>
 			<div className='flex items-center justify-between'>
@@ -42,7 +46,7 @@ async function Page({ params }: Params) {
 						</span>{' '}
 						<Settings2 />
 					</div>
-					<Lessons section={section} />
+					<Lessons section={section} lessons={lessons} />
 				</div>
 				<div className='flex flex-col space-y-2'>
 					<div className='flex items-center gap-2'>
