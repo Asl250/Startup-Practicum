@@ -1,8 +1,11 @@
-import { getDetailedCourse } from '@/actions/course.action'
+import { getDetailedCourse, getFeaturedCourses } from '@/actions/course.action'
+import type { ICourse } from '@/app.types'
 import Description from '@/app/[lng]/(root)/courses/[slug]/_components/description'
 import Hero from '@/app/[lng]/(root)/courses/[slug]/_components/hero'
 import Overview from '@/app/[lng]/(root)/courses/[slug]/_components/overview'
+import CourseCard from '@/components/cards/course.card'
 import TopBar from '@/components/shared/top-bar'
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import { Separator } from '@/components/ui/separator'
 import { translation } from '@/i18n/server'
 
@@ -15,6 +18,10 @@ const Page = async ({params: {lng, slug}} : Props) => {
 
 	const courseJSON = await getDetailedCourse(slug)
 	const course = JSON.parse(JSON.stringify(courseJSON))
+	
+	const coursesJSON = await getFeaturedCourses()
+	const courses = JSON.parse(JSON.stringify(coursesJSON))
+	
 	return (
 		<>
 			<TopBar label={'allCourses'} extra={'Full Courses ReactJs'}/>
@@ -34,20 +41,20 @@ const Page = async ({params: {lng, slug}} : Props) => {
 				<h1 className='font-space-grotesk text-4xl font-bold'>
 					{t('youMayLike')}
 				</h1>
-				{/* <Carousel opts={{ align: 'start' }} className='mt-6 w-full'> */}
-				{/* 	<CarouselContent className='w-full'> */}
-				{/* 		{courses.map((course: ICourse) => ( */}
-				{/* 			<CarouselItem */}
-				{/* 				key={course.title} */}
-				{/* 				className='md:basis-1/2 lg:basis-1/3' */}
-				{/* 			> */}
-				{/* 				<CourseCard {...course} /> */}
-				{/* 			</CarouselItem> */}
-				{/* 		))} */}
-				{/* 	</CarouselContent> */}
-				{/* 	<CarouselPrevious className={'flex max-lg:hidden'}/> */}
-				{/* 	<CarouselNext className={'flex max-lg:hidden'}/> */}
-				{/* </Carousel> */}
+				<Carousel opts={{ align: 'start' }} className='mt-6 w-full'>
+					<CarouselContent className='w-full'>
+						{courses.map((course: ICourse) => (
+							<CarouselItem
+								key={course.title}
+								className='md:basis-1/2 lg:basis-1/3'
+							>
+								<CourseCard {...course} />
+							</CarouselItem>
+						))}
+					</CarouselContent>
+					<CarouselPrevious className={'flex max-lg:hidden'}/>
+					<CarouselNext className={'flex max-lg:hidden'}/>
+				</Carousel>
 				
 			</div>
 		</>

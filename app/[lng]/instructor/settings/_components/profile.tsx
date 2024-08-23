@@ -13,6 +13,7 @@ const Profile = () => {
 				colorBackground: resolvedTheme === 'dark' ? '#020817' : '#fff',
 			}
 		}}/>
+		
 	)
 }
 export default Profile
