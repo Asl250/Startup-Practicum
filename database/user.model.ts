@@ -1,13 +1,20 @@
-import { model, models, Schema } from 'mongoose'
+import { Schema, model, models } from 'mongoose'
 
 const UserSchema = new Schema(
 	{
-		fullName: {type: String},
-		email: {type: String},
-		picture: {type: String},
-		clerkId: {type: String},
+		fullName: String,
+		clerkId: String,
+		email: String,
+		picture: String,
+		bio: String,
+		phone: String,
+		job: String,
+		website: String,
+		linkedin: String,
+		github: String,
+		youtube: String,
 	},
-	{timestamps: true}
+	{ timestamps: true }
 )
 
 const User = models.User || model('User', UserSchema)
