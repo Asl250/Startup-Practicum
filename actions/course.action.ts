@@ -1,14 +1,16 @@
 'use server'
 
-import type { GetAllCoursesParams, GetCoursesParams, ICreateCourse } from '@/actions/types'
-import type { ICourse, ILesson } from '@/app.types'
+import { GetAllCoursesParams, GetCoursesParams, ICreateCourse } from '@/actions/types'
+import { ICourse, ILesson } from '@/app.types'
 import Course from '@/database/course.model'
 import Lesson from '@/database/lesson.model'
+import Purchase from '@/database/purchase.model'
 import Section from '@/database/section.model'
+import UserProgress from '@/database/user-progress.model'
 import User from '@/database/user.model'
 import { connectToDatabase } from '@/lib/mongoose'
 import { calculateTotalDuration } from '@/lib/utils'
-import type { FilterQuery } from 'mongoose'
+import { FilterQuery } from 'mongoose'
 import { revalidatePath } from 'next/cache'
 import { cache } from 'react'
 
@@ -192,5 +194,70 @@ export const getAllCourses = async (params: GetAllCoursesParams) => {
 		return { courses, isNext, totalCourses }
 	} catch (error) {
 		throw new Error('Something went wrong!')
+	}
+}
+
+export const purchaseCourse = async (course: string, clerkId: string) => {
+	try {
+		await connectToDatabase()
+		const user = await User.findOne({ clerkId })
+		const checkCourse = await Course.findById(course)
+			.select('purchases')
+			.populate({
+				path: 'purchases',
+				model: Purchase,
+				match: { user: user._id },
+			})
+		
+		if (checkCourse.purchases.length > 0)
+			return JSON.parse(JSON.stringify({ status: 200 }))
+		
+		const purchase = await Purchase.create({ user: user._id, course })
+		
+		await Course.findByIdAndUpdate(course,
+			{ $push: { purchases: purchase._id } }
+		)
+		return JSON.parse(JSON.stringify({ status: 200 }))
+		
+	} catch (error) {
+		throw new Error('Something went wrong!')
+	}
+}
+
+export const getDashboardCourse = async (clerkId: string, lessonId: string) => {
+	try {
+		await connectToDatabase()
+		const course = await Course.findById(lessonId).select('title')
+		const sections = await Section.find({ course: lessonId })
+			.select('title')
+			.sort({ position: 1 })
+			.populate({
+				path: 'lessons',
+				model: Lesson,
+				select: 'title userProgress',
+				options: { sort: { position: 1 } },
+				populate: {
+					path: 'userProgress',
+					match: { userId: clerkId },
+					model: UserProgress,
+					select: 'lessonId',
+				},
+			})
+		
+		const lessons = sections.map(section => section.lessons).flat()
+		const lessonIds = lessons.map(lesson => lesson._id)
+		
+		const validCompletedLessons = await UserProgress.find({
+			userId: clerkId,
+			lessonId: { $in: lessonIds },
+			isCompleted: true,
+		})
+		
+		const progressPercentage =
+			(validCompletedLessons.length / lessons.length) * 100
+		
+		return { course, sections, progressPercentage }
+	} catch (error) {
+		console.log(error)
 	}
 }
