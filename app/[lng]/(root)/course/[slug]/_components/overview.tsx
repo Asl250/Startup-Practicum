@@ -2,7 +2,7 @@
 
 import { getCourseSections } from '@/actions/section.action'
 import type { ICourse, ISection } from '@/app.types'
-import SectionList from '@/app/[lng]/(root)/courses/[slug]/_components/sectionList'
+import SectionList from '@/app/[lng]/(root)/course/[slug]/_components/sectionList'
 import ReviewCard from '@/components/cards/review.card'
 import SectionLoading from '@/components/shared/section-loading'
 import { Accordion, } from '@/components/ui/accordion'

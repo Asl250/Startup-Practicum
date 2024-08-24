@@ -1,67 +1,89 @@
-"use client"
+'use client'
 
 import { ICourse } from '@/app.types'
 import CourseCard from '@/components/cards/course.card'
 import { Button } from '@/components/ui/button'
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
+import {
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+	CarouselNext,
+	CarouselPrevious,
+} from '@/components/ui/carousel'
 import { filterCourses } from '@/constants'
 import useTranslate from '@/hooks/use-translate'
-import { cn } from '@/lib/utils'
-import { useState } from 'react'
+import { cn, formQuery } from '@/lib/utils'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 interface Props {
 	courses: ICourse[]
 }
-
-const FeaturedCourses = ({courses}: Props) => {
-	const [filter, setFilter] = useState('all')
+function FeaturedCourses({ courses }: Props) {
 	const t = useTranslate()
+	const searchParams = useSearchParams()
+	const router = useRouter()
+	
+	const onUpdateParams = (value: string) => {
+		const newUrl = formQuery({
+			value,
+			key: 'filter',
+			params: searchParams.toString(),
+			toCourses: true,
+		})
+		
+		router.push(newUrl)
+	}
 	
 	return (
-		<div className={'container max-w-6xl mx-auto py-12'}>
-			<div className={'items-center justify-between flex max-md:flex-col max-md:items-center'}>
-				<div className={'flex flex-col space-y-1'}>
-					<h1 className={'font-spaceGrotesk text-3xl font-bold'}>
+		<div className='container mx-auto max-w-6xl py-12'>
+			<div className='flex items-center justify-between max-md:flex-col max-md:items-start'>
+				<div className='flex flex-col space-y-1'>
+					<h1 className='font-space-grotesk text-3xl font-bold'>
 						{t('exploreCourses')}
 					</h1>
-					<p className={'text-sm text-muted-foreground'}>
+					<p className='text-sm text-muted-foreground'>
 						{t('exploreCoursesDescription')}
 					</p>
 				</div>
-				<div className={'flex max-md:text-sm text-md items-center gap-1 self-end max-md:mt-4 max-md:w-full max-md:rounded-full max-md:p-2 max-md:bg-primary'}>
+				
+				<div className='flex items-center gap-1 self-end max-md:mt-4 max-md:rounded-md max-md:bg-primary max-md:p-2'>
 					{filterCourses.map(item => (
-					<Button
-						className={cn("max-md:w-full max-md:bg-secondary", filter === item.name && 'text-primary')}
-						onClick={() => setFilter(item.name)}
-						variant={filter === item.name ? 'secondary' : 'ghost'}
-						key={item.name}
-						rounded={'full'}>
-						{t(item.label)}
-					</Button>
+						<Button
+							key={item.name}
+							rounded={'full'}
+							variant={item.name === 'all' ? 'secondary' : 'ghost'}
+							className={cn('font-medium max-md:w-full max-md:bg-secondary')}
+							onClick={() => onUpdateParams(item.name)}
+						>
+							{t(item.label)}
+						</Button>
 					))}
 				</div>
 			</div>
-			
-			<div className={'md:hidden flex flex-col space-y-4 mt-4'}>
+			<div className='mt-4 flex flex-col space-y-4 md:hidden'>
 				{courses.map(course => (
 					<CourseCard key={course.title} {...course} />
 				))}
 			</div>
-			
-			<Carousel opts={{align: 'start'}} className={'hidden mt-6 md:flex w-full'}>
-				<CarouselContent className={'flex w-full'}>
+			<Carousel
+				opts={{ align: 'start' }}
+				className='mt-6 hidden w-full md:flex'
+			>
+				<CarouselContent className='w-full'>
 					{courses.map(course => (
 						<CarouselItem
-							className={'md:basis-1/2 lg:basis-1/3 md:min-w-[300px]'}
-							key={course.title}>
-							<CourseCard {...course}/>
+							key={course.title}
+							className='md:basis-1/2 lg:basis-1/3 min-w-[300px]'
+						>
+							<CourseCard {...course} />
 						</CarouselItem>
 					))}
 				</CarouselContent>
-				<CarouselPrevious/>
-				<CarouselNext/>
+				<CarouselPrevious />
+				<CarouselNext />
 			</Carousel>
 		</div>
 	)
 }
+
 export default FeaturedCourses

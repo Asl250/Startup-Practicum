@@ -1,7 +1,7 @@
 'use client'
 
 import type { ISection } from '@/app.types'
-import LessonList from '@/app/[lng]/(root)/courses/[slug]/_components/lesson-list'
+import LessonList from '@/app/[lng]/(root)/course/[slug]/_components/lesson-list'
 import { AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import useTranslate from '@/hooks/use-translate'
 import { calculateTotalDuration } from '@/lib/utils'
