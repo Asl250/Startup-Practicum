@@ -2,7 +2,7 @@
 
 import { deleteSection } from '@/actions/section.action'
 import { ISection } from '@/app.types'
-import ConfirmDeleteModal from '@/components/modals/confirm-delete.modal'
+import ConfirmDeleteModal from '@/components/modals/confirm-delete-modal'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
