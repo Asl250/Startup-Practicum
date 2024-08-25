@@ -1,5 +1,6 @@
 'use client'
 
+import DropdownContent from '@/app/[lng]/dashboard/[courseId]/_components/dropdown-content'
 import Logo from '@/components/shared/logo'
 import ModeToggle from '@/components/shared/mode-toggle'
 import UserBox from '@/components/shared/user-box'
@@ -9,9 +10,11 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import useTranslate from '@/hooks/use-translate'
+import { useReview } from '@/hooks/useReview'
 import { MoreVertical, Star } from 'lucide-react'
 
 function Navbar() {
+	const {onOpen} = useReview()
 	const t = useTranslate()
 
 	return (
@@ -24,6 +27,7 @@ function Navbar() {
 				<div
 					className='hidden cursor-pointer items-center gap-1 opacity-50 transition-all duration-200 hover:opacity-100 md:flex'
 					role='button'
+					onClick={onOpen}
 				>
 					<Star size={20} />
 					<p>{t('evaluation')}</p>
@@ -35,7 +39,7 @@ function Navbar() {
 							<MoreVertical />
 						</Button>
 					</DropdownMenuTrigger>
-					{/* <DropdownContent /> */}
+					<DropdownContent />
 				</DropdownMenu>
 				<UserBox />
 			</div>

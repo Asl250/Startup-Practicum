@@ -1,3 +1,4 @@
+import ReviewModal from '@/components/modals/review.modal'
 import { ChildProps } from '@/types'
 import Navbar from './_components/navbar'
 import Sidebar from './_components/sidebar'
@@ -15,6 +16,7 @@ function Layout({ params: { courseId, lng }, children }: Props) {
 					<div className='mx-auto w-full max-w-5xl'>{children}</div>
 				</section>
 			</div>
+			<ReviewModal/>
 		</div>
 	)
 }
