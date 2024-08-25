@@ -72,6 +72,10 @@
   }
 }
 
+.accordion-course > svg {
+  @apply hidden;
+}
+
 /* Search box */
 .search-box {
   width: fit-content;

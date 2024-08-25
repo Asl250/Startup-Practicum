@@ -224,11 +224,11 @@ export const purchaseCourse = async (course: string, clerkId: string) => {
 	}
 }
 
-export const getDashboardCourse = async (clerkId: string, lessonId: string) => {
+export const getDashboardCourse = async (clerkId: string, courseId: string) => {
 	try {
 		await connectToDatabase()
-		const course = await Course.findById(lessonId).select('title')
-		const sections = await Section.find({ course: lessonId })
+		const course = await Course.findById(courseId).select('title')
+		const sections = await Section.find({ course: courseId })
 			.select('title')
 			.sort({ position: 1 })
 			.populate({
@@ -258,6 +258,6 @@ export const getDashboardCourse = async (clerkId: string, lessonId: string) => {
 		
 		return { course, sections, progressPercentage }
 	} catch (error) {
-		console.log(error)
+		throw new Error('Something went wrong while getting dashboard course!')
 	}
 }

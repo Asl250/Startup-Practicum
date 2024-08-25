@@ -45,7 +45,7 @@ export interface ILesson {
 		seconds: number
 	}
 	free: boolean
-	// userProgress: IUserProgress[]
+	userProgress: IUserProgress[]
 }
 
 export interface IUserProgress {
