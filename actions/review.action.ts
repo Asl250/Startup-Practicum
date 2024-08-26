@@ -88,3 +88,55 @@ export const setFlag = async (
 		throw new Error('Error setting flag')
 	}
 }
+
+
+export const getCourseReviews = async (course: string, limit: number) => {
+	try {
+		await connectToDatabase()
+		const reviews = await Review.find({ course, isFlag: false })
+			.sort({ createdAt: -1 })
+			.populate({ path: 'user', model: User, select: 'fullName picture' })
+			.limit(limit)
+		
+		return JSON.parse(JSON.stringify(reviews))
+	} catch (error) {
+		throw new Error('Error getting course reviews')
+	}
+}
+
+export const getReviewsPercentage = async (id: string) => {
+	try {
+		await connectToDatabase()
+		
+		const reviews = await Review.find({ course: id, isFlag: false })
+		const total = reviews.length
+		
+		const percentage: {[key: string]: number} = {
+			1: 0,
+			2: 0,
+			3: 0,
+			4: 0,
+			5: 0,
+		}
+		
+		reviews.forEach(review => {
+			let rating = review.rating
+			
+			if (rating === 2.5) rating = 3
+			else if (rating === 3.5) rating = 4
+			else if (rating === 4.5) rating = 5
+			else if (rating === 0.5) rating = 1
+			else if (rating === 1.5) rating = 2
+			
+			percentage[rating] += 1
+		})
+		
+		for(const key in percentage) {
+			percentage[key] = Math.round(percentage[key] / total * 100)
+		}
+		
+		return percentage
+	} catch (err) {
+		throw new Error('Error getting course reviews')
+	}
+}

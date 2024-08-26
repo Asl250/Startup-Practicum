@@ -44,7 +44,7 @@ function Description(course : ICourse) {
 		<>
 			<Toaster theme={'dark'} position={'top-center'} richColors/>
 			<div className='rounded-md border bg-secondary/50 p-4 shadow-lg dark:shadow-white/20 lg:sticky lg:top-24 lg:p-6'>
-				<div className='flex items-center justify-between font-space-grotesk'>
+				<div className='flex items-center justify-between font-spaceGrotesk'>
 					<div className='text-2xl font-bold'>{course.currentPrice.toLocaleString('en-US', {
 						style: 'currency',
 						currency: 'USD',
@@ -74,7 +74,7 @@ function Description(course : ICourse) {
 				</p>
 				
 				<div className='mt-4 flex items-center justify-between border-b pb-2'>
-					<div className='flex items-center gap-2 font-space-grotesk'>
+					<div className='flex items-center gap-2 font-spaceGrotesk'>
 						<MonitorPlay className='size-5' />
 						<span className='font-bold'>{t('lessons')}</span>
 					</div>
@@ -82,7 +82,7 @@ function Description(course : ICourse) {
 				</div>
 				
 				<div className='mt-2 flex items-center justify-between border-b pb-2'>
-					<div className='flex items-center gap-2 font-space-grotesk'>
+					<div className='flex items-center gap-2 font-spaceGrotesk'>
 						<Clock className='size-5' />
 						<span className='font-bold'>{t('durations')}</span>
 					</div>
@@ -90,7 +90,7 @@ function Description(course : ICourse) {
 				</div>
 				
 				<div className='mt-2 flex items-center justify-between border-b pb-2'>
-					<div className='flex items-center gap-2 font-space-grotesk'>
+					<div className='flex items-center gap-2 font-spaceGrotesk'>
 						<BarChart2 className='size-5' />
 						<span className='font-bold'>{t('skillLevel')}</span>
 					</div>
@@ -98,7 +98,7 @@ function Description(course : ICourse) {
 				</div>
 				
 				<div className='mt-2 flex items-center justify-between border-b pb-2'>
-					<div className='flex items-center gap-2 font-space-grotesk'>
+					<div className='flex items-center gap-2 font-spaceGrotesk'>
 						<Languages className='size-5' />
 						<span className='font-bold'>{t('language')}</span>
 					</div>
@@ -106,7 +106,7 @@ function Description(course : ICourse) {
 				</div>
 				
 				<div className='mt-2 flex items-center justify-between border-b pb-2'>
-					<div className='flex items-center gap-2 font-space-grotesk'>
+					<div className='flex items-center gap-2 font-spaceGrotesk'>
 						<BiCategory className='size-5' />
 						<span className='font-bold'>{t('category')}</span>
 					</div>
@@ -114,7 +114,7 @@ function Description(course : ICourse) {
 				</div>
 				
 				<div className='mt-2 flex items-center justify-between border-b pb-2'>
-					<div className='flex items-center gap-2 font-space-grotesk'>
+					<div className='flex items-center gap-2 font-spaceGrotesk'>
 						<GrCertificate className='size-5' />
 						<span className='font-bold'>{t('certificate')}</span>
 					</div>
@@ -122,7 +122,7 @@ function Description(course : ICourse) {
 				</div>
 				
 				<div className='mt-2 flex items-center justify-between border-b pb-2'>
-					<div className='flex items-center gap-2 font-space-grotesk'>
+					<div className='flex items-center gap-2 font-spaceGrotesk'>
 						<Infinity className='size-5' />
 						<span className='font-bold'>{t('fullLifetime')}</span>
 					</div>

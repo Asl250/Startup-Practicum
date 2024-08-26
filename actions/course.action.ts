@@ -5,6 +5,7 @@ import { ICourse, ILesson } from '@/app.types'
 import Course from '@/database/course.model'
 import Lesson from '@/database/lesson.model'
 import Purchase from '@/database/purchase.model'
+import Review from '@/database/review.model'
 import Section from '@/database/section.model'
 import UserProgress from '@/database/user-progress.model'
 import User from '@/database/user.model'
@@ -122,7 +123,8 @@ export const getDetailedCourse = cache(async (id: string) => {
 	try {
 		await connectToDatabase()
 		const course = await Course.findById(id)
-			.select('title description instructor previewImage oldPrice currentPrice learning requirements tags updatedAt level category language')
+			.select('title description instructor previewImage oldPrice currentPrice ' +
+				'learning requirements tags updatedAt level category language purchases')
 			.populate({
 				path: 'instructor',
 				select: 'fullName picture',
@@ -134,13 +136,27 @@ export const getDetailedCourse = cache(async (id: string) => {
 			model: Lesson,
 		})
 		const totalLessons: ILesson[] = sections.map((section) => section.lessons).flat()
-		console.log(totalLessons.length)
+		
+		const reviews = await Review.find({ course: id, isFlag: false }).select(
+			'rating'
+		)
+		
+		const rating = reviews.reduce((total, review) => total + review.rating, 0)
+		
+		const calcRating = (rating / reviews.length).toFixed(1)
+		
+		const purchasedStudents = await Purchase.find({
+			course: id,
+		}).countDocuments()
 		
 		const data = {
 			...course._doc,
 			totalLessons: totalLessons.length,
 			totalSections: sections.length,
-			totalDuration: calculateTotalDuration(totalLessons)
+			totalDuration: calculateTotalDuration(totalLessons),
+			rating: calcRating === 'NaN' ? 0 : calcRating,
+			reviewCount: reviews.length,
+			purchasedStudents,
 		}
 		return data
 	} catch (error) {
