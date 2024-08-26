@@ -1,11 +1,9 @@
 'use client'
 
-import { purchaseCourse } from '@/actions/course.action'
 import type { ICourse } from '@/app.types'
-import FillLoading from '@/components/shared/fill-loading'
 import { Button } from '@/components/ui/button'
+import { useCart } from '@/hooks/use-card'
 import useTranslate from '@/hooks/use-translate'
-import { useAuth } from '@clerk/nextjs'
 import {
 	BarChart2,
 	Clock,
@@ -13,32 +11,38 @@ import {
 	Languages,
 	MonitorPlay,
 } from 'lucide-react'
-import { useParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { GrCertificate } from 'react-icons/gr'
 import {BiCategory} from 'react-icons/bi'
-import { toast, Toaster } from 'sonner'
+import { Toaster } from 'sonner'
 
 function Description(course : ICourse) {
 	const t = useTranslate()
 	const [isLoading, setIsLoading] = useState(false)
-	const {userId} = useAuth()
 	const router = useRouter()
-	const {lng} = useParams()
-
 	
-	const onPurchase = () => {
+	const {addToCart} = useCart()
+
+	const onCart = () => {
 		setIsLoading(true)
-		const promise = purchaseCourse(course._id, userId!)
-			.then(() => router.push(`/${lng}/dashboard/${course._id}`))
-			.catch(() => setIsLoading(false))
-		
-		toast.promise(promise, {
-			loading: t('loading'),
-			success: t('success'),
-			error: t('error'),
-		})
+		addToCart(course)
+		router.push('/shopping/cart')
 	}
+	
+	//
+	// const onPurchase = () => {
+	// 	setIsLoading(true)
+	// 	const promise = purchaseCourse(course._id, userId!)
+	// 		.then(() => router.push(`/${lng}/dashboard/${course._id}`))
+	// 		.catch(() => setIsLoading(false))
+	//
+	// 	toast.promise(promise, {
+	// 		loading: t('loading'),
+	// 		success: t('success'),
+	// 		error: t('error'),
+	// 	})
+	// }
 
 	return (
 		<>
@@ -54,19 +58,25 @@ function Description(course : ICourse) {
 						currency: 'USD',
 					})}</div>
 				</div>
-				
-				<Button size={'lg'} className='mt-4 w-full font-bold'>
-					{t('addToCart')}
+
+				<Button
+					size={'lg'}
+					className='mt-2 w-full font-bold'
+					onClick={onCart}
+					disabled={isLoading}
+					
+				>
+						{t('buyNow')}
 				</Button>
+				
 				<Button
 					size={'lg'}
 					className='mt-2 w-full font-bold'
 					variant={'outline'}
-					onClick={onPurchase}
 					disabled={isLoading}
+				
 				>
-					{isLoading && <FillLoading/>}
-						{t('buyNow')}
+					{t('addWishlist')}
 				</Button>
 				
 				<p className='my-3 text-center text-sm text-muted-foreground'>

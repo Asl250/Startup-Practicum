@@ -4,6 +4,7 @@ import Logo from '@/components/shared/logo'
 import ModeToggle from '@/components/shared/mode-toggle'
 import { Button } from '@/components/ui/button'
 import { navLinks } from '@/constants'
+import { useCart } from '@/hooks/use-card'
 import { LogIn, ShoppingCart } from 'lucide-react'
 import Link from 'next/link'
 import GlobalSearch from './global-search'
@@ -19,6 +20,8 @@ function Navbar() {
 	const t = useTranslate()
 	const pathname = usePathname()
 	const { lng } = useParams()
+	
+	const {cartsLength} = useCart()
 
 	return (
 		<div className='fixed inset-0 z-40 h-20 bg-background/70 backdrop-blur-xl'>
@@ -46,8 +49,20 @@ function Navbar() {
 						<div className='hidden md:flex'>
 							<GlobalSearch />
 							<LanguageDropdown />
-							<Button size={'icon'} variant={'ghost'}>
-								<ShoppingCart />
+							<Button
+								size={'icon'}
+								variant={cartsLength() ? 'secondary' : 'ghost'}
+								asChild
+								className={'relative'}>
+								<Link href={'/shopping/cart'}>
+									<ShoppingCart />
+									
+									{cartsLength() ? (
+										<div className='absolute -right-2 -top-2 flex size-6 items-center justify-center rounded-full bg-destructive'>
+											{cartsLength()}
+										</div>
+									) : null}
+								</Link>
 							</Button>
 						</div>
 						<Mobile />
