@@ -6,6 +6,8 @@ import type { ICourse, IReview, ISection } from '@/app.types'
 import AllReviews from '@/app/[lng]/(root)/course/[slug]/_components/all-reviews'
 import SectionList from '@/app/[lng]/(root)/course/[slug]/_components/sectionList'
 import ReviewCard from '@/components/cards/review.card'
+import NoResult from '@/components/shared/no-result'
+import ReviewLoading from '@/components/shared/review-loading'
 import SectionLoading from '@/components/shared/section-loading'
 import { Accordion, } from '@/components/ui/accordion'
 import { Separator } from '@/components/ui/separator'
@@ -130,7 +132,9 @@ function Overview(course: ICourse) {
 				</div>
 			</div>
 			
-			{reviews.length ? (
+			{isLoading && <ReviewLoading/>}
+			
+			{!isLoading && reviews.length ? (
 				<div className='mt-8 flex flex-col pb-20'>
 					<div className='mt-6 flex items-center gap-1 font-space-grotesk text-xl'>
 						<Star className='fill-[#DD6B20] text-[#DD6B20]' />
@@ -153,7 +157,12 @@ function Overview(course: ICourse) {
 						<AllReviews {...course}/>
 					)}
 				</div>
-			) : null}
+			) : !isLoading && (
+				<NoResult
+					title={t('noReviews')}
+					description={t('noReviewsDescription')}
+				/>
+	)}
 		
 		
 		</>

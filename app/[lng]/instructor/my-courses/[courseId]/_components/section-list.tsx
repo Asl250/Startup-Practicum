@@ -1,6 +1,7 @@
 'use client'
 
 import { ISection } from '@/app.types'
+import useTranslate from '@/hooks/use-translate'
 import { Draggable } from '@hello-pangea/dnd'
 import { Grip, Pencil } from 'lucide-react'
 import Link from 'next/link'
