@@ -3,6 +3,8 @@ import { enUS, ruRU, trTR } from '@clerk/localizations'
 import { type ClassValue, clsx } from 'clsx'
 import qs from 'query-string'
 import { twMerge } from 'tailwind-merge'
+import { enUS as en, uz, tr, ru } from 'date-fns/locale'
+
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -89,4 +91,11 @@ export const formatLessonTime = (lesson: ILesson) => {
   }${seconds.toString().padStart(2, '0')}`
   
   return formattedTime
+}
+
+export const getTimeLocale = (lng: string) => {
+  if (lng === 'en') return en
+  if (lng === 'ru') return ru
+  if (lng === 'tr') return tr
+  if (lng === 'uz') return uz
 }

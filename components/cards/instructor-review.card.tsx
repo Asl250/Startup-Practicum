@@ -1,41 +1,73 @@
 'use client'
 
+import { setFlag } from '@/actions/review.action'
+import type { IReview } from '@/app.types'
+import FillLoading from '@/components/shared/fill-loading'
+import { Toaster } from '@/components/ui/sonner'
+import { cn } from '@/lib/utils'
+import { formatDistanceToNow } from 'date-fns'
 import { Flag } from 'lucide-react'
+import { usePathname } from 'next/navigation'
+import { useState } from 'react'
+import { toast } from 'sonner'
 import { Button } from '../ui/button'
-import { Avatar, AvatarFallback } from '../ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import ReactStars from 'react-stars'
 
-function InstructorReviewCard() {
+function InstructorReviewCard({review}: {review: IReview}) {
+	const [isLoading, setIsLoading] = useState(false)
+	const pathname  = usePathname()
+	
+	const handleFlag = async () => {
+		setIsLoading(true)
+		
+		const promise = setFlag(review._id, !review.isFlag, pathname)
+			.finally(() => setIsLoading(false))
+		
+		toast.promise(promise, {
+			loading: 'Loading...',
+			success: 'Successfully flagged!',
+			error: 'Something went wrong!',
+		})
+	}
+	
 	return (
-		<div className='flex gap-4 border-b pb-4'>
-			<div className='flex-1'>
-				<div className='flex gap-3'>
-					<Avatar>
-						<AvatarFallback className='uppercase'>SB</AvatarFallback>
-					</Avatar>
-
-					<div className='flex flex-col'>
-						<div className='font-space-grotesk text-sm'>
-							Samar Badriddinov{' '}
-							<span className='text-xs text-muted-foreground'>3 Days ago</span>
+		<>
+			<Toaster theme={'dark'} richColors position={'top-center'}/>
+			<div className='flex gap-4 border-b pb-4 relative'>
+				{isLoading && <FillLoading />}
+				<div className='flex-1'>
+					<div className='flex gap-3'>
+						<Avatar>
+							<AvatarImage src={review.user.picture} />
+							<AvatarFallback className='uppercase'>
+								{review.user.fullName[0]}
+							</AvatarFallback>
+						</Avatar>
+						
+						<div className='flex flex-col'>
+							<div className='font-space-grotesk text-sm'>
+								{review.user.fullName}{' '}
+								<span className='text-xs text-muted-foreground'>
+								{formatDistanceToNow(new Date(review.createdAt))} ago
+							</span>
+							</div>
+							<ReactStars value={4.5} edit={false} color2='#E59819' />
+							<div className='font-space-grotesk font-bold'>
+								{review.course.title}
+							</div>
+							<p className='text-sm text-muted-foreground'>
+								{review.data}
+							</p>
 						</div>
-						<ReactStars value={4.5} edit={false} color2='#E59819' />
-						<div className='font-space-grotesk font-bold'>
-							Full Course ReactJS
-						</div>
-						<p className='text-sm text-muted-foreground'>
-							Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius
-							voluptate corporis ratione esse. Voluptates quam sit suscipit rem
-							odio quo non repudiandae, delectus voluptas ipsa hic veniam sunt.
-							Vitae, sunt?
-						</p>
 					</div>
 				</div>
+				<Button size={'icon'} variant={'ghost'} className='self-start' onClick={handleFlag}>
+					<Flag className={cn('text-muted-foreground', review.isFlag && 'fill-white')} />
+				</Button>
 			</div>
-			<Button size={'icon'} variant={'ghost'} className='self-start'>
-				<Flag className='text-muted-foreground' />
-			</Button>
-		</div>
+		</>
+	
 	)
 }
 
