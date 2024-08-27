@@ -11,13 +11,19 @@ import {
 	Languages,
 	MonitorPlay,
 } from 'lucide-react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { GrCertificate } from 'react-icons/gr'
 import {BiCategory} from 'react-icons/bi'
 import { Toaster } from 'sonner'
 
-function Description(course : ICourse) {
+interface Props  {
+	course: ICourse
+	isPurchased: boolean
+}
+
+function Description({ course, isPurchased } : Props) {
 	const t = useTranslate()
 	const [isLoading, setIsLoading] = useState(false)
 	const router = useRouter()
@@ -30,19 +36,6 @@ function Description(course : ICourse) {
 		router.push('/shopping/cart')
 	}
 	
-	//
-	// const onPurchase = () => {
-	// 	setIsLoading(true)
-	// 	const promise = purchaseCourse(course._id, userId!)
-	// 		.then(() => router.push(`/${lng}/dashboard/${course._id}`))
-	// 		.catch(() => setIsLoading(false))
-	//
-	// 	toast.promise(promise, {
-	// 		loading: t('loading'),
-	// 		success: t('success'),
-	// 		error: t('error'),
-	// 	})
-	// }
 
 	return (
 		<>
@@ -58,16 +51,21 @@ function Description(course : ICourse) {
 						currency: 'USD',
 					})}</div>
 				</div>
-
-				<Button
-					size={'lg'}
-					className='mt-2 w-full font-bold'
-					onClick={onCart}
-					disabled={isLoading}
-					
-				>
+				
+				{isPurchased ? (
+					<Button size={'lg'} className='relative mt-2 w-full font-bold' asChild>
+						<Link href={`/dashboard/${course._id}`}>{t('toLesson')}</Link>
+					</Button>
+				) : (
+					<Button
+						size={'lg'}
+						className='relative mt-2 w-full font-bold'
+						onClick={onCart}
+						disabled={isLoading}
+					>
 						{t('buyNow')}
-				</Button>
+					</Button>
+				)}
 				
 				<Button
 					size={'lg'}

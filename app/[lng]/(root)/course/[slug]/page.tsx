@@ -1,4 +1,4 @@
-import { getDetailedCourse, getFeaturedCourses } from '@/actions/course.action'
+import { getDetailedCourse, getFeaturedCourses, getIsPurchase } from '@/actions/course.action'
 import type { ICourse } from '@/app.types'
 import Description from '@/app/[lng]/(root)/course/[slug]/_components/description'
 import Hero from '@/app/[lng]/(root)/course/[slug]/_components/hero'
@@ -8,6 +8,7 @@ import TopBar from '@/components/shared/top-bar'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import { Separator } from '@/components/ui/separator'
 import { translation } from '@/i18n/server'
+import { auth } from '@clerk/nextjs/server'
 
 interface Props {
 	params: { lng: string; slug: string }
@@ -15,12 +16,15 @@ interface Props {
 
 const Page = async ({params: {lng, slug}} : Props) => {
 	const { t } = await translation(lng)
+	const {userId} = auth()
 
 	const courseJSON = await getDetailedCourse(slug)
 	const course = JSON.parse(JSON.stringify(courseJSON))
 	
 	const coursesJSON = await getFeaturedCourses()
 	const courses = JSON.parse(JSON.stringify(coursesJSON))
+	
+	const isPurchased = await getIsPurchase(userId!, slug)
 	
 	return (
 		<>
@@ -33,7 +37,7 @@ const Page = async ({params: {lng, slug}} : Props) => {
 						<Overview {...course}/>
 					</div>
 					<div className={'col-span-1 max-lg:col-span-3'}>
-						<Description {...course}/>
+						<Description course={course} isPurchased={isPurchased}/>
 					</div>
 				</div>
 				

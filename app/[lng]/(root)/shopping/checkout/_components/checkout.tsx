@@ -1,32 +1,42 @@
 'use client'
 
+import { purchaseCourse } from '@/actions/course.action'
 import { payment } from '@/actions/payment.action'
 import FillLoading from '@/components/shared/fill-loading'
 import { Button } from '@/components/ui/button'
 import { useCart } from '@/hooks/use-card'
 import useTranslate from '@/hooks/use-translate'
 import { addressSchema } from '@/lib/validation'
+import { useAuth } from '@clerk/nextjs'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { CardCvcElement, CardExpiryElement, CardNumberElement } from '@stripe/react-stripe-js'
-import { ArrowRight } from 'lucide-react'
+import { CardCvcElement, CardExpiryElement, CardNumberElement, useElements, useStripe } from '@stripe/react-stripe-js'
+import { AlertCircle, ArrowRight } from 'lucide-react'
 import { useTheme } from 'next-themes'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-// import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 
 
 function Checkout() {
 	const [loading, setLoading] = useState(false)
-	// const [error, setError] = useState('')
+	const [error, setError] = useState('')
+	
+	
+	const elements = useElements()
+	const stripe = useStripe()
 	
 	const { resolvedTheme } = useTheme()
 	const t = useTranslate()
+	const { userId } = useAuth()
+	const router = useRouter()
 	
-	const {totalPrice, taxes} = useCart()
 	
+	const { totalPrice, taxes, carts, clearCart } = useCart()
+	console.log(totalPrice)
 	const cardStyles = {
 		base: {
 			color: resolvedTheme === 'light' ? '#000' : '#fff',
@@ -50,21 +60,58 @@ function Checkout() {
 	})
 	
 	const onSubmit = async (values: z.infer<typeof addressSchema>) => {
+		if (!stripe || !elements) return null
 		setLoading(true)
-		await payment(100)
+		
+		const { address, city, zip, fullName } = values
+		
+		const { error, paymentMethod } = await stripe.createPaymentMethod({
+			type: 'card',
+			card: elements.getElement(CardNumberElement)!,
+			billing_details: {
+				name: fullName,
+				address: {
+					line1: address,
+					city,
+					postal_code: zip,
+				},
+			},
+		})
+		
+		if (error) {
+			setLoading(false)
+			setError(`${t('paymentError')} ${error.message}`)
+		} else {
+			const price = totalPrice() + taxes()
+			const clientSecret = await payment(price, userId!, paymentMethod.id)
+			const {error, paymentIntent} = await stripe.confirmCardPayment(clientSecret!)
+			if (error) {
+				setLoading(false)
+				setError(`${t('paymentError')} ${error.message}`)
+			} else {
+				for (const course of carts) {
+					purchaseCourse(course._id, userId!)
+				}
+				router.push(`/shopping/success/${paymentIntent.id}`)
+				setTimeout(clearCart, 5000)
+			}
+		}
+		setLoading(false)
+		
 	}
+	
 	
 	return (
 		<>
-			{loading && <FillLoading/>}
+			{loading && <FillLoading />}
 			
-			{/* {error && ( */}
-			{/* 	<Alert variant='destructive' className='mb-4 mt-2'> */}
-			{/* 		<AlertCircle className='size-4' /> */}
-			{/* 		<AlertTitle>Error</AlertTitle> */}
-			{/* 		<AlertDescription>{error}</AlertDescription> */}
-			{/* 	</Alert> */}
-			{/* )} */}
+			{error && (
+				<Alert variant='destructive' className='mb-4 mt-2'>
+					<AlertCircle className='size-4' />
+					<AlertTitle>Error</AlertTitle>
+					<AlertDescription>{error}</AlertDescription>
+				</Alert>
+			)}
 			
 			<div className={'mt-4 flex gap-2'}>
 				<div className='w-[60%] rounded-md border bg-secondary px-2 py-3'>

@@ -67,7 +67,7 @@ export const useCart = create<ICartStore>((set, get) => ({
 	totalPrice: () => {
 		const {carts} = get()
 		
-		return carts.reduce((acc, cart) => acc + cart.currentPrice * cart.quantity, 0)
+		return carts.reduce((acc, cart) => acc + cart.currentPrice, 0)
 	},
 	cartsLength: () => {
 		return get().carts.reduce((acc, cart) => acc + cart.quantity, 0)
