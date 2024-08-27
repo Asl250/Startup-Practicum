@@ -1,6 +1,6 @@
 'use client'
 
-import ShoppingCartCard from '@/app/[lng]/(root)/shopping/_components/shopping-cart.cart'
+import ShoppingCartCard from '@/app/[lng]/(root)/shopping/cart/_components/shopping-cart.cart'
 import NoResult from '@/components/shared/no-result'
 import TopBar from '@/components/shared/top-bar'
 import { Button } from '@/components/ui/button'
