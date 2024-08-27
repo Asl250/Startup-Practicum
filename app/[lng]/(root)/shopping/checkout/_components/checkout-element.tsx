@@ -11,7 +11,7 @@ import Image from 'next/image'
 
 
 const stripePromise = loadStripe(
-	process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+	process.env.NEXT_STRIPE_PUBLISHABLE_KEY!
 )
 const CheckoutElement = () => {
 	
