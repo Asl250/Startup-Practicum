@@ -1,5 +1,6 @@
 'use client'
 
+import type { ICard } from '@/app.types'
 import Checkout from '@/app/[lng]/(root)/shopping/checkout/_components/checkout'
 import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
@@ -13,7 +14,12 @@ import Image from 'next/image'
 const stripePromise = loadStripe(
 	'pk_test_51OiHOdKXUy1FiHyAvpEnP450N9DqTUQ6sB8X2Lz04mZAzt7wlkf5NLtzSHxYIJhqk3tdj9bHhIFt1Is2QDXw0I1000HW2NXSZC'
 )
-const CheckoutElement = () => {
+
+interface Props {
+	cards: ICard[]
+}
+
+const CheckoutElement = ({cards}: Props) => {
 	
 	const t = useTranslate()
 	
@@ -33,7 +39,7 @@ const CheckoutElement = () => {
 							</p>
 							
 							<Elements stripe={stripePromise}>
-								<Checkout/>
+								<Checkout cards={cards}/>
 							</Elements>
 						</CardContent>
 					</Card>
@@ -98,7 +104,7 @@ const CheckoutElement = () => {
 							<div className='flex items-center justify-between text-sm'>
 								<div className='font-space-grotesk font-bold'>{t('taxes')}</div>
 								<div className='font-medium'>
-									{taxes().toLocaleString('en-US', {
+									{totalPrice().toLocaleString('en-US', {
 										style: 'currency',
 										currency: 'USD',
 									})}

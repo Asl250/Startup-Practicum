@@ -37,7 +37,6 @@ const CourseFieldsForm = () => {
 	
 	function onUpload(e: ChangeEvent<HTMLInputElement>) {
 		const files = e.target.files
-		console.log(files)
 		if (!files) return '!files'
 		const file = files[0]
 	

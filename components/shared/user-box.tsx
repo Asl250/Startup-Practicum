@@ -55,7 +55,7 @@ function UserBox() {
 							{t('instructor')}
 						</DropdownMenuItem>
 					</Link>
-				<Link href={'/user-profile'}>
+				<Link href={'/profile'}>
 					<DropdownMenuItem className='w-full cursor-pointer text-muted-foreground'>
 						{t('manageAccount')}
 					</DropdownMenuItem>

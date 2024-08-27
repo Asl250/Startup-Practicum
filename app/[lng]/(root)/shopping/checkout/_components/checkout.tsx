@@ -2,8 +2,11 @@
 
 import { purchaseCourse } from '@/actions/course.action'
 import { payment } from '@/actions/payment.action'
+import type { ICard } from '@/app.types'
 import FillLoading from '@/components/shared/fill-loading'
 import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { useCart } from '@/hooks/use-card'
 import useTranslate from '@/hooks/use-translate'
 import { addressSchema } from '@/lib/validation'
@@ -21,10 +24,16 @@ import { Input } from '@/components/ui/input'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 
 
-function Checkout() {
+interface Props {
+	cards: ICard[]
+}
+
+
+function Checkout({cards}: Props) {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState('')
 	
+	const [radioValue, setRadioValue] = useState<string>('0')
 	
 	const elements = useElements()
 	const stripe = useStripe()
@@ -36,7 +45,6 @@ function Checkout() {
 	
 	
 	const { totalPrice, taxes, carts, clearCart } = useCart()
-	console.log(totalPrice)
 	const cardStyles = {
 		base: {
 			color: resolvedTheme === 'light' ? '#000' : '#fff',
@@ -82,24 +90,32 @@ function Checkout() {
 			setLoading(false)
 			setError(`${t('paymentError')} ${error.message}`)
 		} else {
-			const price = totalPrice() + taxes()
-			const clientSecret = await payment(price, userId!, paymentMethod.id)
-			const {error, paymentIntent} = await stripe.confirmCardPayment(clientSecret!)
-			if (error) {
-				setLoading(false)
-				setError(`${t('paymentError')} ${error.message}`)
-			} else {
-				for (const course of carts) {
-					purchaseCourse(course._id, userId!)
-				}
-				router.push(`/shopping/success/${paymentIntent.id}`)
-				setTimeout(clearCart, 5000)
-			}
+			paymentIntent(paymentMethod.id)
 		}
 		setLoading(false)
 		
 	}
 	
+	const paymentIntent = async (paymentMethod: string) => {
+		if (!stripe || !elements) return null
+		setLoading(true)
+		
+		
+		const price = totalPrice() + taxes()
+		const clientSecret = await payment(price, userId!, paymentMethod)
+		const {error, paymentIntent} = await stripe.confirmCardPayment(clientSecret!)
+		if (error) {
+			setLoading(false)
+			setError(`${t('paymentError')} ${error.message}`)
+		} else {
+			for (const course of carts) {
+				purchaseCourse(course._id, userId!)
+			}
+			router.push(`/shopping/success/${paymentIntent.id}`)
+			setTimeout(clearCart, 5000)
+		}
+		
+	}
 	
 	return (
 		<>
@@ -113,111 +129,174 @@ function Checkout() {
 				</Alert>
 			)}
 			
-			<div className={'mt-4 flex gap-2'}>
-				<div className='w-[60%] rounded-md border bg-secondary px-2 py-3'>
-					<CardNumberElement options={{
-						placeholder: 'XXXX  XXXX XXXX XXXX',
-						showIcon: true,
-						style: cardStyles,
-					}} />
-				</div>
-				
-				<div className='w-[20%] rounded-md border bg-secondary px-2 py-3'>
-					<CardExpiryElement options={{ style: cardStyles }} />
-				</div>
-				
-				<div className='w-[20%] rounded-md border bg-secondary px-2 py-3'>
-					<CardCvcElement
-						options={{
-							style: cardStyles,
-							placeholder: 'CVC',
-						}}
-					/>
-				</div>
-			</div>
-			
-			<div className='mt-2'>
-				<Form {...form}>
-					<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-3'>
-						<FormField
-							control={form.control}
-							name='fullName'
-							render={({ field }) => (
-								<FormItem>
-									<FormControl>
-										<Input
-											className='h-11 bg-secondary'
-											placeholder={t('fullName')}
-											disabled={loading}
-											{...field}
-										/>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-						
-						<FormField
-							control={form.control}
-							name='address'
-							render={({ field }) => (
-								<FormItem>
-									<FormControl>
-										<Input
-											className='h-11 bg-secondary'
-											placeholder={t('address')}
-											disabled={loading}
-											{...field}
-										/>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-						
-						<div className='grid grid-cols-2 gap-2'>
-							<FormField
-								control={form.control}
-								name='city'
-								render={({ field }) => (
-									<FormItem>
-										<FormControl>
-											<Input
-												className='h-11 bg-secondary'
-												placeholder={t('city')}
-												disabled={loading}
-												{...field}
-											/>
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
+			<RadioGroup onValueChange={setRadioValue} value={radioValue}>
+				<div className={'flex flex-col space-y-3'}>
+					{cards.map((card, i) => (
+						<div
+							key={card.id}
+							className='flex items-center justify-between border bg-secondary p-4'>
+							<div>
+								<div className='flex items-center gap-2'>
+									<RadioGroupItem value={`${i}`} id={`${i}`} />
+									<Label
+										htmlFor={`${i}`}
+										className='font-spaceGrotesk font-bold capitalize'
+									>
+										{card.billing_details.name} |
+									</Label>
+									<p className='font-spaceGrotesk text-sm font-bold'>
+										{card.card.brand} {card.card.last4}
+									</p>
+								</div>
+								<div className='ml-6 font-spaceGrotesk text-sm font-bold'>
+									{t('expDate')} {card.card.exp_month}/{card.card.exp_year}
+								</div>
+							</div>
 							
-							<FormField
-								control={form.control}
-								name='zip'
-								render={({ field }) => (
-									<FormItem>
-										<FormControl>
-											<Input
-												className='h-11 bg-secondary'
-												placeholder={t('zipCode')}
-												disabled={loading}
-												{...field}
-											/>
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
+							{radioValue === `${i}` && (
+								<div className='flex justify-end'>
+									<Button
+										className='group max-md:w-full'
+										type='button'
+										onClick={() => paymentIntent(card.id)}
+										disabled={loading}
+									>
+										<span>
+											{t('payNow')}{' '}
+											{(totalPrice() + taxes()).toLocaleString('en-US', {
+												style: 'currency',
+												currency: 'USD'
+											})}
+										</span>
+										<ArrowRight className='ml-1 size-4 transition-transform group-hover:translate-x-1' />
+									</Button>
+								</div>
+							)}
+						</div>
+					))}
+					
+					<div className='flex items-center gap-2 border bg-secondary p-4'>
+						<RadioGroupItem
+							value={`${cards.length + 1}`}
+							id={`${cards.length + 1}`}
+						/>
+						<Label
+							htmlFor={`${cards.length + 1}`}
+							className='font-spaceGrotesk font-bold capitalize'
+						>
+							{t('newCreditCard')}
+						</Label>
+					</div>
+				</div>
+			</RadioGroup>
+			
+			{radioValue === `${cards.length + 1}` && (
+				<>
+					<div className={'mt-4 flex gap-2'}>
+						<div className='w-[60%] rounded-md border bg-secondary px-2 py-3'>
+							<CardNumberElement options={{
+								placeholder: 'XXXX  XXXX XXXX XXXX',
+								showIcon: true,
+								style: cardStyles
+							}} />
 						</div>
 						
-						<Button
-							className='group h-11 max-md:w-full'
-							type='submit'
-							disabled={loading}
-						>
+						<div className='w-[20%] rounded-md border bg-secondary px-2 py-3'>
+							<CardExpiryElement options={{ style: cardStyles }} />
+						</div>
+						
+						<div className='w-[20%] rounded-md border bg-secondary px-2 py-3'>
+							<CardCvcElement
+								options={{
+									style: cardStyles,
+									placeholder: 'CVC',
+								}}
+							/>
+						</div>
+					</div>
+					
+					<div className='mt-2'>
+						<Form {...form}>
+							<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-3'>
+								<FormField
+									control={form.control}
+									name='fullName'
+									render={({ field }) => (
+										<FormItem>
+											<FormControl>
+												<Input
+													className='h-11 bg-secondary'
+													placeholder={t('fullName')}
+													disabled={loading}
+													{...field}
+												/>
+											</FormControl>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+								
+								<FormField
+									control={form.control}
+									name='address'
+									render={({ field }) => (
+										<FormItem>
+											<FormControl>
+												<Input
+													className='h-11 bg-secondary'
+													placeholder={t('address')}
+													disabled={loading}
+													{...field}
+												/>
+											</FormControl>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+								
+								<div className='grid grid-cols-2 gap-2'>
+									<FormField
+										control={form.control}
+										name='city'
+										render={({ field }) => (
+											<FormItem>
+												<FormControl>
+													<Input
+														className='h-11 bg-secondary'
+														placeholder={t('city')}
+														disabled={loading}
+														{...field}
+													/>
+												</FormControl>
+												<FormMessage />
+											</FormItem>
+										)}
+									/>
+									
+									<FormField
+										control={form.control}
+										name='zip'
+										render={({ field }) => (
+											<FormItem>
+												<FormControl>
+													<Input
+														className='h-11 bg-secondary'
+														placeholder={t('zipCode')}
+														disabled={loading}
+														{...field}
+													/>
+												</FormControl>
+												<FormMessage />
+											</FormItem>
+										)}
+									/>
+								</div>
+								
+								<Button
+									className='group h-11 max-md:w-full'
+									type='submit'
+									disabled={loading}
+								>
 								<span>
 									{t('payNow')}{' '}
 									{(totalPrice() + taxes()).toLocaleString('en-US', {
@@ -225,11 +304,14 @@ function Checkout() {
 										currency: 'USD',
 									})}
 								</span>
-							<ArrowRight className='ml-1 size-4 transition-transform group-hover:translate-x-1' />
-						</Button>
-					</form>
-				</Form>
-			</div>
+									<ArrowRight className='ml-1 size-4 transition-transform group-hover:translate-x-1' />
+								</Button>
+							</form>
+						</Form>
+					</div>
+				</>
+			)}
+		
 		</>
 	
 	)

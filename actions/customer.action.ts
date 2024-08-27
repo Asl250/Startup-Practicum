@@ -53,3 +53,20 @@ export const attachPayment = async (
 	}
 }
 
+
+export const getCustomerCarts = async (clerkId: string) => {
+	try {
+		await connectToDatabase()
+		const customer = await getCustomer(clerkId)
+		
+		const paymentMethods = await stripe.paymentMethods.list({
+			customer: customer.id,
+			type: 'card',
+			limit: 10,
+		})
+		
+		return paymentMethods.data
+	} catch (err) {
+		throw new Error("Something went wrong when getting customer carts")
+	}
+}

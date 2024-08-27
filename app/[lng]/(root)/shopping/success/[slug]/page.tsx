@@ -15,7 +15,6 @@ export const metadata: Metadata = {
 
 const Page = async ({params} : {params: {slug: string, lng:string}}) => {
 	const payment = await retrievePayment(params.slug)
-	console.log(params.slug)
 	const { t } = await translation(params.lng)
 	return (
 		<>
