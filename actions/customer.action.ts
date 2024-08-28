@@ -53,6 +53,18 @@ export const attachPayment = async (
 	}
 }
 
+export const detachPaymentMethod = async (
+	paymentMethod: string,
+	path: string
+) => {
+	try {
+		await stripe.paymentMethods.detach(paymentMethod)
+		revalidatePath(path)
+	} catch (error) {
+		const result = error as Error
+		throw new Error(result.message)
+	}
+}
 
 export const getCustomerCarts = async (clerkId: string) => {
 	try {
@@ -68,5 +80,21 @@ export const getCustomerCarts = async (clerkId: string) => {
 		return paymentMethods.data
 	} catch (err) {
 		throw new Error("Something went wrong when getting customer carts")
+	}
+}
+
+export const getPaymentIntents = async (clerkId: string) => {
+	try {
+		const customer = await getCustomer(clerkId)
+		
+		const payments = await stripe.paymentIntents.list({
+			customer: customer.id,
+			limit: 100,
+			expand: ['data.payment_method'],
+		})
+		
+		return payments.data
+	} catch (err) {
+		throw new Error('Something went wrong when getting payment intents')
 	}
 }

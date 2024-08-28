@@ -18,7 +18,7 @@ function CreditCard({ card }: { card: ICard }) {
 					</h1>
 				</div>
 
-				<div className='flex items-center justify-center gap-4 font-spaceGrotesk text-4xl max-md:text-2xl'>
+				<div className='flex items-center justify-center gap-4 font-spaceGrotesk text-3xl max-md:text-2xl'>
 					<div>****</div>
 					<div>****</div>
 					<div>****</div>

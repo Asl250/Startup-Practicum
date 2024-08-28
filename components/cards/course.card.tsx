@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 const CourseCard = (course : ICourse) => {
 	return (
-		<Link href={`/course/${course._id}`} className={'border'}>
+		<Link href={`/course/${course._id}`}>
 			<Card className={'group w-full'}>
 				<CardContent className={'relative w-full h-56'}>
 					<Image
