@@ -9,7 +9,7 @@ function LearningJourney() {
 	
 	return (
 		<div className='container mx-auto max-w-6xl py-24'>
-			<h1 className='text-center font-space-grotesk text-2xl font-bold'>
+			<h1 className='text-center font-spaceGrotesk text-2xl font-bold'>
 				{t('learnJourney')}
 			</h1>
 			<p className='mx-auto max-w-4xl text-center text-sm text-muted-foreground'>
@@ -23,7 +23,7 @@ function LearningJourney() {
 						className='flex flex-col items-center justify-center rounded-md bg-secondary p-6 text-center'
 					>
 						<Image src={item.image} alt={item.title} width={70} height={70} />
-						<h2 className='mt-2 line-clamp-1 font-space-grotesk text-lg font-bold'>
+						<h2 className='mt-2 line-clamp-1 font-spaceGrotesk text-lg font-bold'>
 							{t(item.title)}
 						</h2>
 						<p className='line-clamp-2 text-sm text-white/80'>

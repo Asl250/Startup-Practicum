@@ -5,7 +5,7 @@ function Layout({ children }: ChildProps) {
 	return (
 		<>
 			<Sidebar />
-			<main className='w-full p-4 pr-[420px] max-md:pr-24'>
+			<main className='w-full p-4 pr-[450px] max-xl:pr-[250px] max-lg:pr-20 max-md:pr-24'>
 				<div className='size-full rounded-md bg-secondary px-4 pb-4'>
 					{children}
 				</div>

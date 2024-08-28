@@ -1,6 +1,8 @@
 'use server'
 
 import type { ICreateUser, IUpdateUser } from '@/actions/types'
+import Course from '@/database/course.model'
+import Review from '@/database/review.model'
 import User from '@/database/user.model'
 import { connectToDatabase } from '@/lib/mongoose'
 import { revalidatePath } from 'next/cache'
@@ -64,5 +66,20 @@ export const updateUser = async (data: IUpdateUser) => {
 		return updatedUser
 	} catch (error) {
 		throw new Error('Error updating user. Please try again.')
+	}
+}
+
+export const getUserReviews = async (clerkId: string) => {
+	try {
+		await connectToDatabase()
+		const user = await User.findOne({clerkId}).select('_id')
+
+		return await Review.find({ user: user._id })
+			.sort({ createdAt: -1 })
+			.populate({ path: 'user', model: User, select: 'fullName picture' })
+			.populate({ path: 'course', model: Course, select: 'title' })
+		
+	} catch (err) {
+		throw new Error('something went wrong')
 	}
 }

@@ -42,7 +42,7 @@ const AllCourses = ({result}: Props) => {
 			<div className='flex items-center justify-between max-md:flex-col max-md:items-start max-md:space-y-2'>
 				<h2 className='max-md:self-end'>
 					{t('result1')}{' '}
-					<span className='font-space-grotesk font-bold'>{totalCourses}</span>{' '}
+					<span className='font-spaceGrotesk font-bold'>{totalCourses}</span>{' '}
 					{t('result2')}
 				</h2>
 				

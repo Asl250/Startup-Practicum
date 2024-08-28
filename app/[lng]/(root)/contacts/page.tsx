@@ -20,7 +20,7 @@ async function Page ({ params: { lng } }: LngParams) {
 			<div className='container mx-auto max-w-6xl'>
 				<div className='mt-6 grid grid-cols-2 gap-4 max-md:grid-cols-1'>
 					<div className='flex flex-col'>
-						<h1 className='font-space-grotesk text-4xl font-bold'>
+						<h1 className='font-spaceGrotesk text-4xl font-bold'>
 							{t('contactTitle')}
 						</h1>
 						<p className='mt-2 text-muted-foreground'>

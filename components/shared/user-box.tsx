@@ -42,7 +42,7 @@ function UserBox() {
 						</div>
 
 						<div className='space-y-1'>
-							<p className='line-clamp-1 font-space-grotesk text-sm'>
+							<p className='line-clamp-1 font-spaceGrotesk text-sm'>
 								{user?.fullName}
 							</p>
 						</div>

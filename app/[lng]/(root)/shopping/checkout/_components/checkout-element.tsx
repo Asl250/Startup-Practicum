@@ -70,13 +70,13 @@ const CheckoutElement = ({cards}: Props) => {
 													className='object-cover'
 												/>
 											</div>
-											<h1 className='font-space-grotesk font-bold'>
+											<h1 className='font-spaceGrotesk font-bold'>
 												{item.title}
 											</h1>
 										</div>
 										
 										<div className='flex items-center gap-2'>
-											<h1 className='font-space-grotesk text-sm font-bold'>
+											<h1 className='font-spaceGrotesk text-sm font-bold'>
 												{item.currentPrice.toLocaleString('en-US', {
 													style: 'currency',
 													currency: 'USD',
@@ -91,7 +91,7 @@ const CheckoutElement = ({cards}: Props) => {
 					
 					<Card className='bg-gradient-to-t from-secondary to-background'>
 						<CardContent className='py-4'>
-							<h1 className='font-space-grotesk text-2xl font-bold'>
+							<h1 className='font-spaceGrotesk text-2xl font-bold'>
 								{t('results')}
 							</h1>
 							<p className='text-sm text-muted-foreground'>
@@ -102,7 +102,7 @@ const CheckoutElement = ({cards}: Props) => {
 							
 							
 							<div className='flex items-center justify-between text-sm'>
-								<div className='font-space-grotesk font-bold'>{t('taxes')}</div>
+								<div className='font-spaceGrotesk font-bold'>{t('taxes')}</div>
 								<div className='font-medium'>
 									{totalPrice().toLocaleString('en-US', {
 										style: 'currency',
@@ -112,7 +112,7 @@ const CheckoutElement = ({cards}: Props) => {
 							</div>
 							
 							<div className='flex items-center justify-between text-sm'>
-								<div className='font-space-grotesk font-bold'>{t('taxes')}</div>
+								<div className='font-spaceGrotesk font-bold'>{t('taxes')}</div>
 								<div className='font-medium'>
 									{taxes().toLocaleString('en-US', {
 										style: 'currency',
@@ -122,7 +122,7 @@ const CheckoutElement = ({cards}: Props) => {
 							</div>
 							
 							<div className='flex items-center justify-between text-sm'>
-								<div className='font-space-grotesk font-bold'>{t('total')}</div>
+								<div className='font-spaceGrotesk font-bold'>{t('total')}</div>
 								<div className='font-medium'>
 									{(totalPrice() + taxes()).toLocaleString('en-US', {
 										style: 'currency',

@@ -13,7 +13,7 @@ function Hero(course: ICourse) {
 
 	return (
 		<>
-			<h1 className='font-space-grotesk text-4xl font-bold'>
+			<h1 className='font-spaceGrotesk text-4xl font-bold'>
 				{course.title}
 			</h1>
 
@@ -30,10 +30,10 @@ function Hero(course: ICourse) {
 						src={course.instructor.picture}
 						className='rounded-full'
 					/>
-					<p className='font-space-grotesk font-bold'>{course.instructor.fullName}</p>
+					<p className='font-spaceGrotesk font-bold'>{course.instructor.fullName}</p>
 				</div>
 
-				<div className='flex items-center gap-2 font-space-grotesk'>
+				<div className='flex items-center gap-2 font-spaceGrotesk'>
 					<p className='font-bold text-[#E59819]'>{course.rating}</p>
 					<ReactStars value={course.rating} edit={false} color2='#E59819' />
 					<p className='font-bold'>{course.reviewCount}</p>
@@ -41,12 +41,12 @@ function Hero(course: ICourse) {
 
 				<div className='flex items-center gap-2'>
 					<PiStudentBold className='size-6' />
-					<p className='font-space-grotesk font-bold'>{course.purchasedStudents} {t('students')}</p>
+					<p className='font-spaceGrotesk font-bold'>{course.purchasedStudents} {t('students')}</p>
 				</div>
 
 				<div className='flex items-center gap-2'>
 					<Clock3 className='size-6' />
-					<p className='font-space-grotesk font-bold'>
+					<p className='font-spaceGrotesk font-bold'>
 						{t('lastUpdated')} {format(new Date(course.updatedAt), 'MM/yyyy')}
 					</p>
 				</div>

@@ -124,7 +124,7 @@ const ReviewModal = () => {
 											<Button
 												type='submit'
 												disabled={isLoading}
-												className='font-space-grotesk font-bold'
+												className='font-spaceGrotesk font-bold'
 											>
 												{review ? t('change') : t('submit')}
 											</Button>

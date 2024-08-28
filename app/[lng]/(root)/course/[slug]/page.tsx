@@ -42,7 +42,7 @@ const Page = async ({params: {lng, slug}} : Props) => {
 				</div>
 				
 				<Separator className={'my-12'}/>
-				<h1 className='font-space-grotesk text-4xl font-bold'>
+				<h1 className='font-spaceGrotesk text-4xl font-bold'>
 					{t('youMayLike')}
 				</h1>
 				<Carousel opts={{ align: 'start' }} className='mt-6 w-full'>

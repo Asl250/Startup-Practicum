@@ -76,7 +76,7 @@ function VideoLesson({ lesson }: Props) {
 			/>
 			
 			<div className='mt-4 flex flex-col gap-2 rounded-md bg-gradient-to-t from-background to-secondary p-4 md:flex-row md:items-center md:justify-between lg:p-6'>
-				<h2 className='mt-4 font-space-grotesk text-2xl font-bold'>
+				<h2 className='mt-4 font-spaceGrotesk text-2xl font-bold'>
 					{lesson.title}
 				</h2>
 				<Button disabled={isLoading} onClick={onEnd}>

@@ -10,7 +10,7 @@ const Categories = () => {
 	return (
 		<div className='container mx-auto max-w-6xl py-12'>
 			<div className='flex flex-col space-y-1'>
-				<h1 className='font-space-grotesk text-3xl font-bold'>
+				<h1 className='font-spaceGrotesk text-3xl font-bold'>
 					{t('topCategories')}
 				</h1>
 				<p className='text-sm text-muted-foreground'>

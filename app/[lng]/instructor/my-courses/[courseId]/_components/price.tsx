@@ -44,7 +44,7 @@ function Price(course: ICourse) {
 				) : (
 					<div className='flex flex-col space-y-2'>
 						<div className='flex items-center gap-2'>
-							<span className='font-space-grotesk font-bold text-muted-foreground'>
+							<span className='font-spaceGrotesk font-bold text-muted-foreground'>
 								Old price:
 							</span>
 							<span className='font-medium'>
@@ -55,7 +55,7 @@ function Price(course: ICourse) {
 							</span>
 						</div>
 						<div className='flex items-center gap-2'>
-							<span className='font-space-grotesk font-bold text-muted-foreground'>
+							<span className='font-spaceGrotesk font-bold text-muted-foreground'>
 								Current price:
 							</span>
 							<span className='font-medium'>

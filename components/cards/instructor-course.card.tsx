@@ -20,7 +20,7 @@ function InstructorCourseCard({ course }: Props ) {
 					/>
 				</div>
 				<div className='flex items-center justify-between px-2'>
-					<h1 className='font-space-grotesk text-2xl font-bold'>
+					<h1 className='font-spaceGrotesk text-2xl font-bold'>
 						{course.title}
 					</h1>
 					<Badge variant={course.published ? 'default' : 'destructive'}>

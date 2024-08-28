@@ -8,7 +8,6 @@ import {
 	ListVideo,
 	MessageSquareMore,
 	MonitorPlay,
-	Rss,
 	Settings2,
 	User,
 } from 'lucide-react'
@@ -275,7 +274,6 @@ export const profileNavLinks = [
 	{ label: 'creditCards', route: '/profile/credit-cards', icon: CreditCard },
 	{ label: 'reviews', route: '/profile/reviews', icon: MessageSquareMore },
 	{ label: 'notification', route: '/profile/notifications', icon: Bell },
-	{ label: 'settings', route: '/profile/settings', icon: Settings2 },
 ]
 
 export const adminNavLinks = [

@@ -50,7 +50,7 @@ function Overview(course: ICourse) {
 	return (
 		<>
 			<div className='mt-6 rounded-md bg-gradient-to-t from-background to-secondary p-4 lg:p-6'>
-				<h2 className='font-space-grotesk text-3xl font-bold'>
+				<h2 className='font-spaceGrotesk text-3xl font-bold'>
 					{t('whatYouWillLearn')}
 				</h2>
 
@@ -65,14 +65,14 @@ function Overview(course: ICourse) {
 			</div>
 
 			<div className='mt-8 rounded-md bg-gradient-to-b from-background to-secondary p-4 lg:p-6'>
-				<h2 className='font-space-grotesk text-3xl font-bold'>
+				<h2 className='font-spaceGrotesk text-3xl font-bold'>
 					{t('courseContent')}
 				</h2>
 
 				<div className='mt-2 flex flex-row flex-wrap gap-8'>
 					<div className='flex flex-col'>
 						<ListOrdered className='size-10 ' />
-						<p className='font-space-grotesk text-xl font-bold'>
+						<p className='font-spaceGrotesk text-xl font-bold'>
 							{t('numberOfModules')}
 						</p>
 						<div className='text-2xl font-medium'>{course.totalSections}</div>
@@ -80,7 +80,7 @@ function Overview(course: ICourse) {
 
 					<div className='flex flex-col'>
 						<MonitorPlay className='size-10 ' />
-						<p className='font-space-grotesk text-xl font-bold'>
+						<p className='font-spaceGrotesk text-xl font-bold'>
 							{t('numberOfLessons')}
 						</p>
 						<div className='text-2xl font-medium'>{course.totalLessons}</div>
@@ -88,7 +88,7 @@ function Overview(course: ICourse) {
 
 					<div className='flex flex-col '>
 						<CalendarRange className='size-10 ' />
-						<p className='font-space-grotesk text-xl font-bold'>
+						<p className='font-spaceGrotesk text-xl font-bold'>
 							{t('courseDuration')}
 						</p>
 						<div className='text-2xl font-medium'>
@@ -118,7 +118,7 @@ function Overview(course: ICourse) {
 			</div>
 
 			<div className='mt-8 rounded-md bg-secondary p-4 lg:p-6'>
-				<h2 className='font-space-grotesk text-3xl font-bold'>
+				<h2 className='font-spaceGrotesk text-3xl font-bold'>
 					{t('requirements')}
 				</h2>
 
@@ -136,7 +136,7 @@ function Overview(course: ICourse) {
 			
 			{!isLoading && reviews.length ? (
 				<div className='mt-8 flex flex-col pb-20'>
-					<div className='mt-6 flex items-center gap-1 font-space-grotesk text-xl'>
+					<div className='mt-6 flex items-center gap-1 font-spaceGrotesk text-xl'>
 						<Star className='fill-[#DD6B20] text-[#DD6B20]' />
 						<div className='font-medium'>
 							{t('reviewCourse')}: <span className='font-bold'>{course.rating}</span>

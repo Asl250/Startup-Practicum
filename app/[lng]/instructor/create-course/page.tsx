@@ -12,7 +12,7 @@ const Page = () => {
 				description='Fill in the details below to create a new course'
 			/>
 			<div className='mt-4 rounded-md bg-background p-4'>
-				<h3 className='font-space-grotesk text-lg font-medium'>
+				<h3 className='font-spaceGrotesk text-lg font-medium'>
 					Basic information
 				</h3>
 				<Separator className='my-3' />

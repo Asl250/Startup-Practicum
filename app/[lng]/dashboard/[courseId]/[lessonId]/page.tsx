@@ -18,7 +18,7 @@ async function Page({ params: { lessonId, lng, courseId } }: Props) {
 			<VideoLesson lesson={JSON.parse(JSON.stringify(lesson))} />
 			{lesson.content && (
 				<div className='rounded-md bg-gradient-to-b from-background to-secondary px-4 pb-4 pt-1 md:px-8'>
-					<h1 className='mb-2 font-space-grotesk text-xl font-medium text-primary'>
+					<h1 className='mb-2 font-spaceGrotesk text-xl font-medium text-primary'>
 						{t('usefullInformation')}
 					</h1>
 					<div className='prose max-w-none flex-1 dark:prose-invert'>

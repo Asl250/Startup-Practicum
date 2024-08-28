@@ -1,9 +1,11 @@
 'use client'
 
+import { addWishlistCourse } from '@/actions/course.action'
 import type { ICourse } from '@/app.types'
 import { Button } from '@/components/ui/button'
 import { useCart } from '@/hooks/use-card'
 import useTranslate from '@/hooks/use-translate'
+import { useAuth } from '@clerk/nextjs'
 import {
 	BarChart2,
 	Clock,
@@ -16,7 +18,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { GrCertificate } from 'react-icons/gr'
 import {BiCategory} from 'react-icons/bi'
-import { Toaster } from 'sonner'
+import { toast, Toaster } from 'sonner'
 
 interface Props  {
 	course: ICourse
@@ -28,6 +30,8 @@ function Description({ course, isPurchased } : Props) {
 	const [isLoading, setIsLoading] = useState(false)
 	const router = useRouter()
 	
+	const {userId} = useAuth()
+	
 	const {addToCart} = useCart()
 
 	const onCart = () => {
@@ -36,6 +40,20 @@ function Description({ course, isPurchased } : Props) {
 		router.push('/shopping/cart')
 	}
 	
+	
+	const onAdd = () => {
+		if (!userId) return toast.error('Please sign Up!')
+		setIsLoading(true)
+		
+		const promise = addWishlistCourse(course._id, userId)
+			.finally(() => setIsLoading(false))
+	
+		toast.promise(promise, {
+			loading: t('loading'),
+			success: t('successfully'),
+			error: t('error'),
+		})
+	}
 
 	return (
 		<>
@@ -72,7 +90,7 @@ function Description({ course, isPurchased } : Props) {
 					className='mt-2 w-full font-bold'
 					variant={'outline'}
 					disabled={isLoading}
-				
+					onClick={onAdd}
 				>
 					{t('addWishlist')}
 				</Button>

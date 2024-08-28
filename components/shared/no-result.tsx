@@ -15,7 +15,7 @@ function NoResult({ description, title }: Props) {
 				height={200}
 				className='block object-contain'
 			/>
-			<h2 className='mt-8 font-space-grotesk text-2xl font-bold'>{title}</h2>
+			<h2 className='mt-8 font-spaceGrotesk text-2xl font-bold'>{title}</h2>
 			<p className='my-3.5 max-w-md text-center'>{description}</p>
 		</div>
 	)

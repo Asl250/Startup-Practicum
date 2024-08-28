@@ -42,7 +42,7 @@ function SectionField(section: ISection) {
 					<Forms section={section} onToggle={onToggle} />
 				) : (
 					<div className='flex items-center gap-2'>
-						<span className='self-start font-space-grotesk font-bold text-muted-foreground'>
+						<span className='self-start font-spaceGrotesk font-bold text-muted-foreground'>
 							Title:
 						</span>
 						<span className='line-clamp-3 font-medium'>{section.title}</span>

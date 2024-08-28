@@ -9,12 +9,19 @@ import { formatDistanceToNow } from 'date-fns'
 import { Flag } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
+import { FaCheck, FaTimes } from 'react-icons/fa'
 import { toast } from 'sonner'
 import { Button } from '../ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import ReactStars from 'react-stars'
 
-function InstructorReviewCard({review}: {review: IReview}) {
+interface Props {
+	review: IReview,
+	isProfile?: boolean
+}
+
+
+function InstructorReviewCard({review, isProfile}: Props) {
 	const [isLoading, setIsLoading] = useState(false)
 	const pathname  = usePathname()
 	
@@ -46,14 +53,14 @@ function InstructorReviewCard({review}: {review: IReview}) {
 						</Avatar>
 						
 						<div className='flex flex-col'>
-							<div className='font-space-grotesk text-sm'>
+							<div className='font-spaceGrotesk text-sm'>
 								{review.user.fullName}{' '}
 								<span className='text-xs text-muted-foreground'>
 								{formatDistanceToNow(new Date(review.createdAt))} ago
 							</span>
 							</div>
 							<ReactStars value={4.5} edit={false} color2='#E59819' />
-							<div className='font-space-grotesk font-bold'>
+							<div className='font-spaceGrotesk font-bold'>
 								{review.course.title}
 							</div>
 							<p className='text-sm text-muted-foreground'>
@@ -62,9 +69,29 @@ function InstructorReviewCard({review}: {review: IReview}) {
 						</div>
 					</div>
 				</div>
-				<Button size={'icon'} variant={'ghost'} className='self-start' onClick={handleFlag}>
-					<Flag className={cn('text-muted-foreground', review.isFlag && 'fill-white')} />
-				</Button>
+				{isProfile ? (
+					<Button variant={'ghost'} size={'icon'} className='self-start'>
+						{review.isFlag ? (
+							<FaTimes className='text-red-500' />
+						) : (
+							<FaCheck className='text-green-500' />
+						)}
+					</Button>
+				) : (
+					<Button
+						size={'icon'}
+						variant={'ghost'}
+						className='self-start'
+						onClick={handleFlag}
+					>
+						<Flag
+							className={cn(
+								'text-muted-foreground',
+								review.isFlag && 'fill-white'
+							)}
+						/>
+					</Button>
+				)}
 			</div>
 		</>
 	

@@ -20,7 +20,7 @@ function Footer() {
 					</div>
 					
 					<div className='flex flex-col space-y-3'>
-						<h1 className='font-space-grotesk text-3xl'>{t('pages')}</h1>
+						<h1 className='font-spaceGrotesk text-3xl'>{t('pages')}</h1>
 						<div className='flex flex-col space-y-3 pt-6'>
 							{navLinks.map(item => (
 								<Link
@@ -35,7 +35,7 @@ function Footer() {
 					</div>
 					
 					<div className='flex flex-col space-y-3'>
-						<h1 className='font-space-grotesk text-3xl'>{t('contacts')}</h1>
+						<h1 className='font-spaceGrotesk text-3xl'>{t('contacts')}</h1>
 						<div className='flex flex-col space-y-3 pt-6'>
 							<div className='flex items-center space-x-3'>
 								<PhoneCall size={20} />

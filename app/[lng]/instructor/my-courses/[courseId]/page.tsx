@@ -34,7 +34,7 @@ async function Page({params} : {params: {courseId: string}}) {
 			<div className='mt-6 grid grid-cols-2 gap-4'>
 				<div className='flex flex-col space-y-2'>
 					<div className='flex items-center gap-2'>
-						<span className='font-space-grotesk text-3xl font-medium'>
+						<span className='font-spaceGrotesk text-3xl font-medium'>
 							Course Fields
 						</span>{' '}
 						<Settings />
@@ -48,7 +48,7 @@ async function Page({params} : {params: {courseId: string}}) {
 				<div className='flex flex-col space-y-2'>
 					{/* Sections */}
 					<div className='flex items-center gap-2'>
-						<span className='font-space-grotesk text-3xl font-medium'>
+						<span className='font-spaceGrotesk text-3xl font-medium'>
 							Course Sections
 						</span>{' '}
 						<LayoutPanelLeft />
@@ -57,7 +57,7 @@ async function Page({params} : {params: {courseId: string}}) {
 					
 					{/* Preview image */}
 					<div className='flex items-center gap-2'>
-						<span className='font-space-grotesk text-3xl font-medium'>
+						<span className='font-spaceGrotesk text-3xl font-medium'>
 							Preview Image
 						</span>{' '}
 						<Images />
