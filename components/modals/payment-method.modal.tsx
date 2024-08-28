@@ -56,6 +56,7 @@ function StripeElement() {
 		
 		const { address, city, fullName, zip } = values
 		
+		
 		const { error, paymentMethod } = await stripe.createPaymentMethod({
 			type: 'card',
 			card: elements.getElement(CardNumberElement)!,
