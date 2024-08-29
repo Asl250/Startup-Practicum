@@ -1,7 +1,7 @@
 'use server'
 
 
-import { attachPayment, createCustomer, getCustomer } from '@/actions/customer.action'
+import { attachPayment, getCustomer } from '@/actions/customer.action'
 import { connectToDatabase } from '@/lib/mongoose'
 import stripe from '@/lib/stripe'
 import { generateNumericId } from '@/lib/utils'
@@ -38,6 +38,16 @@ export const retrievePayment = async (pi: string) => {
 			expand: ['payment_method'],
 		})
 	} catch (err) {
+		const result = err as Error
+		throw new Error(result.message)
+	}
+}
+
+export const applyCoupon = async (code: string) => {
+	try {
+	const coupon = await stripe.coupons.retrieve(code)
+		return JSON.parse(JSON.stringify(coupon))
+	}  catch (err) {
 		const result = err as Error
 		throw new Error(result.message)
 	}

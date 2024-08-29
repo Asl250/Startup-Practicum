@@ -15,21 +15,28 @@ import { useAuth } from '@clerk/nextjs'
 import {CardNumberElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { AlertCircle, ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { z } from 'zod'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 
 
 interface Props {
-	cards: ICard[]
+	cards: ICard[],
+	coupon: number
 }
 
 
-function Checkout({cards}: Props) {
+function Checkout({cards, coupon}: Props) {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState('')
 	
 	const [radioValue, setRadioValue] = useState<string>('0')
+	
+	useEffect(() => {
+		if (cards.length === 0) {
+			setRadioValue(`${cards.length + 1}`)
+		}
+	}, [cards])
 	
 	const elements = useElements()
 	const stripe = useStripe()
@@ -40,7 +47,7 @@ function Checkout({cards}: Props) {
 	
 	
 	const { totalPrice, taxes, carts, clearCart } = useCart()
-	
+	console.log(totalPrice(coupon))
 	
 	const onSubmit = async (values: z.infer<typeof addressSchema>) => {
 		if (!stripe || !elements) return null
@@ -48,48 +55,70 @@ function Checkout({cards}: Props) {
 		
 		const { address, city, zip, fullName } = values
 		
-		const { error, paymentMethod } = await stripe.createPaymentMethod({
-			type: 'card',
-			card: elements.getElement(CardNumberElement)!,
-			billing_details: {
-				name: fullName,
-				address: {
-					line1: address,
-					city,
-					postal_code: zip,
+		try {
+			const { error, paymentMethod } = await stripe.createPaymentMethod({
+				type: 'card',
+				card: elements.getElement(CardNumberElement)!,
+				billing_details: {
+					name: fullName,
+					address: {
+						line1: address,
+						city,
+						postal_code: zip,
+					},
 				},
-			},
-		})
-		
-		if (error) {
+			})
+			
+			if (error) {
+				setLoading(false)
+				setError(`${t('paymentError')} ${error.message}`)
+			} else {
+				paymentIntent(paymentMethod.id)
+			}
+		} catch (err) {
 			setLoading(false)
-			setError(`${t('paymentError')} ${error.message}`)
-		} else {
-			paymentIntent(paymentMethod.id)
+			const error = err as Error
+			setError(error.message)
 		}
-		setLoading(false)
 		
+	}
+	
+	const onSavedCard = (paymentMethod: string) => {
+		setLoading(true)
+		try {
+			paymentIntent(paymentMethod)
+		} catch (err) {
+			setLoading(false)
+			const error = err as Error
+			setError(error.message)
+		}
 	}
 	
 	const paymentIntent = async (paymentMethod: string) => {
 		if (!stripe || !elements) return null
 		setLoading(true)
 		
-		
-		const price = totalPrice() + taxes()
-		const clientSecret = await payment(price, userId!, paymentMethod)
-		const {error, paymentIntent} = await stripe.confirmCardPayment(clientSecret!)
-		if (error) {
-			setLoading(false)
-			setError(`${t('paymentError')} ${error.message}`)
-		} else {
-			for (const course of carts) {
-				purchaseCourse(course._id, userId!)
+		try {
+			const price = totalPrice(coupon) + taxes()
+			const clientSecret = await payment(price, userId!, paymentMethod)
+			const {error, paymentIntent} = await stripe.confirmCardPayment(clientSecret!)
+			if (error) {
+				setLoading(false)
+				setError(`${t('paymentError')} ${error.message}`)
+			} else {
+				for (const course of carts) {
+					purchaseCourse(course._id, userId!)
+				}
+				router.push(`/shopping/success/${paymentIntent.id}`)
+				setTimeout(clearCart, 5000)
 			}
-			router.push(`/shopping/success/${paymentIntent.id}`)
-			setTimeout(clearCart, 5000)
+		} catch (err) {
+			setLoading(false)
+			const error = err as Error
+			setError(error.message)
+			
 		}
-		
+
 	}
 	
 	return (
@@ -133,12 +162,12 @@ function Checkout({cards}: Props) {
 									<Button
 										className='group max-md:w-full'
 										type='button'
-										onClick={() => paymentIntent(card.id)}
+										onClick={() => onSavedCard(card.id)}
 										disabled={loading}
 									>
 										<span>
 											{t('payNow')}{' '}
-											{(totalPrice() + taxes()).toLocaleString('en-US', {
+											{(totalPrice(coupon) + taxes()).toLocaleString('en-US', {
 												style: 'currency',
 												currency: 'USD'
 											})}

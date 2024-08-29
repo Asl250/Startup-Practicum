@@ -11,7 +11,7 @@ interface Props extends ICourse {
 }
 
 function ShoppingCartCard(item: Props) {
-	const { removeFromCart, totalPrice } = useCart()
+	const { removeFromCart } = useCart()
 	
 	return (
 		<div
@@ -30,7 +30,7 @@ function ShoppingCartCard(item: Props) {
 						{item.description}
 					</p>
 					<h1 className='font-spaceGrotesk font-bold md:hidden'>
-						{(item.currentPrice * item.quantity).toLocaleString('en-US', {
+						{(item.currentPrice).toLocaleString('en-US', {
 							style: 'currency',
 							currency: 'USD',
 						})}
@@ -40,7 +40,7 @@ function ShoppingCartCard(item: Props) {
 			
 			<div className='flex items-center justify-end gap-2'>
 				<h1 className='font-spaceGrotesk text-xl font-bold max-md:hidden'>
-					{totalPrice().toLocaleString('en-US', {
+					{item.currentPrice.toLocaleString('en-US', {
 						style: 'currency',
 						currency: 'USD',
 					})}

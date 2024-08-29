@@ -80,3 +80,6 @@ export const addressSchema = z.object({
 	zip: z.string(),
 })
 
+export const couponSchema = z.object({
+	code: z.string().min(3),
+})

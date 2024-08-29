@@ -1,5 +1,3 @@
-
-import ContactForm from '@/components/forms/contact.form'
 import TopBar from '@/components/shared/top-bar'
 import { translation } from '@/i18n/server'
 import type { LngParams } from '@/types'
@@ -17,7 +15,7 @@ async function Page ({ params: { lng } }: LngParams) {
 				className={'w-full h-96 border-0'}
 			/>
 			
-			<div className='container mx-auto max-w-6xl'>
+			<div className='container mx-auto max-w-6xl my-10'>
 				<div className='mt-6 grid grid-cols-2 gap-4 max-md:grid-cols-1'>
 					<div className='flex flex-col'>
 						<h1 className='font-spaceGrotesk text-4xl font-bold'>
@@ -38,8 +36,7 @@ async function Page ({ params: { lng } }: LngParams) {
 					</div>
 					
 					<div>
-						<h1 className={'mb-2 font-spaceGrotesk text-4xl font-bold'}>{t('contactForm')}</h1>
-						<ContactForm/>
+						{/* <ContactForm/> */}
 					</div>
 				</div>
 			</div>
