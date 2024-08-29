@@ -1,6 +1,6 @@
 'use server'
 
-import { GetAllCoursesParams, GetCoursesParams, ICreateCourse } from '@/actions/types'
+import { GetAllCoursesParams, GetCoursesParams, type GetPaginationParams, ICreateCourse } from '@/actions/types'
 import { ICourse, ILesson } from '@/app.types'
 import Course from '@/database/course.model'
 import Lesson from '@/database/lesson.model'
@@ -459,5 +459,32 @@ export const getWishlist = async (clerkId: string) => {
 		return wishlistCourses
 	} catch (error) {
 		throw new Error('Something went wrong while getting whishlist!')
+	}
+}
+
+export const getAdminCourses = async (params: GetPaginationParams) => {
+	try {
+		await connectToDatabase()
+		const { page = 1, pageSize = 9 } = params
+		
+		const skipAmount = (page - 1) * pageSize
+		
+		const courses = await Course.find()
+			.skip(skipAmount)
+			.limit(pageSize)
+			.sort({ createdAt: -1 })
+			.populate('instructor previewImage title')
+			.populate({
+				path: 'instructor',
+				select: 'fullName picture clerkId',
+				model: User,
+			})
+		
+		const totalCourses = await Course.countDocuments()
+		const isNext = totalCourses > skipAmount + courses.length
+		
+		return { courses, isNext, totalCourses }
+	} catch (error) {
+		throw new Error('Something went wrong while getting admin courses!')
 	}
 }

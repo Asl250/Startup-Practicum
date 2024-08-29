@@ -257,14 +257,14 @@ export const editorConfig = {
 
 export const instructorNavLinks = [
 	{ label: 'Dashboard', route: '', icon: GaugeCircle },
-	{ label: 'My Courses', route: '/my-courses', icon: MonitorPlay },
+	{ label: 'My Courses', route: '/instructor/my-courses', icon: MonitorPlay },
 	{
 		label: 'Create Course',
-		route: '/create-course',
+		route: '/instructor/create-course',
 		icon: FileCode,
 	},
-	{ label: 'Reviews', route: '/reviews', icon: MessageSquareMore },
-	{ label: 'Settings', route: '/settings', icon: Settings2 },
+	{ label: 'Reviews', route: '/instructor/reviews', icon: MessageSquareMore },
+	{ label: 'Settings', route: '/instructor/settings', icon: Settings2 },
 ]
 
 export const profileNavLinks = [

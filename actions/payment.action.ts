@@ -52,3 +52,25 @@ export const applyCoupon = async (code: string) => {
 		throw new Error(result.message)
 	}
 }
+
+export const getBalance = async () => {
+	try {
+		const data = await stripe.balance.retrieve()
+		
+		const totalAvailable = data.available.reduce(
+			(acc, cur) => acc + cur.amount,
+			0
+		)
+		const totalPending = data.pending.reduce(
+			(acc, cur) => acc + cur.amount,
+			0
+		)
+		
+		
+		
+		return totalAvailable + totalPending
+	} catch (err) {
+		const result = err as Error
+		throw new Error(result.message)
+	}
+}

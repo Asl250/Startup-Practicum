@@ -1,6 +1,6 @@
 'use server'
 
-import type { GetReviewParams } from '@/actions/types'
+import type { GetPaginationParams, GetReviewParams } from '@/actions/types'
 import type { IReview } from '@/app.types'
 import Course from '@/database/course.model'
 import Review from '@/database/review.model'
@@ -138,5 +138,32 @@ export const getReviewsPercentage = async (id: string) => {
 		return percentage
 	} catch (err) {
 		throw new Error('Error getting course reviews')
+	}
+}
+
+export const getAdminReviews = async (params: GetPaginationParams) => {
+	try {
+		await connectToDatabase()
+		const { page = 1, pageSize = 3 } = params
+		
+		const skipAmount = (page - 1) * pageSize
+		
+		const reviews = await Review.find()
+			.sort({ createdAt: -1 })
+			.skip(skipAmount)
+			.limit(pageSize)
+			.populate({
+				path: 'user',
+				select: 'fullName picture clerkId',
+				model: User,
+			})
+			.populate({ path: 'course', select: 'title', model: Course })
+		
+		const totalReviews = await Review.countDocuments()
+		const isNext = totalReviews > skipAmount + reviews.length
+		
+		return { reviews, isNext, totalReviews }
+	} catch (error) {
+		throw new Error('Error getting admin reviews')
 	}
 }

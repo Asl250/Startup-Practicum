@@ -23,7 +23,7 @@ import { z } from 'zod'
 
 
 const stripePromise = loadStripe(
-	process.env.NEXT_STRIPE_PUBLISHABLE_KEY!
+	'pk_test_51OiHOdKXUy1FiHyAvpEnP450N9DqTUQ6sB8X2Lz04mZAzt7wlkf5NLtzSHxYIJhqk3tdj9bHhIFt1Is2QDXw0I1000HW2NXSZC'
 )
 
 interface Props {

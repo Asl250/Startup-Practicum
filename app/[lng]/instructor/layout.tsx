@@ -1,14 +1,14 @@
 'use client'
 
-import Navbar from '@/app/[lng]/instructor/_components/navbar'
-import Sidebar from '@/app/[lng]/instructor/_components/sidebar'
+import Navbar from '@/components/shared/navbar'
+import Sidebar from '@/components/shared/sidebar'
 import type { ChildProps } from '@/types'
 
 const Layout = ({children}: ChildProps) => {
 	return (
 		<>
 			<Navbar/>
-			<Sidebar/>
+			<Sidebar page={'instructor'}/>
 			<main className={'w-full pl-[320px] pt-[11vh] p-4'}>
 				<div className={'size-full px-4 pb-4 pt-1 rounded-md bg-secondary'}>
 					{children}

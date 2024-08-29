@@ -18,10 +18,11 @@ import ReactStars from 'react-stars'
 interface Props {
 	review: IReview,
 	isProfile?: boolean
+	isAdmin?: boolean
 }
 
 
-function InstructorReviewCard({review, isProfile}: Props) {
+function InstructorReviewCard({review, isProfile, isAdmin}: Props) {
 	const [isLoading, setIsLoading] = useState(false)
 	const pathname  = usePathname()
 	
@@ -41,7 +42,10 @@ function InstructorReviewCard({review, isProfile}: Props) {
 	return (
 		<>
 			<Toaster theme={'dark'} richColors position={'top-center'}/>
-			<div className='flex gap-4 border-b pb-4 relative'>
+			<div className={cn(
+				'relative flex gap-4 border-b pb-4',
+				isAdmin && 'bg-background p-2 rounded-md'
+			)}>
 				{isLoading && <FillLoading />}
 				<div className='flex-1'>
 					<div className='flex gap-3'>
