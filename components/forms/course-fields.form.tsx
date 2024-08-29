@@ -78,7 +78,7 @@ const CourseFieldsForm = () => {
 	}
 	return (
 		<>
-			<Toaster position={'top-center'} theme={'dark'}/>
+			<Toaster position={'top-center'} theme={'dark'} richColors />
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className={'space-y-3'}>
 					<FormField

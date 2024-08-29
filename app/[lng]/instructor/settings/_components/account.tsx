@@ -52,7 +52,7 @@ const Account = (user: IUser) => {
 	}
 	return (
 		<>
-			<Toaster position={'top-center'} richColors />
+			<Toaster position={'top-center'} richColors theme={'dark'}/>
 			<Card className='ml-6 max-w-4xl'>
 				<CardContent className='relative p-6'>
 					{isLoading && <FillLoading />}

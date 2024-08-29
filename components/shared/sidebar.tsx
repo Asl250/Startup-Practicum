@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import { adminNavLinks, instructorNavLinks, profileNavLinks } from '@/constants'
+import useTranslate from '@/hooks/use-translate'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -11,7 +12,7 @@ interface Props {
 
 const Sidebar = ({page}: Props) => {
 	const pathname = usePathname()
-	
+	const t = useTranslate()
 	const getNavLinks = () => {
 		if (page === 'admin') {
 			return adminNavLinks
@@ -35,7 +36,7 @@ const Sidebar = ({page}: Props) => {
 								className={'flex w-full justify-start gap-2'}
 								variant={pathname.slice(3) === item.route ? 'secondary' : 'ghost'}>
 								<item.icon className={'size-5 text-muted-foreground'}/>
-								<span>{item.label}</span>
+								<span>{t(item.label)}</span>
 							</Button>
 						</Link>
 					))}
