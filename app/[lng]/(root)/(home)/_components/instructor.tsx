@@ -16,8 +16,8 @@ function Instructor({instructors} : Props) {
 	
 	return (
 		<div className='container mx-auto max-w-6xl py-12'>
-			<div className='flex items-center justify-between'>
-				<div className='flex flex-col space-y-1'>
+			<div className='md:flex items-center justify-between'>
+				<div className='flex flex-col space-y-1 pb-5'>
 					<h1 className='font-spaceGrotesk text-3xl font-bold'>
 						{t('learnInstructors')}
 					</h1>
@@ -26,7 +26,7 @@ function Instructor({instructors} : Props) {
 					</p>
 				</div>
 				
-				<div className='flex items-center gap-1 self-end'>
+				<div className='flex items-center gap-1 md:self-end'>
 					<Button variant={'secondary'} asChild>
 						<Link href={'/instructors'}>
 							<span>{t('viewAll')}</span>

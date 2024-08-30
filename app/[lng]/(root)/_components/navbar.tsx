@@ -10,7 +10,7 @@ import { LogIn, ShoppingCart } from 'lucide-react'
 import Link from 'next/link'
 import GlobalSearch from './global-search'
 import LanguageDropdown from '@/components/shared/language-dropdown'
-import { SignInButton, SignUpButton, SignedIn, SignedOut } from '@clerk/nextjs'
+import { SignInButton, SignedIn, SignedOut } from '@clerk/nextjs'
 import UserBox from '@/components/shared/user-box'
 import useTranslate from '@/hooks/use-translate'
 import Mobile from './mobile'
@@ -52,11 +52,14 @@ function Navbar() {
 							<LanguageDropdown />
 							<Notification/>
 							<Button
+								aria-label={'shopping-cart'}
 								size={'icon'}
 								variant={cartsLength() ? 'secondary' : 'ghost'}
 								asChild
 								className={'relative'}>
-								<Link href={'/shopping/cart'}>
+								<Link
+									aria-label={'shopping-cart'}
+									href={'/shopping/cart'}>
 									<ShoppingCart />
 									
 									{cartsLength() ? (
@@ -76,7 +79,7 @@ function Navbar() {
 					<SignedOut>
 						<SignInButton mode='modal'>
 							<Button
-								variant={'ghost'}
+								variant={'default'}
 								size={'lg'}
 								rounded={'full'}
 								className='hidden md:flex'
@@ -84,11 +87,6 @@ function Navbar() {
 								{t('logIn')}
 							</Button>
 						</SignInButton>
-						<SignUpButton mode='modal'>
-							<Button size={'lg'} rounded={'full'} className='hidden md:flex'>
-								{t('signUp')}
-							</Button>
-						</SignUpButton>
 						<SignInButton mode='modal'>
 							<Button size={'icon'} variant={'ghost'} className='md:hidden'>
 								<LogIn />

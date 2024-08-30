@@ -1,7 +1,7 @@
 import { ICourse } from '@/app.types'
+import CustomImage from '@/components/shared/custom-image'
 import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
-import Image from 'next/image'
 import Link from 'next/link'
 
 const CourseCard = (course : ICourse) => {
@@ -9,9 +9,7 @@ const CourseCard = (course : ICourse) => {
 		<Link href={`/course/${course._id}`}>
 			<Card className={'group w-full'}>
 				<CardContent className={'relative w-full h-56'}>
-					<Image
-						className={'object-cover'}
-						fill
+					<CustomImage
 						src={course.previewImage}
 						alt={course.title}/>
 				</CardContent>
@@ -22,13 +20,14 @@ const CourseCard = (course : ICourse) => {
 					<Separator/>
 					<div className={'flex items-center justify-between'}>
 						<div className={'flex items-center gap-2'}>
-							<Image
-								src={course.instructor.picture}
-								alt={course.title}
-								width={40}
-								height={40}
-								className={'rounded-full object-cover'}
-							/>
+							<div className={'size-[40px] relative'}>
+								<CustomImage
+									src={course.instructor.picture}
+									alt={course.title}
+									className={'rounded-full'}
+								/>
+							</div>
+							
 							<p className={'text-sm text-muted-foreground'}>
 								{course.instructor.fullName}
 							</p>

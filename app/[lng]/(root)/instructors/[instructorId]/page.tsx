@@ -16,7 +16,7 @@ export async function generateMetadata(
 	parent: ResolvingMetadata
 ): Promise<Metadata> {
 	const user = await getUserById(params.instructorId)
-
+	
 	return {
 		title: `Muallim: ${user.fullName}`,
 		description: `Muallim haqida ma'lumot: ${user.bio}`,
@@ -91,7 +91,6 @@ async function Page({ params, searchParams }: Props) {
 				<div className='mt-2 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
 					{result.courses.map((course, index) => {
 						const data = JSON.parse(JSON.stringify(course))
-						console.log(data)
 						return <CourseCard key={index} {...data} />
 					})}
 				</div>

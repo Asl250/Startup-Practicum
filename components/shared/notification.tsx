@@ -16,7 +16,6 @@ function Notification() {
 			try {
 				const data = await getCount(userId!)
 				setCount(data)
-				console.log(data)
 			} catch (error) {
 				setCount(0)
 			}

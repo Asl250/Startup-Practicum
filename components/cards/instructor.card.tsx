@@ -1,7 +1,7 @@
 'use client'
 
 import type { IUser } from '@/app.types'
-import Image from 'next/image'
+import CustomImage from '@/components/shared/custom-image'
 import Link from 'next/link'
 
 interface Props {
@@ -13,9 +13,8 @@ const InstructorCard = ({ instructor }: Props) => {
 		<Link href={`/instructors/${instructor.clerkId}`}>
 			<div className={'flex flex-col space-y-1'}>
 				<div className={'relative h-72 w-full'}>
-					<Image
-						fill
-						className={'object-cover rounded-md'}
+					<CustomImage
+						className={'rounded-md'}
 						src={instructor.picture}
 						alt={instructor.fullName} />
 				</div>

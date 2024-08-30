@@ -4,6 +4,12 @@ import TopBar from "@/components/shared/top-bar"
 import { translation } from '@/i18n/server'
 import type { LngParams } from '@/types'
 import { auth } from '@clerk/nextjs/server'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+	title: 'Praktikum | Checkout',
+	description: 'Kurslarni sotib olish sahifasi',
+}
 
 async function Page({ params }: LngParams) {
 	const { t } = await translation(params.lng)
