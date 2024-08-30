@@ -29,7 +29,7 @@ export const createCourse = async (data: ICreateCourse, clerkId: string) => {
 export const getCourses = async (params: GetCoursesParams) => {
 	try {
 		await connectToDatabase()
-		const {clerkId, page = 1, pageSize = 3} = params
+		const {clerkId, page = 1, pageSize = 6} = params
 		const skipAmount = (page - 1) * pageSize
 		
 		const user = await User.findOne({clerkId})

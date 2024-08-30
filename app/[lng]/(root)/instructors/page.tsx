@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 async function Page({ searchParams }: SearchParamsProps) {
 	const page = searchParams.page ? +searchParams.page : 1
-	const instructorData = await getAdminInstructors({ page, pageSize: 9 })
+	const instructorData = await getAdminInstructors({ page, pageSize: 6 })
 
 	return (
 		<>

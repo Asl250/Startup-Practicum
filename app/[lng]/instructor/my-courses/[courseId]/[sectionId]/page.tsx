@@ -38,7 +38,7 @@ async function Page({ params }: Params) {
 			</div>
 			<Separator className='my-3 bg-muted-foreground' />
 
-			<div className='grid grid-cols-2 gap-4'>
+			<div className='grid lg:grid-cols-2 gap-4 grid-cols-1'>
 				<div className='flex flex-col space-y-2'>
 					<div className='flex items-center gap-2'>
 						<span className='font-spaceGrotesk text-3xl font-medium'>

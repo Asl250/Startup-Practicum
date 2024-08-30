@@ -123,7 +123,7 @@ const CourseFieldsForm = () => {
 						)}
 					/>
 					
-					<div className='grid grid-cols-2 gap-4'>
+					<div className='grid lg:grid-cols-2 gap-4 grid-cols-1'>
 						<FormField
 							control={form.control}
 							name='learning'
@@ -167,7 +167,7 @@ const CourseFieldsForm = () => {
 					</div>
 					
 					
-					<div className={'grid grid-cols-3 gap-4'}>
+					<div className={'grid md:grid-cols-3 gap-4 grid-cols-1'}>
 						<FormField
 							control={form.control}
 							name='level'

@@ -43,7 +43,7 @@ function InstructorForm() {
 
 		return (
 			<>
-				<h2 className='font-space-grotesk text-xl font-bold'>
+				<h2 className='font-spaceGrotesk text-xl font-bold'>
 					{t('basicInformation')}
 				</h2>
 				<p className='text-xs text-muted-foreground'>
@@ -69,7 +69,7 @@ function InstructorForm() {
 
 		return (
 			<>
-				<h2 className='font-space-grotesk text-xl font-bold'>
+				<h2 className='font-spaceGrotesk text-xl font-bold'>
 					{t('socialMedia')}
 				</h2>
 				<p className='text-xs text-muted-foreground'>
@@ -95,7 +95,7 @@ function InstructorForm() {
 
 		return (
 			<>
-				<h2 className='font-space-grotesk text-xl font-bold'>
+				<h2 className='font-spaceGrotesk text-xl font-bold'>
 					{t('bioAndProfile')}
 				</h2>
 				<p className='text-xs text-muted-foreground'>
@@ -117,7 +117,7 @@ function InstructorForm() {
 					height={200}
 					className='text-center'
 				/>
-				<h1 className='font-space-grotesk text-xl font-bold'>
+				<h1 className='font-spaceGrotesk text-xl font-bold'>
 					{t('thanksSubmission')}
 				</h1>
 				<p className='text-center text-xs text-muted-foreground'>
@@ -144,7 +144,7 @@ function InstructorForm() {
 						<Progress value={progress} />
 						<div className='my-2 grid grid-cols-3'>
 							<div></div>
-							<div className='text-center font-space-grotesk font-bold'>
+							<div className='text-center font-spaceGrotesk font-bold'>
 								{step}/3
 							</div>
 							<div />

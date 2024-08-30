@@ -13,7 +13,7 @@ async function Page ({searchParams} : SearchParamsProps) {
 	return (
 		<div>
 			<Header title='My courses' description='Here are your latest courses' />
-			<div className={'grid grid-cols-3 gap-4 mt-4'}>
+			<div className={'grid xl:grid-cols-3 gap-4 mt-4 md:grid-cols-2 grid-cols-1'}>
 				{result.courses.map(item => (
 					<InstructorCourseCard
 						key={item._id}

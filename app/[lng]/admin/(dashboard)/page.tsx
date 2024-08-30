@@ -1,16 +1,23 @@
 import { getAdminCourses } from '@/actions/course.action'
 import { getBalance } from '@/actions/payment.action'
 import { getAdminReviews } from '@/actions/review.action'
-import { getAdminInstructors } from '@/actions/user.action'
+import { getAdminInstructors, getRole } from '@/actions/user.action'
 import Header from '@/app/[lng]/instructor/_components/header'
 import AdminCourseCard from '@/components/cards/admin-course.card'
 import InstructorCard from '@/components/cards/instructor.card'
 import StatisticsCard from '@/components/cards/statistics.card'
+import { auth } from '@clerk/nextjs/server'
 import { MessageSquare, MonitorPlay, User } from 'lucide-react'
+import { redirect } from 'next/navigation'
 import { GrMoney } from 'react-icons/gr'
 import InstructorReviewCard from '@/components/cards/instructor-review.card'
 
 const Page = async () => {
+	const {userId} = auth()
+	const user = await getRole(userId!)
+	
+	if (!user.isAdmin) return redirect('/')
+	
 	const courseData = await getAdminCourses({})
 	const reviewData = await getAdminReviews({})
 	const instructorData = await getAdminInstructors({})
@@ -21,7 +28,7 @@ const Page = async () => {
 		<>
 			<Header title='Dashboard' description='Welcome to your dashboard' />
 			
-			<div className='mt-4 grid grid-cols-4 gap-4'>
+			<div className='mt-4 grid lg:grid-cols-4 gap-4 sm:grid-cols-2 grid-cols-1'>
 				<StatisticsCard
 					label='All Courses'
 					value={`${courseData.totalCourses}`}
@@ -51,7 +58,7 @@ const Page = async () => {
 				title='All Courses'
 				description='Here are all the courses you have'
 			/>
-			<div className='mt-4 grid grid-cols-3 gap-4 '>
+			<div className='mt-4 grid lg:grid-cols-3 gap-4 grid-cols-1'>
 				{courseData.courses.map(course => (
 					<AdminCourseCard
 						key={course._id}
@@ -61,7 +68,7 @@ const Page = async () => {
 			</div>
 			
 			<Header title='Reviews' description='Here are your latest reviews' />
-			<div className='mt-4 grid grid-cols-3 gap-4'>
+			<div className='mt-4 grid lg:grid-cols-3 gap-4  grid-cols-1'>
 				{reviewData.reviews.map(review => (
 					<InstructorReviewCard
 						key={review._id}
@@ -72,7 +79,7 @@ const Page = async () => {
 			</div>
 			
 			<Header title='Instructors' description='Here are your instructors' />
-			<div className='mt-4 grid grid-cols-4 gap-4'>
+			<div className='mt-4 grid lg:grid-cols-3 gap-4 md:grid-cols-2 grid-cols-1'>
 				{instructorData.instructors.map(item => (
 					<InstructorCard
 						key={item._id}

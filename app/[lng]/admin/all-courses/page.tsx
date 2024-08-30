@@ -6,7 +6,7 @@ import Pagination from '@/components/shared/pagination'
 
 async function Page({ searchParams }: SearchParamsProps) {
 	const page = searchParams.page ? +searchParams.page : 1
-	const courseData = await getAdminCourses({ page, pageSize: 9 })
+	const courseData = await getAdminCourses({ page, pageSize: 6 })
 	
 	return (
 		<>
@@ -15,7 +15,7 @@ async function Page({ searchParams }: SearchParamsProps) {
 				description='Here are all the courses you have'
 			/>
 			
-			<div className='mt-4 grid grid-cols-3 gap-4'>
+			<div className='mt-4 grid xl:grid-cols-3 gap-4 lg:grid-cols-2 grid-cols-1'>
 				{courseData.courses.map(item => (
 					<AdminCourseCard
 						key={item._id}
