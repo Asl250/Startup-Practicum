@@ -46,7 +46,7 @@ const Page = async ({params: {lng, slug}} : Props) => {
 	
 	let isPurchased
 	if (userId) {
-		const isPurchased = await getIsPurchase(userId!, slug)
+		isPurchased = await getIsPurchase(userId!, slug)
 	}
 	
 	return (
