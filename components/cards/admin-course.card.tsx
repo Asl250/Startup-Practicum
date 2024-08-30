@@ -1,5 +1,6 @@
 'use client'
 
+import { sendNotification } from '@/actions/notification'
 import Image from 'next/image'
 import { Card, CardContent } from '../ui/card'
 import { ICourse } from '@/app.types'
@@ -14,14 +15,23 @@ function AdminCourseCard({ course }: { course: ICourse }) {
 
 	const onToggleStatus = () => {
 		let upd
+		let not
 
 		if (course.published) {
 			upd = updateCourse(course._id, { published: false }, pathname)
+			not = sendNotification(
+				course.instructor.clerkId,
+				'messageCourseUnpublished'
+			)
 		} else {
 			upd = updateCourse(course._id, { published: true }, pathname)
+			not = sendNotification(
+				course.instructor.clerkId,
+				'messageCoursePublished'
+			)
 		}
 
-		const promise = Promise.all([upd])
+		const promise = Promise.all([upd, not])
 
 		toast.promise(promise, {
 			loading: 'Loading...',

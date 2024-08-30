@@ -1,5 +1,6 @@
 'use client'
 
+import { sendNotification } from '@/actions/notification'
 import FillLoading from '@/components/shared/fill-loading'
 import { Card, CardContent } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
@@ -85,12 +86,16 @@ function InstructorForm() {
 		const onSubmit = async (values: z.infer<typeof bioSchema>) => {
 			setLoading(true)
 
-			return updateUser({
+			const upd = updateUser({
 				clerkId: userId!,
 				updatedData: { ...values, approvedInstructor: true },
 			})
 				.then(() => setStep(4))
 				.finally(() => setLoading(false))
+			
+			const not = sendNotification(userId!, 'messageInstructorApproved')
+			
+			return Promise.all([upd, not])
 		}
 
 		return (

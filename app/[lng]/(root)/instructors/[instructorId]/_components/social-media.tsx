@@ -10,7 +10,7 @@ function SocialMedia({ user }: { user: IUser }) {
 		<div className='flex gap-2'>
 			<Button
 				size={'sm'}
-				className='font-space-grotesk'
+				className='font-spaceGrotesk'
 				variant={'secondary'}
 				onClick={() => window.open(user.github, '_blank')}
 			>
@@ -21,7 +21,7 @@ function SocialMedia({ user }: { user: IUser }) {
 			<Button
 				size={'sm'}
 				variant={'secondary'}
-				className='font-space-grotesk'
+				className='font-spaceGrotesk'
 				onClick={() => window.open(user.linkedin, '_blank')}
 			>
 				<FaLinkedin className='size-4' />
@@ -31,7 +31,7 @@ function SocialMedia({ user }: { user: IUser }) {
 			<Button
 				size={'sm'}
 				variant={'secondary'}
-				className='font-space-grotesk'
+				className='font-spaceGrotesk'
 				onClick={() => window.open(user.youtube, '_blank')}
 			>
 				<FaYoutube className='size-4' />
@@ -41,7 +41,7 @@ function SocialMedia({ user }: { user: IUser }) {
 			<Button
 				size={'sm'}
 				variant={'secondary'}
-				className='font-space-grotesk'
+				className='font-spaceGrotesk'
 				onClick={() => window.open(user.website, '_blank')}
 			>
 				<GiWorld className='size-4' />

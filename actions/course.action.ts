@@ -132,7 +132,7 @@ export const getDetailedCourse = cache(async (id: string) => {
 				'learning requirements tags updatedAt level category language purchases')
 			.populate({
 				path: 'instructor',
-				select: 'fullName picture',
+				select: 'fullName picture clerkId',
 				model: User,
 			})
 		

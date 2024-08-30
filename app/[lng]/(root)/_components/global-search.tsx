@@ -36,7 +36,7 @@ const GlobalSearch = () => {
 	
 	
 	return (
-		<div className='search-box'>
+		<div className='search-box max-md:pb-4'>
 			<Button
 				size={'icon'}
 				variant={'ghost'}

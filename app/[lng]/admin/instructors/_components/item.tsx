@@ -1,5 +1,6 @@
 'use client'
 
+import { sendNotification } from '@/actions/notification'
 import { updateUser } from '@/actions/user.action'
 import type { IUser } from '@/app.types'
 import { Button } from '@/components/ui/button'
@@ -29,11 +30,18 @@ function Item({ item }: Props) {
 		const isConfirmed = confirm(`Are you sure you want to ${msg} this user?`)
 		
 		if (isConfirmed) {
-			const promise = updateUser({
+			const upd = updateUser({
 				clerkId: item.clerkId,
 				updatedData: { role: item.role === 'user' ? 'instructor' : 'user' },
 				path: pathname,
 			})
+			
+			const not = sendNotification(
+				item.clerkId,
+				`messageRoleChanged ${item.role === 'user' ? 'instructor' : 'user'}`
+			)
+			
+			const promise = Promise.all([upd, not])
 			
 			toast.promise(promise, {
 				loading: 'Loading...',
@@ -55,7 +63,11 @@ function Item({ item }: Props) {
 				path: pathname,
 			})
 			
-			const promise = Promise.all([upd])
+			const not = sendNotification(
+				item.clerkId,
+				item.isAdmin ? 'messageYoureNotAdmin' : 'messageYoureAdmin'
+			)
+			const promise = Promise.all([upd, not])
 			
 			toast.promise(promise, {
 				loading: 'Loading...',
@@ -77,7 +89,10 @@ function Item({ item }: Props) {
 				path: pathname,
 			})
 			
-			const promise = Promise.all([upd])
+			const not = sendNotification(item.clerkId, 'messageDeleteInstructor')
+			
+			
+			const promise = Promise.all([upd, not])
 			
 			toast.promise(promise, {
 				loading: 'Loading...',

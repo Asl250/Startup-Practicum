@@ -55,20 +55,20 @@ async function Page({ params, searchParams }: Props) {
 						className='rounded-md max-md:self-start'
 					/>
 					<div className='flex flex-1 flex-col space-y-2'>
-						<h2 className='font-space-grotesk text-3xl font-bold'>
+						<h2 className='font-spaceGrotesk text-3xl font-bold'>
 							{user.fullName}
 						</h2>
 						<p className='line-clamp-2 text-muted-foreground'>{user.bio}</p>
 						<div className='flex items-center gap-4'>
 							<div className='flex items-center gap-1'>
 								<PiStudentBold />
-								<span className='font-space-grotesk font-bold'>
+								<span className='font-spaceGrotesk font-bold'>
 									{result.totalStudents} {t('students')}
 								</span>
 							</div>
 							<div className='flex items-center gap-1'>
 								<FaList />
-								<span className='font-space-grotesk font-bold'>
+								<span className='font-spaceGrotesk font-bold'>
 									{result.totalCourses} {t('courses')}
 								</span>
 							</div>
@@ -77,7 +77,7 @@ async function Page({ params, searchParams }: Props) {
 					</div>
 				</div>
 
-				<h1 className='mt-4 text-center font-space-grotesk text-4xl font-bold'>
+				<h1 className='mt-4 text-center font-spaceGrotesk text-4xl font-bold'>
 					{t('allCourses')}
 				</h1>
 

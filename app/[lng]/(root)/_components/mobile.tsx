@@ -2,6 +2,7 @@
 
 import LanguageDropdown from '@/components/shared/language-dropdown'
 import Logo from '@/components/shared/logo'
+import Notification from '@/components/shared/notification'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import {
@@ -49,6 +50,7 @@ function Mobile() {
 					))}
 					<div className='flex items-center justify-center gap-4'>
 						<LanguageDropdown />
+						<Notification/>
 						<Button size={'icon'} variant={'ghost'}>
 							<ShoppingCart />
 						</Button>

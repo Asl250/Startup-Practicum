@@ -25,7 +25,7 @@ function Sidebar({ page }: Props) {
 	}
 	
 	return (
-		<div className='fixed inset-0 mt-[10vh] h-[90vh] w-[300px] max-md:w-24'>
+		<div className='fixed inset-0 mt-[10vh] h-[90vh] w-[300px] max-md:w-24 md:border-r'>
 			<div className='mt-6 px-4 max-md:px-2'>
 				<div className='flex flex-col space-y-3'>
 					{getNavLinks().map(item => (

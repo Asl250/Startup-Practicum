@@ -2,6 +2,7 @@
 
 import Logo from '@/components/shared/logo'
 import ModeToggle from '@/components/shared/mode-toggle'
+import Notification from '@/components/shared/notification'
 import { Button } from '@/components/ui/button'
 import { navLinks } from '@/constants'
 import { useCart } from '@/hooks/use-card'
@@ -49,6 +50,7 @@ function Navbar() {
 						<div className='hidden md:flex'>
 							<GlobalSearch />
 							<LanguageDropdown />
+							<Notification/>
 							<Button
 								size={'icon'}
 								variant={cartsLength() ? 'secondary' : 'ghost'}

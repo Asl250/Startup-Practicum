@@ -1,3 +1,4 @@
+import { sendNotification } from '@/actions/notification'
 import { CreateUser, UpdateUser } from '@/actions/user.action'
 import { NextResponse } from 'next/server'
 import { Webhook } from 'svix'
@@ -59,6 +60,7 @@ export async function POST(req: Request) {
 			picture: image_url,
 			fullName: `${first_name} ${last_name}`,
 		})
+		await sendNotification(id, 'messageWelcome')
 		return NextResponse.json({massage: 'User created', user})
 	}
 	
@@ -73,6 +75,7 @@ export async function POST(req: Request) {
 				fullName: `${first_name} ${last_name}`,
 			},
 		})
+		await sendNotification(id, 'messageProfileUpdated')
 		return NextResponse.json({massage: 'User updated', user})
 	}
 	
