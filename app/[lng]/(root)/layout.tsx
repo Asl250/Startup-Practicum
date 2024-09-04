@@ -1,5 +1,6 @@
 import Footer from '@/app/[lng]/(root)/_components/footer'
 import Navbar from '@/app/[lng]/(root)/_components/navbar'
+import RefreshModal from '@/components/modals/refresh.modal'
 import type { ChildProps } from '@/types'
 
 function Layout ({children} : ChildProps) {
@@ -10,6 +11,7 @@ function Layout ({children} : ChildProps) {
 					{children}
 					<Footer/>
 				</main>
+				<RefreshModal/>
 			</div>
 		)
 }
