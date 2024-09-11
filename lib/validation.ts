@@ -102,7 +102,7 @@ export const bioSchema = z.object({
 	bio: z.string().min(10),
 })
 
-export const prompSchema = z.object({
+export const promptSchema = z.object({
 	prompt: z.string().min(4),
 })
 

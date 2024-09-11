@@ -7,6 +7,8 @@ import { dir } from 'i18next'
 import type { Metadata } from "next";
 import { Roboto, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import NextTopLoader from 'nextjs-toploader'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const roboto  = Roboto({
   subsets: ["latin", "cyrillic"],
@@ -26,18 +28,18 @@ export async function generateStaticParams() {
 
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://startup.sammi.ac'),
+  metadataBase: new URL('https://ask250.uz'),
   title: 'Sammi praktikum | Dasturlash kurslari',
   description:
     "Sammi Praktikum Next.js dasturlash kurslari, amaliyotlar, startup loyihalar va asosiysi sifatli ta'limdir.",
-  authors: [{ name: 'Aslbek Rashidov', url: 'https://startup.sammi.ac' }],
+  authors: [{ name: 'Aslbek Rashidov', url: 'https://ask250.uz' }],
   icons: { icon: '/logo.svg' },
   openGraph: {
     title: 'Sammi praktikum | Dasturlash kurslari',
     description:
       "Sammi Praktikum Next.js dasturlash kurslari, amaliyotlar, startup loyihalar va asosiysi sifatli ta'limdir.",
     type: 'website',
-    url: 'https://startup.sammi.ac',
+    url: 'https://ask250.uz',
     locale: 'uz_UZ',
     images: 'https://media.graphassets.com/f4jkBWQ6SVaKwySKRNQT',
     countryName: 'Uzbekistan',
@@ -64,10 +66,22 @@ function RootLayout( {children, params : { lng }} : Props){
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange>
+            <NextTopLoader
+              color='#3182CE'
+              initialPosition={0.5}
+              crawlSpeed={200}
+              height={3}
+              crawl={true}
+              showSpinner={false}
+              easing='ease'
+              speed={200}
+              shadow='0 0 10px #3182CE,0 0 5px #3182CE'
+            />
             {children}
           
           </ThemeProvider>
         </body>
+        <GoogleAnalytics gaId="G-F26V696SWR" />
       </html>
     </ClerkProvider>
   
