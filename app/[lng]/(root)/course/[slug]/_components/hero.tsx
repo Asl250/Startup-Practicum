@@ -17,6 +17,7 @@ import { Clock3, PauseCircle, Play, PlayCircle } from 'lucide-react'
 import { toast } from 'sonner'
 import Vimeo from '@u-wave/react-vimeo'
 
+
 function Hero(course: ICourse) {
 	const [loading, setLoading] = useState(false)
 	const [open, setOpen] = useState(false)
