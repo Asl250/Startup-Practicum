@@ -23,8 +23,9 @@ interface Props {
 		values: z.infer<typeof addressSchema>
 	) => Promise<null | undefined>
 	isProfile?: boolean
+	coupon: number
 }
-function PaymentForm({ onHandler, isProfile }: Props) {
+function PaymentForm({ onHandler, isProfile, coupon }: Props) {
 	const [loading, setLoading] = useState(false)
 
 	const { resolvedTheme } = useTheme()
@@ -172,7 +173,7 @@ function PaymentForm({ onHandler, isProfile }: Props) {
 							) : (
 								<span>
 									{t('payNow')}{' '}
-									{(totalPrice() + taxes()).toLocaleString('en-US', {
+									{(totalPrice(coupon) + taxes()).toLocaleString('en-US', {
 										style: 'currency',
 										currency: 'USD',
 									})}

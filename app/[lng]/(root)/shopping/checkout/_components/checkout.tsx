@@ -172,7 +172,7 @@ function Checkout({cards, coupon}: Props) {
 											{t('payNow')}{' '}
 											{(totalPrice(coupon) + taxes()).toLocaleString('en-US', {
 												style: 'currency',
-												currency: 'USD'
+												currency: 'USD',
 											})}
 										</span>
 										<ArrowRight className='ml-1 size-4 transition-transform group-hover:translate-x-1' />
@@ -198,7 +198,7 @@ function Checkout({cards, coupon}: Props) {
 			</RadioGroup>
 			
 			{radioValue === `${cards.length + 1}` && (
-				<PaymentForm onHandler={onSubmit}/>
+				<PaymentForm onHandler={onSubmit} coupon={coupon}/>
 			)}
 		
 		</>
