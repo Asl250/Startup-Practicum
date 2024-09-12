@@ -23,7 +23,7 @@ interface Props {
 		values: z.infer<typeof addressSchema>
 	) => Promise<null | undefined>
 	isProfile?: boolean
-	coupon: number
+	coupon?: number
 }
 function PaymentForm({ onHandler, isProfile, coupon }: Props) {
 	const [loading, setLoading] = useState(false)
