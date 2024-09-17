@@ -26,7 +26,7 @@ function LearningJourney() {
 						<h2 className='mt-2 line-clamp-1 font-spaceGrotesk text-lg font-bold'>
 							{t(item.title)}
 						</h2>
-						<h2 className='line-clamp-2 text-sm text-white/80 text-black dark:text-white'>
+						<h2 className='line-clamp-2 text-sm text-black dark:text-white'>
 							{t(item.excerpt)}
 						</h2>
 					</div>
