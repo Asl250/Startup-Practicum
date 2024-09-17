@@ -44,7 +44,7 @@ function Hero() {
 					width={520}
 					height={520}
 					sizes='(max-width: 520px) 100vw, (max-width: 520px) 50vw, 33vw'
-					className='h-auto w-full lg:self-end self-center object-cover'
+					className='h-auto w-full self-center object-cover'
 				/>
 			</div>
 

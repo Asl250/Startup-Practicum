@@ -209,12 +209,12 @@ export const learningJourney = [
 	{
 		title: 'startTitle3',
 		excerpt: 'startDescription3',
-		image: '/assets/journey/online-learning.png',
+		image: '/assets/journey/learning.png',
 	},
 	{
 		title: 'startTitle4',
 		excerpt: 'startDescription4',
-		image: '/assets/journey/certificate.png',
+		image: '/assets/journey/standards.png',
 	},
 ]
 
@@ -282,18 +282,4 @@ export const adminNavLinks = [
 	{ label: 'Instructors', route: '/admin/instructors', icon: User },
 	{ label: 'Reviews', route: '/admin/reviews', icon: MessageSquareMore },
 	{ label: 'Notifications', route: '/admin/notifications', icon: Bell },
-]
-
-export const amountOptions = [
-	{ value: '1', label: 'photo' },
-	{ value: '2', label: 'photos' },
-	{ value: '3', label: 'photos' },
-	{ value: '4', label: 'photos' },
-	{ value: '5', label: 'photos' },
-]
-
-export const resolutionOptions = [
-	{ value: '256x256', label: '256x256' },
-	{ value: '512x512', label: '512x512' },
-	{ value: '1024x1024', label: '1024x1024' },
 ]
