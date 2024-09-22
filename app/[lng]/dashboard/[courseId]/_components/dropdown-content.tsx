@@ -5,9 +5,10 @@ import {
 	DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
 import useTranslate from '@/hooks/use-translate'
+import { useMassage } from '@/hooks/useMassage'
 import { useReview } from '@/hooks/useReview'
 import { useAuth } from '@clerk/nextjs'
-import { FolderArchive, Heart, Share2, Star } from 'lucide-react'
+import { FolderArchive, Heart, MessageCirclePlus, Share2, Star } from 'lucide-react'
 import { useParams, usePathname } from 'next/navigation'
 import { toast, Toaster } from 'sonner'
 
@@ -15,6 +16,7 @@ function DropdownContent() {
 	const pathname = usePathname()
 	const t = useTranslate()
 	const { onOpen } = useReview()
+	const { onOpenMassage } = useMassage()
 	const { courseId } = useParams()
 	const { userId } = useAuth()
 
@@ -60,6 +62,11 @@ function DropdownContent() {
 				</DropdownMenuItem>
 				
 				<DropdownMenuSeparator />
+				
+				<DropdownMenuItem className='cursor-pointer gap-2' onClick={onOpenMassage}>
+					<MessageCirclePlus size={20} />
+					<span>{t('evaluation')}</span>
+				</DropdownMenuItem>
 				
 				<DropdownMenuItem className='cursor-pointer gap-2' onClick={onOpen}>
 					<Star size={20} />

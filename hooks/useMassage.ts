@@ -10,7 +10,7 @@ interface IMassageStore {
 }
 
 export const useMassage = create<IMassageStore>(set => ({
-	isOpenMassage: true,
+	isOpenMassage: false,
 	isLoadingMassage: false,
 	onOpenMassage: () => set({ isOpenMassage: true }),
 	onCloseMassage: () => set({ isOpenMassage: false }),

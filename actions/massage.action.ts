@@ -1,3 +1,6 @@
+'use server'
+
+import type { GetMassagesParams } from '@/actions/types'
 import type { IMassage } from '@/app.types'
 import Course from '@/database/course.model'
 import Massage from '@/database/massage.model'
@@ -19,28 +22,52 @@ export const createMassage = async (
 	}
 }
 
-export const getMassage = async (course: string, clerkId: string) => {
+
+export const getMassage = async (params: GetMassagesParams) => {
 	try {
 		await connectToDatabase()
+		const { page = 1, pageSize = 9, clerkId } = params
+		
+		const skipAmount = (page - 1) * pageSize
+		
 		const user = await User.findOne({ clerkId })
-		const massage = await Massage.findOne({ user: user._id, course })
-		return JSON.parse(JSON.stringify(massage))
-	} catch (err) {
-		throw new Error("Something went wrong when getting massage")
+		const courses = await Course.find({ instructor: user._id })
+		
+		const massage = await Massage.find({ course: { $in: courses } })
+			.sort({ createdAt: -1 })
+			.populate({
+				path: 'user',
+				model: User,
+				select: 'fullName picture clerkId',
+			})
+			.populate({ path: 'course', model: Course, select: 'title' })
+			.skip(skipAmount)
+			.limit(pageSize)
+		
+		const totalMassages = await Massage.find({
+			course: { $in: courses },
+		}).countDocuments()
+		
+		const isNext = totalMassages > skipAmount + massage.length
+		
+		return { massage, isNext, totalMassages }
+	} catch (error) {
+		throw new Error('Error getting reviews')
 	}
 }
 
-export const getCourseMassages = async (course: string) => {
+export const getUserMassages = async (clerkId: string) => {
 	try {
 		await connectToDatabase()
-		const massages = await Massage.find({ course })
+		const user = await User.findOne({clerkId}).select('_id')
+		
+		return await Massage.find({ user: user._id })
 			.sort({ createdAt: -1 })
 			.populate({ path: 'user', model: User, select: 'fullName picture' })
 			.populate({ path: 'course', model: Course, select: 'title' })
 		
-		return JSON.parse(JSON.stringify(massages))
-	} catch (error) {
-		throw new Error('Error getting massage')
+	} catch (err) {
+		throw new Error('something went wrong')
 	}
 }
 

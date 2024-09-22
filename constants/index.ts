@@ -5,11 +5,11 @@ import {
 	FileCode,
 	GaugeCircle,
 	Home,
-	ListVideo,
+	ListVideo, MessageCirclePlus,
 	MessageSquareMore,
 	MonitorPlay,
 	Settings2,
-	User,
+	User
 } from 'lucide-react'
 import {
 	DiCisco,
@@ -265,6 +265,7 @@ export const instructorNavLinks = [
 	},
 	{ label: 'Reviews', route: '/instructor/reviews', icon: MessageSquareMore },
 	{ label: 'Settings', route: '/instructor/settings', icon: Settings2 },
+	{ label: 'massages', route: '/instructor/massages', icon: MessageCirclePlus },
 ]
 
 export const profileNavLinks = [
@@ -274,6 +275,7 @@ export const profileNavLinks = [
 	{ label: 'creditCards', route: '/profile/credit-cards', icon: CreditCard },
 	{ label: 'reviews', route: '/profile/reviews', icon: MessageSquareMore },
 	{ label: 'notification', route: '/profile/notifications', icon: Bell },
+	{ label: 'massages', route: '/profile/massages', icon: MessageCirclePlus },
 ]
 
 export const adminNavLinks = [
