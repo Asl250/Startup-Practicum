@@ -39,7 +39,7 @@ const MassageModal = () => {
 		
 		const data = { ...values }
 		
-		let promise = createMassage(data, userId!, `${courseId}`)
+		const promise = createMassage(data, userId!, `${courseId}`)
 		
 		promise.then(() => onCloseMassage()).finally(() => stopLoadingMassage())
 		
