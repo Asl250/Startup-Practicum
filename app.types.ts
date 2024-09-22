@@ -86,6 +86,14 @@ export interface IReview {
 	isFlag: boolean
 }
 
+export interface IMassage {
+	data: string
+	user: IUser
+	createdAt: string
+	_id: string
+	course: ICourse
+}
+
 export interface ICard {
 	id: string
 	billing_details: {

@@ -70,6 +70,12 @@ export interface GetReviewParams {
 	pageSize?: number
 }
 
+export interface GetMassagesParams {
+	clerkId: string
+	page?: number
+	pageSize?: number
+}
+
 export interface GetPaginationParams {
 	page?: number
 	pageSize?: number

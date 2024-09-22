@@ -1,5 +1,8 @@
+import { getRole } from '@/actions/user.action'
 import TopBar from '@/components/shared/top-bar'
+import { auth } from '@clerk/nextjs/server'
 import Image from 'next/image'
+import { redirect } from 'next/navigation'
 import InstructorForm from './_components/instructor-form'
 import { Metadata } from 'next'
 
@@ -9,6 +12,11 @@ export const metadata: Metadata = {
 		'Praktikum platformasida muallim boʻlish uchun ariza qoldiring. Oʻzingizga mos kursni tuzing va oʻrganishni boshlang!',
 }
 async function Page() {
+	const {userId} = auth()
+	const user = await getRole(userId!)
+	
+	if (user.role === 'instructor') redirect('/')
+	
 	return (
 		<>
 			<TopBar

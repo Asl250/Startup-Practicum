@@ -1,3 +1,4 @@
+import MassageModal from '@/components/modals/massage.modal'
 import ReviewModal from '@/components/modals/review.modal'
 import { ChildProps } from '@/types'
 import Navbar from './_components/navbar'
@@ -17,6 +18,7 @@ function Layout({ params: { courseId, lng }, children }: Props) {
 				</section>
 			</div>
 			<ReviewModal/>
+			<MassageModal/>
 		</div>
 	)
 }
