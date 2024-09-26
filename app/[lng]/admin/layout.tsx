@@ -1,8 +1,16 @@
+import { getRole } from '@/actions/user.action'
 import Navbar from '@/components/shared/navbar'
 import Sidebar from '@/components/shared/sidebar'
 import { ChildProps } from '@/types'
+import { auth } from '@clerk/nextjs/server'
+import { redirect } from 'next/navigation'
 
-function Layout({ children }: ChildProps) {
+async function Layout({ children }: ChildProps) {
+	const {userId} = auth()
+	const user = await getRole(userId!)
+	
+	if (!user.isAdmin) return redirect('/')
+	
 	return (
 		<>
 			<Navbar />

@@ -1,23 +1,17 @@
 import { getCourses } from '@/actions/course.action'
 import { getReviews } from '@/actions/review.action'
-import { getRole } from '@/actions/user.action'
 import Header from '@/app/[lng]/instructor/_components/header'
 import InstructorCourseCard from '@/components/cards/instructor-course.card'
 import ReviewCard from '@/components/cards/review.card'
 import StatisticsCard from '@/components/cards/statistics.card'
 import { auth } from '@clerk/nextjs/server'
 import { MonitorPlay } from 'lucide-react'
-import { redirect } from 'next/navigation'
 import { GrMoney } from 'react-icons/gr'
 import { PiStudent } from 'react-icons/pi'
 
 
 const Page = async () => {
 	const {userId} = auth()
-	
-	const user = await getRole(userId!)
-	
-	if (user.role !== 'instructor') return redirect('/')
 
 	const result = await getCourses({ clerkId: userId! })
 	const { reviews } = await getReviews({ clerkId: userId! })

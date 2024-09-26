@@ -1,10 +1,19 @@
 'use client'
 
+import { getRole } from '@/actions/user.action'
 import Navbar from '@/components/shared/navbar'
 import Sidebar from '@/components/shared/sidebar'
 import type { ChildProps } from '@/types'
+import { auth } from '@clerk/nextjs/server'
+import { redirect } from 'next/navigation'
 
-const Layout = ({children}: ChildProps) => {
+const Layout = async ({children}: ChildProps) => {
+	const {userId} = auth()
+	
+	const user = await getRole(userId!)
+	
+	if (user.role !== 'instructor') return redirect('/')
+	
 	return (
 		<>
 			<Navbar/>
