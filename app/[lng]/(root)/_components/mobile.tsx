@@ -16,7 +16,6 @@ import useTranslate from '@/hooks/use-translate'
 import { AlignCenter, ShoppingCart } from 'lucide-react'
 import Link from 'next/link'
 import GlobalSearch from './global-search'
-import ModeToggle from '@/components/shared/mode-toggle'
 
 function Mobile() {
 	const t = useTranslate()
@@ -55,7 +54,6 @@ function Mobile() {
 							<ShoppingCart />
 						</Button>
 						<GlobalSearch />
-						<ModeToggle />
 					</div>
 				</div>
 			</SheetContent>

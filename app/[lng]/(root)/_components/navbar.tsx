@@ -89,7 +89,7 @@ function Navbar() {
 						</SignInButton>
 						<SignInButton mode='modal'>
 							<Button size={'icon'} variant={'ghost'} className='md:hidden'>
-								<LogIn />
+								<LogIn aria-label={'SignInButton'} />
 							</Button>
 						</SignInButton>
 					</SignedOut>

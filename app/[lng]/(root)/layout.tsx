@@ -13,7 +13,7 @@ function Layout ({children} : ChildProps) {
 					<Footer/>
 				</main>
 				<RefreshModal/>
-				<AiButton/>
+				<AiButton />
 			</div>
 		)
 }

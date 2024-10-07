@@ -9,6 +9,7 @@ function AiButton() {
 			rounded={'full'}
 			size={'icon'}
 			asChild
+			aria-label={'ai-button'}
 		>
 			<Link href={'/ai'}>
 				<Bot className={'max-md:size-5 size-10'}/>
