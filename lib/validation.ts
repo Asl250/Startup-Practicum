@@ -70,7 +70,7 @@ export const profileSchema = z.object({
 })
 
 export const reviewSchema = z.object({
-	data: z.string(),
+	data: z.string().max(100),
 })
 
 export const massageSchema = z.object({
@@ -108,12 +108,4 @@ export const bioSchema = z.object({
 
 export const promptSchema = z.object({
 	prompt: z.string().min(4),
-})
-
-export const imageSchema = z.object({
-	prompt: z.string().min(1, {
-		message: 'Photo prompt is required',
-	}),
-	amount: z.string().min(1),
-	resolution: z.string().min(1),
 })

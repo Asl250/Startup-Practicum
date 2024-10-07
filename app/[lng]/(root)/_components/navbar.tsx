@@ -1,7 +1,6 @@
 'use client'
 
 import Logo from '@/components/shared/logo'
-import ModeToggle from '@/components/shared/mode-toggle'
 import Notification from '@/components/shared/notification'
 import { Button } from '@/components/ui/button'
 import { navLinks } from '@/constants'
@@ -72,7 +71,6 @@ function Navbar() {
 							</Button>
 						</div>
 						<Mobile />
-						<ModeToggle />
 					</div>
 					<SignedIn>
 						<UserBox />

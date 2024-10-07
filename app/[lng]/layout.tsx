@@ -63,7 +63,7 @@ function RootLayout( {children, params : { lng }} : Props){
         <body className={`${roboto.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="dark"
             enableSystem
             disableTransitionOnChange>
             <NextTopLoader
