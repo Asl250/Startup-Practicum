@@ -9,5 +9,6 @@ const MassageSchema = new Schema(
 	{ timestamps: true }
 )
 
+
 const Massage = models.Massage || model('Massage', MassageSchema)
 export default Massage
