@@ -13,7 +13,6 @@ export interface ICreateCourse {
 	previewImage: string
 }
 
-
 export interface ICreateUser {
 	clerkId: string
 	fullName: string
