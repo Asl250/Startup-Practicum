@@ -21,7 +21,6 @@ function Navbar() {
 	const pathname = usePathname()
 	const { lng } = useParams()
 	
-	
 	const {cartsLength} = useCart()
 
 	return (
