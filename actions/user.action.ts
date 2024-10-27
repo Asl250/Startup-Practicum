@@ -133,7 +133,8 @@ export const getInstructors = async () => {
 export const getRole = async (clerkId: string) => {
 	try {
 		await connectToDatabase()
-		return await User.findOne({ clerkId }).select('role isAdmin')
+		const user =  await User.findOne({ clerkId }).select('role isAdmin')
+		return JSON.parse(JSON.stringify(user))
 	} catch (error) {
 		throw new Error('Error getting role')
 	}

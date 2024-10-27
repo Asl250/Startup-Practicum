@@ -5,14 +5,14 @@ import Navbar from '@/components/shared/navbar'
 import Sidebar from '@/components/shared/sidebar'
 import type { ChildProps } from '@/types'
 import { useAuth } from '@clerk/nextjs'
-import { redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 
 const Layout = async ({children}: ChildProps) => {
 	const {userId} = useAuth()
 	
 	const user = await getRole(userId!)
-	
-	if (user.role !== 'instructor') return redirect('/')
+
+	if (user.role !== 'instructor') return notFound()
 	
 	return (
 		<>

@@ -3,13 +3,13 @@ import Navbar from '@/components/shared/navbar'
 import Sidebar from '@/components/shared/sidebar'
 import { ChildProps } from '@/types'
 import { auth } from '@clerk/nextjs/server'
-import { redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 
 async function Layout({ children }: ChildProps) {
 	const {userId} = auth()
 	const user = await getRole(userId!)
 	
-	if (!user.isAdmin) return redirect('/')
+	if (!user.isAdmin) return notFound()
 	
 	return (
 		<>
