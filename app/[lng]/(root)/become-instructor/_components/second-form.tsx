@@ -68,7 +68,7 @@ function SecondForm({ onHandler }: Props) {
 								<Input
 									{...field}
 									className='bg-primary/10'
-									placeholder='https://linkedin.com/in/sammi'
+									placeholder='https://linkedin.com/in/ask250'
 								/>
 							</FormControl>
 						</FormItem>

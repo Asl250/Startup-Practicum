@@ -33,7 +33,6 @@ export const metadata: Metadata = {
   description:
     "Next.js dasturlash kurslari, amaliyotlar, startup loyihalar va asosiysi sifatli ta'limdir.",
   authors: [{ name: 'Aslbek Rashidov', url: 'https://ask250.uz' }],
-  icons: { icon: '/logo.svg' },
   openGraph: {
     title: ' Dasturlash kurslari',
     description:
