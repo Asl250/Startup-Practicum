@@ -34,13 +34,13 @@ export const metadata: Metadata = {
     "Next.js dasturlash kurslari, amaliyotlar, startup loyihalar va asosiysi sifatli ta'limdir.",
   authors: [{ name: 'Aslbek Rashidov', url: 'https://ask250.uz' }],
   openGraph: {
-    title: ' Dasturlash kurslari',
+    title: 'Dasturlash kurslari',
     description:
       " Next.js dasturlash kurslari, amaliyotlar, startup loyihalar va asosiysi sifatli ta'limdir.",
     type: 'website',
     url: 'https://ask250.uz',
     locale: 'uz_UZ',
-    images: 'https://media.graphassets.com/f4jkBWQ6SVaKwySKRNQT',
+    // images: 'https://media.graphassets.com/f4jkBWQ6SVaKwySKRNQT',
     countryName: 'Uzbekistan',
     siteName: 'ASK250',
     emails: 'info@gmail.com',
