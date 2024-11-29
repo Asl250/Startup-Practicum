@@ -50,7 +50,7 @@ function SecondForm({ onHandler }: Props) {
 								<Input
 									{...field}
 									className='bg-primary/10'
-									placeholder='https://sammi.ac'
+									placeholder='https://ask250.com'
 								/>
 							</FormControl>
 						</FormItem>
@@ -86,7 +86,7 @@ function SecondForm({ onHandler }: Props) {
 								<Input
 									{...field}
 									className='bg-primary/10'
-									placeholder='https://github.com/sammi'
+									placeholder='https://github.com/ask250'
 								/>
 							</FormControl>
 						</FormItem>
