@@ -30,23 +30,23 @@ export async function generateStaticParams() {
 export const metadata: Metadata = {
   metadataBase: new URL('https://ask250.uz'),
   title: ' Dasturlash kurslari',
-  description:
-    "Next.js dasturlash kurslari, amaliyotlar, startup loyihalar va asosiysi sifatli ta'limdir.",
-  authors: [{ name: 'Aslbek Rashidov', url: 'https://ask250.uz' }],
-  openGraph: {
-    title: 'Dasturlash kurslari',
-    description:
-      " Next.js dasturlash kurslari, amaliyotlar, startup loyihalar va asosiysi sifatli ta'limdir.",
-    type: 'website',
-    url: 'https://ask250.uz',
-    locale: 'uz_UZ',
-    // images: 'https://media.graphassets.com/f4jkBWQ6SVaKwySKRNQT',
-    countryName: 'Uzbekistan',
-    siteName: 'ASK250',
-    emails: 'info@gmail.com',
-  },
-  keywords:
-    "Praktikum, NextJS, NextJS to'liq kurs, NextJS kurs, NextJS dasturlash, Startup, Startup loyiha",
+  // description:
+  //   "Next.js dasturlash kurslari, amaliyotlar, startup loyihalar va asosiysi sifatli ta'limdir.",
+  // authors: [{ name: 'Aslbek Rashidov', url: 'https://ask250.uz' }],
+  // openGraph: {
+  //   title: 'Dasturlash kurslari',
+  //   description:
+  //     "Next.js dasturlash kurslari, amaliyotlar, startup loyihalar va asosiysi sifatli ta'limdir.",
+  //   type: 'website',
+  //   url: 'https://ask250.uz',
+  //   locale: 'uz_UZ',
+  //   // images: 'https://media.graphassets.com/f4jkBWQ6SVaKwySKRNQT',
+  //   countryName: 'Uzbekistan',
+  //   siteName: 'ASK250',
+  //   emails: 'info@gmail.com',
+  // },
+  // keywords:
+  //   "Praktikum, NextJS, NextJS to'liq kurs, NextJS kurs, NextJS dasturlash, Startup, Startup loyiha",
 };
 
 interface Props extends ChildProps {
