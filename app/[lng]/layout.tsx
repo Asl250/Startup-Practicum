@@ -9,7 +9,6 @@ import { Roboto, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import NextTopLoader from 'nextjs-toploader'
 import { GoogleAnalytics } from '@next/third-parties/google'
-
 const roboto  = Roboto({
   subsets: ["latin", "cyrillic"],
   weight: ["100", "300", "400", "500", "700",  "900"],
@@ -31,7 +30,6 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://ask250.uz'),
   title: "Startup Practicum - Next.js",
   description: "Startup Practicum - Next.js",
-  icons: { icon : '/favicon.icon'},
   authors: [{ name: 'Aslbek Rashidov', url: 'https://ask250.uz' }],
   openGraph: {
     images: './logo.svg',
