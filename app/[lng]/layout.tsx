@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   description: "Startup Practicum - Next.js",
   authors: [{ name: 'Aslbek Rashidov', url: 'https://ask250.uz' }],
   openGraph: {
-    images: './logo1.png',
+    images: './logo.svg',
     title: 'Dasturlash kurslari',
     description:
       "Next.js dasturlash kurslari, amaliyotlar, startup loyihalar va asosiysi sifatli ta'limdir.",
