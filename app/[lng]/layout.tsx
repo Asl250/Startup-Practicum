@@ -29,12 +29,12 @@ export async function generateStaticParams() {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ask250.uz'),
-  title: ' Dasturlash kurslari',
-  description:
-    "Next.js dasturlash kurslari, amaliyotlar, startup loyihalar va asosiysi sifatli ta'limdir.",
+  title: "Startup Practicum - Next.js",
+  description: "Startup Practicum - Next.js",
+  icons: { icon : '/favicon.icon'},
   authors: [{ name: 'Aslbek Rashidov', url: 'https://ask250.uz' }],
   openGraph: {
-    images: '/logo.svg',
+    images: './logo.svg',
     title: 'Dasturlash kurslari',
     description:
       "Next.js dasturlash kurslari, amaliyotlar, startup loyihalar va asosiysi sifatli ta'limdir.",
