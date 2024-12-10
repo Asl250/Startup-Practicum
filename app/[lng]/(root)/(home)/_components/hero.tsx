@@ -1,23 +1,51 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import {
-	Carousel,
-	CarouselContent,
-	CarouselItem,
-} from '@/components/ui/carousel'
-import { companies } from '@/constants'
+import IconCloud from '@/components/ui/icon-cloud'
+import { VelocityScroll } from '@/components/ui/scroll-based-velocity'
 import useTranslate from '@/hooks/use-translate'
-import Image from 'next/image'
 import Link from 'next/link'
-import Autoplay from 'embla-carousel-autoplay'
+
+const slugs = [
+	"typescript",
+	"javascript",
+	"dart",
+	"java",
+	"react",
+	"flutter",
+	"android",
+	"html5",
+	"css3",
+	"nodedotjs",
+	"express",
+	"nextdotjs",
+	"prisma",
+	"amazonaws",
+	"postgresql",
+	"firebase",
+	"nginx",
+	"vercel",
+	"testinglibrary",
+	"jest",
+	"cypress",
+	"docker",
+	"git",
+	"jira",
+	"github",
+	"gitlab",
+	"visualstudiocode",
+	"androidstudio",
+	"sonarqube",
+	"figma",
+];
 
 function Hero() {
 	const t = useTranslate()
 
 	return (
 		<>
-			<div className='container mx-auto grid xl:min-h-[75vh] min-h-[50vh] max-w-6xl grid-cols-2 gap-8 max-md:grid-cols-1 max-md:pt-32'>
+			<div
+				className='container mx-auto grid xl:min-h-[75vh] min-h-[50vh] max-w-6xl grid-cols-2 gap-8 max-md:grid-cols-1 max-md:pt-32'>
 				<div className='flex flex-col space-y-4 self-center'>
 					<h1 className='font-spaceGrotesk text-5xl font-bold'>
 						{t('heroTitle')}{' '}
@@ -37,34 +65,19 @@ function Hero() {
 						</Link>
 					</div>
 				</div>
-
-				<Image
-					src={'/assets/hero.png'}
-					alt='hero'
-					width={520}
-					height={520}
-					sizes='(max-width: 520px) 100vw, (max-width: 520px) 50vw, 33vw'
-					className='h-auto w-full self-center object-cover'
-				/>
+				
+				<div
+					className='relative flex size-full max-w-lg items-center justify-center overflow-hidden rounded-lg px-20 pb-20 pt-8 '>
+					<IconCloud iconSlugs={slugs} />
+				</div>
 			</div>
-
-			<div className='w-full bg-secondary'>
-				<Carousel
-					opts={{ align: 'start', loop: true }}
-					className='container mx-auto w-full max-w-6xl'
-					plugins={[Autoplay({ delay: 2000 })]}
-				>
-					<CarouselContent>
-						{companies.map((Icon, idx) => (
-							<CarouselItem
-								key={idx}
-								className='basis-1/3 md:basis-1/4 lg:basis-1/6'
-							>
-								<Icon className='h-24 w-full text-muted-foreground' />
-							</CarouselItem>
-						))}
-					</CarouselContent>
-				</Carousel>
+			
+			<div className='w-full'>
+				<VelocityScroll
+					text="Velocity Scroll"
+					default_velocity={1.5}
+					className="font-display text-center text-4xl font-bold tracking-[-0.02em] text-black drop-shadow-sm dark:text-white md:text-7xl md:leading-[5rem]"
+				/>
 			</div>
 		</>
 	)

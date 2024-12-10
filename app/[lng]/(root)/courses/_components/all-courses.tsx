@@ -40,14 +40,14 @@ const AllCourses = ({result}: Props) => {
 	return (
 		<div className='container mx-auto mt-12 max-w-6xl'>
 			<div className='flex items-center justify-between max-md:flex-col max-md:items-start max-md:space-y-2'>
-				<h2 className='max-md:self-end'>
+				<h2 className='max-md:self-end max-md:hidden'>
 					{t('result1')}{' '}
 					<span className='font-spaceGrotesk font-bold'>{totalCourses}</span>{' '}
 					{t('result2')}
 				</h2>
 				
 				<div className='flex items-center gap-2'>
-					<p>{t('sortBy')}</p>
+					<p className={'max-sm:hidden'}>{t('sortBy')}</p>
 					
 					<Select onValueChange={onUpdateParams}>
 						<SelectTrigger className='w-[120px] bg-gradient-to-r from-secondary to-background'>
