@@ -50,7 +50,7 @@ const AllCourses = ({result}: Props) => {
 					<p className={'max-sm:hidden'}>{t('sortBy')}</p>
 					
 					<Select onValueChange={onUpdateParams}>
-						<SelectTrigger className='w-[120px] bg-gradient-to-r from-secondary to-background'>
+						<SelectTrigger className='w-[120px] max-md:w-[90px] bg-gradient-to-r from-secondary to-background'>
 							<SelectValue placeholder={t('filter')} />
 						</SelectTrigger>
 						<SelectContent>
@@ -63,7 +63,7 @@ const AllCourses = ({result}: Props) => {
 					</Select>
 					
 					<Select onValueChange={onUpdateParams}>
-						<SelectTrigger className='w-[120px] bg-gradient-to-l from-background via-secondary to-background'>
+						<SelectTrigger className='w-[120px] max-md:w-[90px] bg-gradient-to-l from-background via-secondary to-background'>
 							<SelectValue placeholder={t('level')} />
 						</SelectTrigger>
 						<SelectContent>
@@ -76,7 +76,7 @@ const AllCourses = ({result}: Props) => {
 					</Select>
 					
 					<Select onValueChange={onUpdateParams}>
-						<SelectTrigger className='w-[120px] bg-gradient-to-l from-secondary to-background'>
+						<SelectTrigger className='w-[120px] max-md:w-[90px] bg-gradient-to-l from-secondary to-background'>
 							<SelectValue placeholder={t('language')} />
 						</SelectTrigger>
 						<SelectContent>

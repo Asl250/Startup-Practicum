@@ -45,8 +45,8 @@ function Hero() {
 	return (
 		<>
 			<div
-				className='container mx-auto grid xl:min-h-[75vh] min-h-[50vh] max-w-6xl grid-cols-2 gap-8 max-md:grid-cols-1 max-md:pt-32'>
-				<div className='flex flex-col space-y-4 self-center'>
+				className='pt-8 container mx-auto grid xl:min-h-[75vh] min-h-[50vh] xl:max-w-7xl grid-cols-2 md:gap-8 max-md:grid-cols-1 max-md:pt-32'>
+				<div className='flex flex-col space-y-4 self-center max-lg:mt-16'>
 					<h1 className='font-spaceGrotesk text-5xl font-bold'>
 						{t('heroTitle')}{' '}
 						<span className='text-blue-500'>{t('heroTitleSpan')}</span>
@@ -67,7 +67,7 @@ function Hero() {
 				</div>
 				
 				<div
-					className='relative flex size-full items-center justify-center overflow-hidden rounded-lg px-20 pb-20 pt-8 '>
+					className='relative flex size-full items-center justify-center overflow-hidden rounded-lg  '>
 					<IconCloud iconSlugs={slugs} />
 				</div>
 			</div>

@@ -2,7 +2,6 @@
 
 import DropdownContent from '@/app/[lng]/dashboard/[courseId]/_components/dropdown-content'
 import Logo from '@/components/shared/logo'
-import ModeToggle from '@/components/shared/mode-toggle'
 import UserBox from '@/components/shared/user-box'
 import { Button } from '@/components/ui/button'
 import {
@@ -44,7 +43,6 @@ function Navbar() {
 					<Star size={20} />
 					<p>{t('evaluation')}</p>
 				</div>
-				<ModeToggle />
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
 						<Button size={'icon'} variant={'ghost'}>

@@ -2,7 +2,6 @@
 
 import LanguageDropdown from '@/components/shared/language-dropdown'
 import Logo from '@/components/shared/logo'
-import ModeToggle from '@/components/shared/mode-toggle'
 import UserBox from '@/components/shared/user-box'
 import { UserButton } from '@clerk/nextjs'
 
@@ -16,7 +15,6 @@ const Navbar = ({isProfile} : Props) => {
 			<Logo/>
 			
 			<div className={'flex items-center gap-4'}>
-				<ModeToggle/>
 				{isProfile && <>
 				<LanguageDropdown/>
 				<UserButton/>
