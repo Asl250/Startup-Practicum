@@ -32,7 +32,7 @@ function Navbar() {
 					<div className='hidden items-center gap-3 border-l pl-2 md:flex'>
 						{navLinks.map(nav => (
 							<Link
-								href={`/${nav.route}`}
+								href={`/${lng}/${nav.route}`}
 								key={nav.route}
 								className={cn(
 									'font-medium transition-all hover:text-blue-500 hover:underline',

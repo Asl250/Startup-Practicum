@@ -4,7 +4,9 @@ import { Button } from '@/components/ui/button'
 import IconCloud from '@/components/ui/icon-cloud'
 import { VelocityScroll } from '@/components/ui/scroll-based-velocity'
 import useTranslate from '@/hooks/use-translate'
+import { cn } from '@/lib/utils'
 import Link from 'next/link'
+import { useState } from 'react'
 
 const slugs = [
 	"typescript",
@@ -41,11 +43,12 @@ const slugs = [
 
 function Hero() {
 	const t = useTranslate()
+	const [loading, setLoading] = useState(true)
 
 	return (
 		<>
 			<div
-				className='pt-8 container mx-auto grid xl:min-h-[75vh] min-h-[50vh] xl:max-w-7xl grid-cols-2 md:gap-8 max-md:grid-cols-1 max-md:pt-32'>
+				className='pt-8 container mx-auto grid xl:min-h-[75vh] min-h-[50vh] max-w-5xl grid-cols-2 md:gap-8 max-md:grid-cols-1 max-md:pt-32'>
 				<div className='flex flex-col space-y-4 self-center max-lg:mt-16'>
 					<h1 className='font-spaceGrotesk text-5xl font-bold'>
 						{t('heroTitle')}{' '}
@@ -67,7 +70,10 @@ function Hero() {
 				</div>
 				
 				<div
-					className='relative flex size-full items-center justify-center overflow-hidden rounded-lg  '>
+					onLoad={() => setLoading(false)}
+					className={cn('relative flex size-full items-center justify-center overflow-hidden rounded-lg lg:ps-5',
+						loading && 'scale-110 blur-2xl grayscale',
+					)}>
 					<IconCloud iconSlugs={slugs} />
 				</div>
 			</div>
