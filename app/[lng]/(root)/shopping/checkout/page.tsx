@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 }
 
 async function Page({ params }: LngParams) {
+	
 	const { t } = await translation(params.lng)
 	const {userId} = auth()
 	

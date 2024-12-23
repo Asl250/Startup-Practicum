@@ -1,6 +1,7 @@
 'use client'
 
-import { addWishlistCourse } from '@/actions/course.action'
+import { addWishlistCourse, purchaseCourse } from '@/actions/course.action'
+import { sendNotification } from '@/actions/notification'
 import type { ICourse } from '@/app.types'
 import { Button } from '@/components/ui/button'
 import { useCart } from '@/hooks/use-card'
@@ -32,12 +33,22 @@ function Description({ course, isPurchased } : Props) {
 	
 	const {userId} = useAuth()
 	
-	const {addToCart} = useCart()
-
-	const onCart = () => {
+	const {addToCart, carts} = useCart()
+	
+	const onCart = async () =>  {
 		setIsLoading(true)
-		addToCart(course)
-		router.push('/shopping/cart')
+		if (course.currentPrice !== 0) {
+			addToCart(course)
+			router.push('/shopping/cart')
+		} else{
+			for (const course of carts) {
+				await purchaseCourse(course._id, userId!)
+				await sendNotification(course.instructor.clerkId, 'messageCourseSold')
+			}
+			await sendNotification(userId!, 'messageCoursePurchased')
+			router.push(`/profile/my-courses`)
+
+		}
 	}
 	
 	

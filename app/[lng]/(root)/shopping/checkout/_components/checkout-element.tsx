@@ -17,6 +17,7 @@ import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import { X } from 'lucide-react'
 import Image from 'next/image'
+import { redirect } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -39,6 +40,10 @@ const CheckoutElement = ({cards}: Props) => {
 	const t = useTranslate()
 	
 	const { totalPrice, taxes, carts } = useCart()
+	
+	if (totalPrice() === 0) return  redirect('/shopping/cart')
+	
+	
 	
 	const form = useForm<z.infer<typeof couponSchema>>({
 		resolver: zodResolver(couponSchema),

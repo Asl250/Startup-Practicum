@@ -72,7 +72,7 @@ function Hero() {
 				<div
 					onLoad={() => setLoading(false)}
 					className={cn('relative flex size-full items-center justify-center overflow-hidden rounded-lg lg:ps-5',
-						loading && 'scale-110 blur-2xl grayscale',
+						loading && 'scale-110 blur-3xl grayscale',
 					)}>
 					<IconCloud iconSlugs={slugs} />
 				</div>
