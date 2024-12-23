@@ -17,7 +17,7 @@ import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import { X } from 'lucide-react'
 import Image from 'next/image'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -35,20 +35,19 @@ const CheckoutElement = ({cards}: Props) => {
 	const [error, setError] = useState('')
 	const [loading, setLoading] = useState(false)
 	const [coupon, setCoupon] = useState(0)
-	
+	const router = useRouter()
 	
 	const t = useTranslate()
 	
 	const { totalPrice, taxes, carts } = useCart()
-	
-	if (totalPrice() === 0) return  redirect('/shopping/cart')
-	
 	
 	
 	const form = useForm<z.infer<typeof couponSchema>>({
 		resolver: zodResolver(couponSchema),
 		defaultValues: {},
 	})
+	
+	if (totalPrice() === 0) return  router.push('/shopping/cart')
 	
 	const onSubmit = async ({ code }: z.infer<typeof couponSchema>) => {
 		setLoading(true)
