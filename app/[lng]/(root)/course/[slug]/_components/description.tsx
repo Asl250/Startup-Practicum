@@ -33,7 +33,7 @@ function Description({ course, isPurchased } : Props) {
 	
 	const {userId} = useAuth()
 	
-	const {addToCart, carts} = useCart()
+	const {addToCart} = useCart()
 	
 	const onCart = async () =>  {
 		setIsLoading(true)
@@ -41,13 +41,9 @@ function Description({ course, isPurchased } : Props) {
 			addToCart(course)
 			router.push('/shopping/cart')
 		} else{
-			for (const course of carts) {
-				await purchaseCourse(course._id, userId!)
-				await sendNotification(course.instructor.clerkId, 'messageCourseSold')
-			}
+			await purchaseCourse(course._id, userId!)
 			await sendNotification(userId!, 'messageCoursePurchased')
 			router.push(`/profile/my-courses`)
-
 		}
 	}
 	
