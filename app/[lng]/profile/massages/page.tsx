@@ -14,14 +14,12 @@ async function Page({ params }: LngParams) {
 	return (
 		<div className={'p-1'}>
 			<Header title={'massages'} description={'massages'} />
-			{massages.length === 0 && (
+			{massages.length === 0 ? (
 				<NoResult
 					title={t('noReviews')}
 					description={t('noReviewsDescription')}
 				/>
-			)}
-			
-			<div className='mt-4 flex max-w-xl flex-col space-y-3'>
+			) : <div className='mt-4 flex max-w-xl flex-col space-y-3'>
 				{massages.map(massage => (
 					<MassageCard
 						key={massage._id}
@@ -30,6 +28,7 @@ async function Page({ params }: LngParams) {
 					/>
 				))}
 			</div>
+			}
 		</div>
 	)
 }
